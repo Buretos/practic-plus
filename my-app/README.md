@@ -25,7 +25,7 @@
 
 Схема состояния (перечень данных) для Redux Store (на кликнте) (несколько подсторов):
 
--	user: id / login / roleId
+-	user: id / login / roleId / session
 -	posts: массив post: id / title / imageUrl / publishedAt / commentsCount
 -	post: id / title / imageUrl / content / publishedAt / comments: массив comment: id / autor / content / publishedAt
 -	users: массив user: id / login / registratedAt / role
