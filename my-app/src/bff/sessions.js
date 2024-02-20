@@ -12,4 +12,10 @@ export const sessions = {
 		// Удаление хэша для разлогинивания
 		delete this.list[hash];
 	},
+
+	access(hash, acsessRoles) {
+		const user = this.list[hash];
+		// проверяем, что пользователь есть (зологинился, есть пользователь с таким хэшем), и его роль находится в списке ролей, которые имеют доступ. У нас это только одна роль администратора.
+		return !!user && acsessRoles.includes(user.roleId);
+	},
 };
