@@ -9,7 +9,7 @@ export const useServerRequest = () => {
 	return useCallback(
 		(operation, ...params) => {
 			// Формирование данных для запроса - request. Авторизация и регистрация не требует отправки сессии. Поэтому она не будет включена в параметры запроса. Для остальных операции будет включена как сессия, так и параметры. Выглядеть это будет (см. ниже).
-			const request = ['register', 'authorize'].includes(operation)
+			const request = ['register', 'authorize', 'fetchPost'].includes(operation)
 				? params
 				: [session, ...params];
 

@@ -1,21 +1,30 @@
+import { getSession, addSession, deleteSession } from './api';
+
 export const sessions = {
-	list: {},
 	create(user) {
 		const hash = Math.random().toFixed(50); // Создаём уникальный хэш с помощью генератора случайных чисел с фиксированной длинной после запятой в 50 знаков
 
-		this.list[hash] = user; // Добавляем его в список
+		addSession(hash, user); // Записываем сессию в sessions: (db json-server). Запишется она осинхронно в синхронном коде, главное, чтобы не было ошибок и на этом мы не зацикливаемся
 
 		return hash; // Возвращаем хэш
 	},
 
-	remove(hash) {
+	async remove(hash) {
 		// Удаление хэша для разлогинивания
-		delete this.list[hash];
+		const session = await getSession(hash); // находим сессию по хешу
+
+		if (!session) {
+			return;
+		}
+
+		deleteSession(session.id);
 	},
 
-	access(hash, acsessRoles) {
-		const user = this.list[hash];
+	async access(hash, acsessRoles) {
+		// получавем сессию с сервера (асинхронно, ждём).
+		const dbSession = await getSession(hash);
+
 		// проверяем, что пользователь есть (зологинился, есть пользователь с таким хэшем), и его роль находится в списке ролей, которые имеют доступ. У нас это только одна роль администратора.
-		return !!user && acsessRoles.includes(user.roleId);
+		return !!dbSession.user && acsessRoles.includes(dbSession.user.roleId);
 	},
 };

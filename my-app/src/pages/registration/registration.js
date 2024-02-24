@@ -65,6 +65,7 @@ const RegistrationContainer = ({ className }) => {
 			}
 
 			dispatch(setUser(res));
+			sessionStorage.setItem('userData', JSON.stringify(res)); // res - объект, но в sessionStorage вообще и в ключи (в нашем случае userData:) можно записать лишь строки. Поэтому переводим объект res в формамт строки json. И то же должно происходить при авторизации
 		});
 	};
 

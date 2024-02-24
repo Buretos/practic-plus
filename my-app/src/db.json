@@ -126,5 +126,58 @@
       "published_at": "2045-06-30"
     }
   ],
-  "comments": []
+  "comments": [
+    {
+      "author_id": "001",
+      "post_id": "003",
+      "published_at": "2051-05-01 21:09",
+      "content": "Мой многострадальный комментарий!",
+      "id": 1
+    },
+    {
+      "author_id": "0emZyQN",
+      "post_id": "003",
+      "published_at": "2046-06-29 14:58",
+      "content": "Многострадальный комментарий другого, Ивана...",
+      "id": 2
+    },
+    {
+      "author_id": "0emZyQN",
+      "post_id": "003",
+      "published_at": "2034-12-25 18:57",
+      "content": "Новый комментарий от Ивана",
+      "id": 3
+    },
+    {
+      "author_id": "0emZyQN",
+      "post_id": "003",
+      "published_at": "2033-09-23 09:43",
+      "content": "Bay!",
+      "id": 4
+    }
+  ],
+  "sessions": [
+    {
+      "hash": "0.61508993461073879771561223606113344430923461914063",
+      "user": {
+        "id": "001",
+        "login": "anton",
+        "password": "123456",
+        "registeredAt": "2050-09-22",
+        "roleId": 0
+      },
+      "id": 1
+    },
+    {
+      "hash": "0.80767410655062010782501147332368418574333190917969",
+      "user": {
+        "id": "0emZyQN",
+        "login": "ivan",
+        "password": "121354",
+        "registeredAt": "2046-03-10 07:24",
+        "roleId": 1
+      },
+      "id": 2
+    }
+  ]
 }

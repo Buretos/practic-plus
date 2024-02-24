@@ -22,11 +22,12 @@ const HeaderContainer = ({ className }) => (
 export const Header = styled(HeaderContainer)`
 	display: flex;
 	justify-content: space-between;
+	background-color: #fff;
 	position: fixed;
 	top: 0;
+	z-index: 100;
 	width: 1000px;
 	height: 120px;
 	padding: 20px 40px;
-	backgroung-color: #fff;
 	box-shadow: 0px -2px 17px #000;
 `;
