@@ -1,9 +1,9 @@
-import { addComment, getComments, getPost, getUsers } from '../api';
+import { deleteComment, getComments, getPost, getUsers } from '../api';
 import { sessions } from '../sessions';
 import { ROLE } from '../constants';
 
-export const addPostComment = async (hash, userId, postId, content) => {
-	const accessRoles = [ROLE.ADMIN, ROLE.MODERATOR, ROLE.READER];
+export const removePostComment = async (hash, postId, id) => {
+	const accessRoles = [ROLE.ADMIN, ROLE.MODERATOR];
 
 	const access = await sessions.access(hash, accessRoles);
 	if (!access) {
@@ -13,7 +13,7 @@ export const addPostComment = async (hash, userId, postId, content) => {
 		};
 	}
 
-	await addComment(userId, postId, content);
+	await deleteComment(id);
 
 	const post = await getPost(postId);
 

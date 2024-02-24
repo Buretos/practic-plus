@@ -130,30 +130,23 @@
     {
       "author_id": "001",
       "post_id": "003",
-      "published_at": "2051-05-01 21:09",
-      "content": "Мой многострадальный комментарий!",
-      "id": 1
-    },
-    {
-      "author_id": "0emZyQN",
-      "post_id": "003",
-      "published_at": "2046-06-29 14:58",
-      "content": "Многострадальный комментарий другого, Ивана...",
-      "id": 2
-    },
-    {
-      "author_id": "0emZyQN",
-      "post_id": "003",
-      "published_at": "2034-12-25 18:57",
-      "content": "Новый комментарий от Ивана",
+      "published_at": "2049-01-31 12:50",
+      "content": "ertubjhnk;jn k;",
       "id": 3
     },
     {
       "author_id": "0emZyQN",
       "post_id": "003",
-      "published_at": "2033-09-23 09:43",
-      "content": "Bay!",
-      "id": 4
+      "published_at": "2054-06-05 15:44",
+      "content": "nn,mnm",
+      "id": 7
+    },
+    {
+      "author_id": "0emZyQN",
+      "post_id": "003",
+      "published_at": "2055-04-20 00:44",
+      "content": "Вот это да!\n",
+      "id": 8
     }
   ],
   "sessions": [
@@ -169,7 +162,18 @@
       "id": 1
     },
     {
-      "hash": "0.80767410655062010782501147332368418574333190917969",
+      "hash": "0.47804968738262965111118774075293913483619689941406",
+      "user": {
+        "id": "001",
+        "login": "anton",
+        "password": "123456",
+        "registeredAt": "2050-09-22",
+        "roleId": 0
+      },
+      "id": 2
+    },
+    {
+      "hash": "0.48270795527193399720999877899885177612304687500000",
       "user": {
         "id": "0emZyQN",
         "login": "ivan",
@@ -177,7 +181,7 @@
         "registeredAt": "2046-03-10 07:24",
         "roleId": 1
       },
-      "id": 2
+      "id": 3
     }
   ]
 }
