@@ -7,4 +7,5 @@ export * from './logout';
 export * from './register';
 export * from './remove-post-comment';
 export * from './remove-user';
+export * from './save-post';
 export * from './update-user-role';
