@@ -1,7 +1,13 @@
 import { transformPost } from '../transformers';
 
-export const getPosts = async (page, limit) =>
-	fetch(`http://localhost:3005/posts?_page=${page}&_limit=${limit}`)
+// из документации json-server берем команды
+// для поиска 'title_like=${searchPhrase}'
+// и пагинации '_page=${page}&_limit=${limit}'
+
+export const getPosts = async (searchPhrase, page, limit) =>
+	fetch(
+		`http://localhost:3005/posts?title_like=${searchPhrase}&_page=${page}&_limit=${limit}`,
+	)
 		.then((loadedPosts) =>
 			Promise.all([loadedPosts.json(), loadedPosts.headers.get('Link')]),
 		)
@@ -11,3 +17,4 @@ export const getPosts = async (page, limit) =>
 		}));
 
 // В объекте возвращаем страницы и ссылки для пагинации согласно документации json-server (нужен номер последней страницы last)
+// title_like=${searchPhrase}&
