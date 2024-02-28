@@ -17,7 +17,7 @@ const AppColumn = styled.div`
 `;
 
 const Page = styled.div`
-	padding: 120px 0 20px 20px;
+	padding: 120px 20px 20px;
 `;
 
 export const Blog = () => {
