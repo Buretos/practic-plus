@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Icon, Input } from '../../../../components';
-
+// Управляемый ввод из родительского компонента приходит и искомаяя фраза и onChange
 const SeacchContainer = ({ className, searchPhrase, onChange }) => {
 	return (
 		<div className={className}>

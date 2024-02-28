@@ -2,7 +2,7 @@ export const debounce = (fn, delay) => {
 	let timeoutId;
 
 	return (...args) => {
-		clearTimeout(timeoutId); //
+		clearTimeout(timeoutId); // отмена функции fn, если она вызывается до истечения времени delay
 		timeoutId = setTimeout(fn, delay, ...args);
 		// setTimeout(() => fn(...args), delay); равнозначная строка что и выше. Так в функцию в setTimeout можно передавать аргументы. См. использоватнгие setTimeout
 		// т.е. функция вызывается через время в мс delay и в неё передаются аргументы ...args
