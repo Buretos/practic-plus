@@ -25,6 +25,6 @@ export const sessions = {
 		const dbSession = await getSession(hash);
 
 		// проверяем, что пользователь есть (зологинился, есть пользователь с таким хэшем), и его роль находится в списке ролей, которые имеют доступ. У нас это только одна роль администратора.
-		return !!dbSession.user && acsessRoles.includes(dbSession.user.roleId);
+		return !!dbSession?.user && acsessRoles.includes(dbSession.user.roleId);
 	},
 };

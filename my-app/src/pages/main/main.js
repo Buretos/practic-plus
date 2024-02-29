@@ -18,7 +18,6 @@ const MainContainer = ({ className }) => {
 		requestServer('fetchPosts', searchPhrase, page, PAGINATION_LIMIT).then(
 			({ res: { posts, links } }) => {
 				setPosts(posts);
-				console.log('links-main:', links);
 				setLastPage(getLastPageFromLinks(links));
 			},
 		);
