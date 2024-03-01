@@ -27,6 +27,20 @@
       "registed_at": "2037-11-17 13:32",
       "role_id": 2,
       "id": "IIPVAtt"
+    },
+    {
+      "login": "assa",
+      "password": "123456",
+      "registed_at": "2036-01-05 04:37",
+      "role_id": 2,
+      "id": "9iFQuCV"
+    },
+    {
+      "login": "assas",
+      "password": "121354",
+      "registed_at": "2063-03-20 04:32",
+      "role_id": 1,
+      "id": "MgTyz1p"
     }
   ],
   "roles": [
@@ -189,6 +203,27 @@
       "published_at": "2059-09-07 00:00",
       "content": "бьттбьтбь",
       "id": 17
+    },
+    {
+      "author_id": "001",
+      "post_id": "009",
+      "published_at": "2052-06-27 21:20",
+      "content": "Интересное дело...",
+      "id": 18
+    },
+    {
+      "author_id": "MgTyz1p",
+      "post_id": "001",
+      "published_at": "2050-08-03 04:44",
+      "content": "вапмвамявам",
+      "id": 19
+    },
+    {
+      "author_id": "9iFQuCV",
+      "post_id": "002",
+      "published_at": "2058-10-05 00:14",
+      "content": "sdvas sdvasdv asdv",
+      "id": 20
     }
   ],
   "sessions": [
@@ -246,6 +281,17 @@
         "roleId": 0
       },
       "id": 5
+    },
+    {
+      "hash": "0.57478039831253613378692080004839226603507995605469",
+      "user": {
+        "id": "9iFQuCV",
+        "login": "assa",
+        "password": "123456",
+        "registeredAt": "2036-01-05 04:37",
+        "roleId": 2
+      },
+      "id": 6
     }
   ]
 }

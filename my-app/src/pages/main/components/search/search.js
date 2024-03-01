@@ -1,5 +1,7 @@
-import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { Icon, Input } from '../../../../components';
+import styled from 'styled-components';
+
 // Управляемый ввод из родительского компонента приходит и искомаяя фраза и onChange
 const SeacchContainer = ({ className, searchPhrase, onChange }) => {
 	return (
@@ -31,3 +33,8 @@ export const Search = styled(SeacchContainer)`
 		right: 10px;
 	}
 `;
+
+Search.propTypes = {
+	searchPhrase: PropTypes.string.isRequired,
+	onChange: PropTypes.func.isRequired,
+};
