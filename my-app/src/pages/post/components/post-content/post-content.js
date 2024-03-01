@@ -39,5 +39,6 @@ export const PostContent = styled(PostContentContainer)`
 	& .post-text {
 		font-size: 18px;
 		white-space: pre-line;
+		margin-bottom: 20px;
 	}
 `;
