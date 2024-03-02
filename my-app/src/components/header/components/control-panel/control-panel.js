@@ -40,7 +40,7 @@ const ControlPanelContainer = ({ className }) => {
 		<div className={className}>
 			<RightAligned>
 				{roleId === ROLE.GUEST ? (
-					<Button width="25%">
+					<Button width="30%">
 						<Link to="/login">Войти</Link>
 					</Button>
 				) : (
@@ -51,14 +51,19 @@ const ControlPanelContainer = ({ className }) => {
 				)}
 			</RightAligned>
 			<RightAligned>
-				<Icon id="fa-backward" margin="10px 0 0 0" onClick={() => navigate(-1)} />
+				<Icon
+					title="Bернуться на предыдущую страницу"
+					id="fa fa-arrow-left"
+					margin="10px 0 0 0"
+					onClick={() => navigate(-1)}
+				/>
 				{isAdmin && (
 					<>
 						<Link to="/post">
-							<Icon id="fa-file-text-o" margin="10px 0 0 16px" />
+							<Icon id="fa-table" margin="10px 0 0 16px" />
 						</Link>
 						<Link to="/users">
-							<Icon id="fa-users" margin="10px 0 0 16px" />
+							<Icon id="fa-user-plus" margin="10px 0 0 16px" />
 						</Link>
 					</>
 				)}
@@ -68,5 +73,5 @@ const ControlPanelContainer = ({ className }) => {
 };
 
 export const ControlPanel = styled(ControlPanelContainer)`
-	width: 315px;
+	width: 250px;
 `;

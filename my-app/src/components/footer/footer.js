@@ -21,8 +21,8 @@ const FooterContainer = ({ className }) => {
 	return (
 		<div className={className}>
 			<div>
-				<div>Блог веб-разработчика</div>
-				<div>web@developer.ru</div>
+				<div>Интернет-магазин</div>
+				<div>guitarium@webstore.ru</div>
 			</div>
 			<div className="infoWeather">
 				<div>
