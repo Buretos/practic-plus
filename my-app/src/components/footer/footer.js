@@ -24,7 +24,7 @@ const FooterContainer = ({ className }) => {
 				<div>Блог веб-разработчика</div>
 				<div>web@developer.ru</div>
 			</div>
-			<div>
+			<div className="infoWeather">
 				<div>
 					{city},{' '}
 					{new Date().toLocaleString('ru', { day: 'numeric', month: 'long' })}
@@ -46,4 +46,8 @@ export const Footer = styled(FooterContainer)`
 	font-weight: bold;
 	backgroung-color: #fff;
 	box-shadow: 0px 2px 17px #000;
+
+	& .infoWeather {
+		text-align: right;
+	}
 `;

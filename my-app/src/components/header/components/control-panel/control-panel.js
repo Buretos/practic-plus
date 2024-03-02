@@ -18,7 +18,7 @@ const RightAligned = styled.div`
 `;
 
 const UserName = styled.div`
-	font-size: 18px;
+	font-size: 22px;
 	font-weight: bold;
 `;
 
@@ -40,7 +40,7 @@ const ControlPanelContainer = ({ className }) => {
 		<div className={className}>
 			<RightAligned>
 				{roleId === ROLE.GUEST ? (
-					<Button>
+					<Button width="25%">
 						<Link to="/login">Войти</Link>
 					</Button>
 				) : (
@@ -67,4 +67,6 @@ const ControlPanelContainer = ({ className }) => {
 	);
 };
 
-export const ControlPanel = styled(ControlPanelContainer)``;
+export const ControlPanel = styled(ControlPanelContainer)`
+	width: 315px;
+`;
