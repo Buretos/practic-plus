@@ -10,7 +10,7 @@ export const PROP_TYPE = {
 		content: PropTypes.string.isRequired,
 		publishedAt: PropTypes.string.isRequired,
 	}),
-	POST: PropTypes.shape({
+	PRODUCT: PropTypes.shape({
 		id: PropTypes.string.isRequired,
 		title: PropTypes.string.isRequired,
 		imageUrl: PropTypes.string.isRequired,

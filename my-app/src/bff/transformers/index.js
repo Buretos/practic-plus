@@ -1,4 +1,4 @@
 export * from './transform-comment';
-export * from './transform-post';
+export * from './transform-product';
 export * from './transform-session';
 export * from './transform-user';

@@ -1,7 +1,10 @@
-import { setPostData } from './set-post-data';
+import { setProductData } from './set-product-data';
 
-export const addCommentAsync = (requestServer, userId, postId, content) => (dispatch) => {
-	requestServer('addPostComment', userId, postId, content).then((postData) => {
-		dispatch(setPostData(postData.res));
-	});
-};
+export const addCommentAsync =
+	(requestServer, userId, productId, content) => (dispatch) => {
+		requestServer('addProductComment', userId, productId, content).then(
+			(productData) => {
+				dispatch(setProductData(productData.res));
+			},
+		);
+	};

@@ -4,16 +4,16 @@ import {
 	appReducer,
 	userReducer,
 	usersReducer,
-	postReducer,
-	postsReducer,
+	productReducer,
+	productsReducer,
 } from './reducers';
 
 const reducer = combineReducers({
 	app: appReducer,
 	user: userReducer,
 	users: usersReducer,
-	post: postReducer,
-	posts: postsReducer,
+	product: productReducer,
+	products: productsReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

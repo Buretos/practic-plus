@@ -61,7 +61,7 @@
       "name": "Гость"
     }
   ],
-  "posts": [
+  "products": [
     {
       "id": "001",
       "title": "Задача организации...",
@@ -164,70 +164,70 @@
   "comments": [
     {
       "author_id": "001",
-      "post_id": "002",
+      "product_id": "002",
       "published_at": "2056-04-25 21:47",
       "content": "Toqwdfasdfs",
       "id": 10
     },
     {
       "author_id": "IIPVAtt",
-      "post_id": "002",
+      "product_id": "002",
       "published_at": "2043-03-22 02:58",
       "content": "sdfasdfasfdas",
       "id": 13
     },
     {
       "author_id": "001",
-      "post_id": "002",
+      "product_id": "002",
       "published_at": "2041-12-14 04:27",
       "content": "fgsdfgsdfg",
       "id": 14
     },
     {
       "author_id": "0emZyQN",
-      "post_id": "002",
+      "product_id": "002",
       "published_at": "2041-07-14 17:51",
       "content": "asdfasfdasf\n",
       "id": 15
     },
     {
       "author_id": "IIPVAtt",
-      "post_id": "009",
+      "product_id": "009",
       "published_at": "2040-03-25 20:17",
       "content": "Очень интересно!",
       "id": 16
     },
     {
       "author_id": "IIPVAtt",
-      "post_id": "009",
+      "product_id": "009",
       "published_at": "2059-09-07 00:00",
       "content": "бьттбьтбь",
       "id": 17
     },
     {
       "author_id": "001",
-      "post_id": "009",
+      "product_id": "009",
       "published_at": "2052-06-27 21:20",
       "content": "Интересное дело...",
       "id": 18
     },
     {
       "author_id": "MgTyz1p",
-      "post_id": "001",
+      "product_id": "001",
       "published_at": "2050-08-03 04:44",
       "content": "вапмвамявам",
       "id": 19
     },
     {
       "author_id": "9iFQuCV",
-      "post_id": "002",
+      "product_id": "002",
       "published_at": "2058-10-05 00:14",
       "content": "sdvas sdvasdv asdv",
       "id": 20
     },
     {
       "author_id": "001",
-      "post_id": "002",
+      "product_id": "002",
       "published_at": "2056-02-28 10:38",
       "content": "dsvznxvm, zn",
       "id": 21

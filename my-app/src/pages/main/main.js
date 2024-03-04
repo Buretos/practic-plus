@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Pagination, PostCard, Search } from './components';
+import { Pagination, ProductCard, Search } from './components';
 import { useServerRequest } from '../../hooks';
 import { PAGINATION_LIMIT } from '../../constants';
 import { debounce, getLastPageFromLinks } from './utils';
 import styled from 'styled-components';
 
 const MainContainer = ({ className }) => {
-	const [posts, setPosts] = useState([]);
+	const [products, setProducts] = useState([]);
 	const [page, setPage] = useState(1);
 	const [lastPage, setLastPage] = useState(1);
 	const [searchPhrase, setSearchPhrase] = useState('');
@@ -15,9 +15,9 @@ const MainContainer = ({ className }) => {
 	// Запрос на просмотр статей есть для всех. Ошибку доступа не проверяем.
 	useEffect(() => {
 		// Запрос поисковой фразы тоже будем отправлять сюда.
-		requestServer('fetchPosts', searchPhrase, page, PAGINATION_LIMIT).then(
-			({ res: { posts, links } }) => {
-				setPosts(posts);
+		requestServer('fetchProducts', searchPhrase, page, PAGINATION_LIMIT).then(
+			({ res: { products, links } }) => {
+				setProducts(products);
 				setLastPage(getLastPageFromLinks(links));
 			},
 		);
@@ -35,13 +35,13 @@ const MainContainer = ({ className }) => {
 
 	return (
 		<div className={className}>
-			<div className="post-and-search">
+			<div className="product-and-search">
 				<Search searchPhrase={searchPhrase} onChange={onSearch} />
-				{posts.length > 0 ? (
-					<div className="post-list">
-						{posts.map(
+				{products.length > 0 ? (
+					<div className="product-list">
+						{products.map(
 							({ id, title, imageUrl, publishedAt, commentsCount }) => (
-								<PostCard
+								<ProductCard
 									key={id}
 									id={id}
 									title={title}
@@ -53,10 +53,10 @@ const MainContainer = ({ className }) => {
 						)}
 					</div>
 				) : (
-					<div className="no-post-found">Статьи не найдены</div>
+					<div className="no-product-found">Статьи не найдены</div>
 				)}
 			</div>
-			{lastPage > 1 && posts.length > 0 && (
+			{lastPage > 1 && products.length > 0 && (
 				<Pagination page={page} lastPage={lastPage} setPage={setPage} />
 			)}
 		</div>
@@ -68,13 +68,13 @@ export const Main = styled(MainContainer)`
 	flex-direction: column;
 	justify-content: space-between;
 
-	& .post-list {
+	& .product-list {
 		display: flex;
 		flex-wrap: wrap;
 		padding: 0 0 80px;
 	}
 
-	& .no-post-found {
+	& .no-product-found {
 		font-size: 18px;
 		margin-top: 40px;
 		text-align: center;

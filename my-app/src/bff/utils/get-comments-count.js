@@ -1,7 +1,7 @@
-export const getCommentsCount = (comments = [], postId) => {
-	const postComments = comments.filter(
-		({ postId: commentPostId }) => commentPostId === postId,
+export const getCommentsCount = (comments = [], productId) => {
+	const productComments = comments.filter(
+		({ productId: commentProductId }) => commentProductId === productId,
 	);
 
-	return postComments.length;
+	return productComments.length;
 };

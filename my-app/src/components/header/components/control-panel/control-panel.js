@@ -59,7 +59,7 @@ const ControlPanelContainer = ({ className }) => {
 				/>
 				{isAdmin && (
 					<>
-						<Link to="/post">
+						<Link to="/product">
 							<Icon id="fa-table" margin="10px 0 0 16px" />
 						</Link>
 						<Link to="/users">
