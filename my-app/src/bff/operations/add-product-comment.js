@@ -4,7 +4,7 @@ import { ROLE } from '../constants';
 import { getProductCommentsWithAuthor } from '../utils';
 
 export const addProductComment = async (hash, userId, productId, content) => {
-	const accessRoles = [ROLE.ADMIN, ROLE.MODERATOR, ROLE.READER];
+	const accessRoles = [ROLE.ADMIN, ROLE.SALESMAN, ROLE.CLIENT];
 
 	const access = await sessions.access(hash, accessRoles);
 	if (!access) {

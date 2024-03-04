@@ -25,7 +25,7 @@ const CommentContainer = ({ className, productId, id, author, publishedAt, conte
 		);
 	};
 
-	const isAdminOrModerator = [ROLE.ADMIN, ROLE.MODERATOR].includes(userRole);
+	const isAdminOrSalesman = [ROLE.ADMIN, ROLE.SALESMAN].includes(userRole);
 
 	return (
 		<div className={className}>
@@ -54,7 +54,7 @@ const CommentContainer = ({ className, productId, id, author, publishedAt, conte
 				</div>
 				<div className="comment-text">{content}</div>
 			</div>
-			{isAdminOrModerator && (
+			{isAdminOrSalesman && (
 				<Icon
 					id="fa-trash-o"
 					size="22px"

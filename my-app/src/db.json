@@ -50,15 +50,15 @@
     },
     {
       "id": 1,
-      "name": "Модератор"
+      "name": "Продавец"
     },
     {
       "id": 2,
-      "name": "Читатель"
+      "name": "Покупатель"
     },
     {
       "id": 3,
-      "name": "Гость"
+      "name": "Посетитель"
     }
   ],
   "products": [
@@ -219,13 +219,6 @@
       "id": 19
     },
     {
-      "author_id": "9iFQuCV",
-      "product_id": "002",
-      "published_at": "2058-10-05 00:14",
-      "content": "sdvas sdvasdv asdv",
-      "id": 20
-    },
-    {
       "author_id": "001",
       "product_id": "002",
       "published_at": "2056-02-28 10:38",
@@ -310,6 +303,17 @@
         "roleId": 0
       },
       "id": 7
+    },
+    {
+      "hash": "0.02836929864926918121170729136792942881584167480469",
+      "user": {
+        "id": "MgTyz1p",
+        "login": "assas",
+        "password": "121354",
+        "registeredAt": "2063-03-20 04:32",
+        "roleId": 1
+      },
+      "id": 8
     }
   ]
 }
