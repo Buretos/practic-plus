@@ -11,10 +11,10 @@ import styled from 'styled-components';
 
 const ProductFormContainer = ({
 	className,
-	product: { id, title, imageUrl, content, publishedAt },
+	product: { id, title, imageUrl, content, categoryId },
 }) => {
-	const [imageUrlValue, setImageUrlValue] = useState(imageUrl);
-	const [titleValue, setTitleValue] = useState(title);
+	const [imageUrlValue, setImageUrlValue] = useState(imageUrl); // записываем в стейт переданную пропсом imageUrl
+	const [titleValue, setTitleValue] = useState(title); // записываем в стейт переданную пропсом title
 	const contentRef = useRef(null);
 
 	// Неуправляемая форма картики и заголовка не сбрасываем значение с предыдущего значения. Поэтому приходится обнулять данные в компоненте Product и рендерить при изменении в useLayoutEffect. Почему-то по другому не получалось сбросить значение полей при создании новой статьи
@@ -58,7 +58,7 @@ const ProductFormContainer = ({
 			/>
 			<SpecialPannel
 				id={id}
-				publishedAt={publishedAt}
+				categoryId={categoryId}
 				margin="20px 0"
 				editButton={<Icon id="fa-floppy-o" size="22px" onClick={onSave} />}
 			/>

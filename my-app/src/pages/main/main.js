@@ -7,6 +7,8 @@ import styled from 'styled-components';
 
 const MainContainer = ({ className }) => {
 	const [products, setProducts] = useState([]);
+	const [categories, setCategories] = useState([]);
+
 	const [page, setPage] = useState(1);
 	const [lastPage, setLastPage] = useState(1);
 	const [searchPhrase, setSearchPhrase] = useState('');
@@ -14,13 +16,17 @@ const MainContainer = ({ className }) => {
 	const requestServer = useServerRequest();
 	// Запрос на просмотр статей есть для всех. Ошибку доступа не проверяем.
 	useEffect(() => {
-		// Запрос поисковой фразы тоже будем отправлять сюда.
+		// Запрос поисковой фразы тоже будем отправлять сюда. // категории товаров тоже
 		requestServer('fetchProducts', searchPhrase, page, PAGINATION_LIMIT).then(
 			({ res: { products, links } }) => {
 				setProducts(products);
 				setLastPage(getLastPageFromLinks(links));
 			},
 		);
+		// ещё нужен запрос списка категорий товаров для выбора fetchRoles
+		requestServer('fetchCategories').then(({ res: categories }) => {
+			setCategories(categories);
+		});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [requestServer, page, shouldSearch]);
 
@@ -40,14 +46,15 @@ const MainContainer = ({ className }) => {
 				{products.length > 0 ? (
 					<div className="product-list">
 						{products.map(
-							({ id, title, imageUrl, publishedAt, commentsCount }) => (
+							({ id, title, imageUrl, categoryId, commentsCount }) => (
 								<ProductCard
 									key={id}
 									id={id}
 									title={title}
 									imageUrl={imageUrl}
-									publishedAt={publishedAt}
+									categoryId={categoryId}
 									commentsCount={commentsCount}
+									categories={categories}
 								/>
 							),
 						)}

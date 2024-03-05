@@ -15,7 +15,7 @@ export const PROP_TYPE = {
 		title: PropTypes.string.isRequired,
 		imageUrl: PropTypes.string.isRequired,
 		content: PropTypes.string.isRequired,
-		publishedAt: PropTypes.string.isRequired,
+		categoryId: PropTypes.number.isRequired,
 	}),
 };
 

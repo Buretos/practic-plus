@@ -9,7 +9,7 @@ import { ROLE } from '../../../../constants';
 import { selectUserRole } from '../../../../selectors';
 import styled from 'styled-components';
 
-const SpecialPannelContainer = ({ className, id, publishedAt, editButton }) => {
+const SpecialPannelContainer = ({ className, id, categoryId, editButton }) => {
 	const dispatch = useDispatch();
 	const requestServer = useServerRequest();
 	const navigate = useNavigate();
@@ -35,7 +35,7 @@ const SpecialPannelContainer = ({ className, id, publishedAt, editButton }) => {
 	return (
 		<div className={className}>
 			<div className="published-at">
-				{publishedAt && (
+				{categoryId && (
 					<Icon
 						inactive={true}
 						id="fa-calendar-o"
@@ -43,12 +43,12 @@ const SpecialPannelContainer = ({ className, id, publishedAt, editButton }) => {
 						size="18px"
 					/>
 				)}
-				{publishedAt}
+				{categoryId}
 			</div>
 			{isAdmin && (
 				<div className="buttons">
 					{editButton}
-					{publishedAt && (
+					{categoryId && (
 						<Icon
 							id="fa-trash-o"
 							size="22px"
@@ -83,6 +83,6 @@ export const SpecialPannel = styled(SpecialPannelContainer)`
 
 SpecialPannel.propTypes = {
 	id: PropTypes.string.isRequired,
-	publishedAt: PropTypes.string.isRequired,
+	categoryId: PropTypes.number.isRequired,
 	editButton: PropTypes.node.isRequired,
 };

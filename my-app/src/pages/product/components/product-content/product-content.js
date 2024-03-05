@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 const ProductContentContainer = ({
 	className,
-	product: { id, title, imageUrl, content, publishedAt },
+	product: { id, title, imageUrl, content, categoryId },
 }) => {
 	const navigate = useNavigate();
 
@@ -16,7 +16,7 @@ const ProductContentContainer = ({
 			<H2>{title}</H2>
 			<SpecialPannel
 				id={id}
-				publishedAt={publishedAt}
+				categoryId={categoryId}
 				margin="-20px 0 20px"
 				editButton={
 					<Icon

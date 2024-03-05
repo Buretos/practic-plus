@@ -8,37 +8,41 @@ const ProductCardContainer = ({
 	id,
 	title,
 	imageUrl,
-	publishedAt,
+	categoryId,
 	commentsCount,
+	categories,
 }) => {
+	// выбираю из массива объектов элемент по id. Получается, что это массив одного элемента внутри которого находится обхект с вдумя ключами. Вот я его по ключу name и достаю.
+	const categoryName = categories.filter(({ id }) => id === categoryId)[0].name;
+
 	return (
 		<div className={className}>
 			<Link to={`/product/${id}`}>
 				<img src={imageUrl} alt={title} />
 				<div className="product-card-footer">
 					<h4>{title}</h4>
-					<div className="product-card-info">
-						<div className="published-at">
-							<Icon
-								inactive={true}
-								id="fa-calendar-o"
-								margin="0 7px 0 0"
-								size="18px"
-							/>
-							{publishedAt}
-						</div>
-						<div className="comments-count">
-							<Icon
-								inactive={true}
-								id="fa-comment-o"
-								margin="0 7px 0 0"
-								size="18px"
-							/>
-							{commentsCount}
-						</div>
-					</div>
 				</div>
 			</Link>
+			<div className="product-card-info">
+				<div className="published-at">
+					<Icon
+						inactive={true}
+						id="fa-align-justify"
+						margin="0 7px 0 0"
+						size="18px"
+					/>
+					{categoryName}
+				</div>
+				<div className="comments-count">
+					<Icon
+						inactive={true}
+						id="fa-comment-o"
+						margin="0 7px 0 0"
+						size="18px"
+					/>
+					{commentsCount}
+				</div>
+			</div>
 		</div>
 	);
 };
@@ -56,7 +60,7 @@ export const ProductCard = styled(ProductCardContainer)`
 	}
 
 	& .product-card-footer {
-		padding: 5px;
+		padding: 5px 10px;
 		border-top: 1px solid #000;
 	}
 
@@ -67,7 +71,7 @@ export const ProductCard = styled(ProductCardContainer)`
 	& .product-card-info {
 		display: flex;
 		justify-content: space-between;
-		padding: 5px;
+		padding: 5px 10px;
 	}
 
 	& .published-at {
@@ -83,6 +87,12 @@ ProductCard.propTypes = {
 	id: PropTypes.string.isRequired,
 	title: PropTypes.string.isRequired,
 	imageUrl: PropTypes.string.isRequired,
-	publishedAt: PropTypes.string.isRequired,
+	categoryId: PropTypes.number.isRequired,
 	commentsCount: PropTypes.number.isRequired,
+	categories: PropTypes.arrayOf(
+		PropTypes.shape({
+			id: PropTypes.number.isRequired,
+			name: PropTypes.string.isRequired,
+		}),
+	),
 };

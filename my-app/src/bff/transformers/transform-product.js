@@ -3,5 +3,5 @@ export const transformProduct = (dbProduct) => ({
 	title: dbProduct.title,
 	content: dbProduct.content,
 	imageUrl: dbProduct.image_url,
-	publishedAt: dbProduct.published_at,
+	categoryId: dbProduct.category_id,
 });

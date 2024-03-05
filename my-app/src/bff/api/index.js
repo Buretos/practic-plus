@@ -6,6 +6,7 @@ export * from './delete-comment';
 export * from './delete-product';
 export * from './delete-session';
 export * from './delete-user';
+export * from './get-categories';
 export * from './get-comments';
 export * from './get-product';
 export * from './get-products';
