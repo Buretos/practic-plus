@@ -1,13 +1,18 @@
 import { useEffect, useMemo, useState } from 'react';
+// import { useDispatch } from 'react-redux';
 import { Pagination, ProductCard, Search } from './components';
+// import { loadCategoriesAsync } from '../../actions';
+
 import { useServerRequest } from '../../hooks';
 import { PAGINATION_LIMIT } from '../../constants';
 import { debounce, getLastPageFromLinks } from './utils';
 import styled from 'styled-components';
 
 const MainContainer = ({ className }) => {
+	// const dispatch = useDispatch();
 	const [products, setProducts] = useState([]);
-	const [categories, setCategories] = useState([]);
+
+	// const [categories, setCategories] = useState([]);
 
 	const [page, setPage] = useState(1);
 	const [lastPage, setLastPage] = useState(1);
@@ -24,9 +29,11 @@ const MainContainer = ({ className }) => {
 			},
 		);
 		// ещё нужен запрос списка категорий товаров для выбора fetchRoles
-		requestServer('fetchCategories').then(({ res: categories }) => {
-			setCategories(categories);
-		});
+		// requestServer('fetchCategories').then(({ res: categories }) => {
+		// 	setCategories(categories);
+		// });
+		// dispatch(loadCategoriesAsync(requestServer));
+
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [requestServer, page, shouldSearch]);
 
@@ -54,7 +61,6 @@ const MainContainer = ({ className }) => {
 									imageUrl={imageUrl}
 									categoryId={categoryId}
 									commentsCount={commentsCount}
-									categories={categories}
 								/>
 							),
 						)}

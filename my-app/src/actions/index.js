@@ -1,6 +1,7 @@
 export * from './action-type';
 export * from './add-comment-async';
 export * from './close-modal';
+export * from './load-categories-async';
 export * from './load-product-async';
 export * from './logout';
 export * from './open-modal';

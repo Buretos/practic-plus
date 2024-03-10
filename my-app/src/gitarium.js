@@ -1,9 +1,10 @@
 import { useLayoutEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
+import { useServerRequest } from './hooks';
 import { Error, Header, Footer, Modal } from './components';
 import { Authorization, Main, Product, Registration, Users } from './pages';
-import { setUser } from './actions';
+import { loadCategoriesAsync, setUser } from './actions';
 import { ERROR } from './constants';
 import styled from 'styled-components';
 
@@ -24,6 +25,8 @@ const Page = styled.div`
 
 export const Gitarium = () => {
 	const dispatch = useDispatch();
+	const requestServer = useServerRequest();
+
 	useLayoutEffect(() => {
 		const currentUserDataJSON = sessionStorage.getItem('userData'); // считываем текущую авторизацию пользователя из sessionStorage (из браузера), который не стирается при обновлении вкладки. Записываем же данные при авторизации и регистрации командой: sessionStorage.setItem('userData', JSON.stringify(res)); Данные в sessionStorage хранятся в виде строк. Поэтому получаем в виде строки JSON, которую нужно преобразовать в объект.
 
@@ -41,7 +44,9 @@ export const Gitarium = () => {
 				roleId: Number(currentUserData.roleId),
 			}),
 		);
-	}, [dispatch]);
+	}, [dispatch, requestServer]);
+
+	dispatch(loadCategoriesAsync(requestServer)); // Записываю в стейт неизменяемые в программе данные список id - name категорий товаров.
 
 	return (
 		<AppColumn>

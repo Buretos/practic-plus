@@ -1,3 +1,4 @@
+export * from './select-categories';
 export * from './select-modal-is-open';
 export * from './select-modal-on-cancel';
 export * from './select-modal-on-confirm';

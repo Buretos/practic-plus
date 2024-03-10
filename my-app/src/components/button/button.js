@@ -16,7 +16,7 @@ export const Button = styled(ButtonContainer)`
 	font-size: 18px;
 	width: ${({ width = '100%' }) => width};
 	height: 32px;
-	border: 1px solid rgb(0, 0, 0);
+	border: ${({ border = '1px solid rgb(0, 0, 0)' }) => border};
 	background-color: rgb(238, 238, 238);
 
 	&:hover {

@@ -6,6 +6,7 @@ import {
 	usersReducer,
 	productReducer,
 	productsReducer,
+	categoriesReducer,
 } from './reducers';
 
 const reducer = combineReducers({
@@ -14,6 +15,7 @@ const reducer = combineReducers({
 	users: usersReducer,
 	product: productReducer,
 	products: productsReducer,
+	categories: categoriesReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

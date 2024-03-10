@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Icon } from '../../../../components';
+import { selectCategories } from '../../../../selectors';
+import { Button, Icon } from '../../../../components';
 import styled from 'styled-components';
 
 const ProductCardContainer = ({
@@ -10,10 +12,12 @@ const ProductCardContainer = ({
 	imageUrl,
 	categoryId,
 	commentsCount,
-	categories,
 }) => {
-	// выбираю из массива объектов элемент по id. Получается, что это массив одного элемента внутри которого находится обхект с вдумя ключами. Вот я его по ключу name и достаю.
-	const categoryName = categories.filter(({ id }) => id === categoryId)[0].name;
+	const categories = useSelector(selectCategories);
+	console.log('categories', categories);
+	const categoryName = categories[categoryId].name;
+
+	// На всякий случай. Object.values(myobj); - позволяет извлекать в массив значения ключей объекта myobj .
 
 	return (
 		<div className={className}>
@@ -24,11 +28,11 @@ const ProductCardContainer = ({
 				</div>
 			</Link>
 			<div className="product-card-info">
-				<div className="published-at">
+				<div className="category">
 					<Icon
 						inactive={true}
 						id="fa-align-justify"
-						margin="0 7px 0 0"
+						margin="2px 7px 0 0"
 						size="18px"
 					/>
 					{categoryName}
@@ -43,6 +47,9 @@ const ProductCardContainer = ({
 					{commentsCount}
 				</div>
 			</div>
+			<Button border="0" fontWeight="900">
+				Купить
+			</Button>
 		</div>
 	);
 };
@@ -72,9 +79,10 @@ export const ProductCard = styled(ProductCardContainer)`
 		display: flex;
 		justify-content: space-between;
 		padding: 5px 10px;
+		border-bottom: 1px solid #000;
 	}
 
-	& .published-at {
+	& .category {
 		display: flex;
 	}
 

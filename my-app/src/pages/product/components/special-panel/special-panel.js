@@ -6,7 +6,7 @@ import { CLOSE_MODAL, openModal, removeProductAsync } from '../../../../actions'
 import { useServerRequest } from '../../../../hooks';
 import { checkAccess } from '../../../../utils';
 import { ROLE } from '../../../../constants';
-import { selectUserRole } from '../../../../selectors';
+import { selectCategories, selectUserRole } from '../../../../selectors';
 import styled from 'styled-components';
 
 const SpecialPannelContainer = ({ className, id, categoryId, editButton }) => {
@@ -14,6 +14,8 @@ const SpecialPannelContainer = ({ className, id, categoryId, editButton }) => {
 	const requestServer = useServerRequest();
 	const navigate = useNavigate();
 	const userRole = useSelector(selectUserRole);
+	const categories = useSelector(selectCategories);
+	const categoryName = categories[categoryId].name;
 
 	const onProductRemove = (id) => {
 		dispatch(
@@ -35,7 +37,8 @@ const SpecialPannelContainer = ({ className, id, categoryId, editButton }) => {
 	return (
 		<div className={className}>
 			<div className="published-at">
-				{categoryId && (
+				{/* !!! нужно поменять,чтобыт у роли админа было выпадающее меню с категориями товара. */}
+				{categoryName && (
 					<Icon
 						inactive={true}
 						id="fa-calendar-o"
@@ -43,12 +46,12 @@ const SpecialPannelContainer = ({ className, id, categoryId, editButton }) => {
 						size="18px"
 					/>
 				)}
-				{categoryId}
+				{categoryName}
 			</div>
 			{isAdmin && (
 				<div className="buttons">
 					{editButton}
-					{categoryId && (
+					{categoryName && (
 						<Icon
 							id="fa-trash-o"
 							size="22px"
