@@ -1,6 +1,4 @@
-import { generateDate } from '../utils';
-
-export const addProduct = ({ imageUrl, title, content }) =>
+export const addProduct = ({ imageUrl, title, categoryId, content }) =>
 	fetch('http://localhost:3005/products', {
 		method: 'POST',
 		headers: {
@@ -8,8 +6,8 @@ export const addProduct = ({ imageUrl, title, content }) =>
 		},
 		body: JSON.stringify({
 			image_url: imageUrl,
-			published_at: generateDate(),
 			title,
+			category_id: categoryId,
 			content,
 		}),
 	}).then((createdProduct) => createdProduct.json());

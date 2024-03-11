@@ -14,8 +14,8 @@ const ProductCardContainer = ({
 	commentsCount,
 }) => {
 	const categories = useSelector(selectCategories);
-	console.log('categories', categories);
-	const categoryName = categories[categoryId].name;
+	// console.log('categories', categories);
+	const categoryName = Object.values(categories)[categoryId].name;
 
 	// На всякий случай. Object.values(myobj); - позволяет извлекать в массив значения ключей объекта myobj .
 

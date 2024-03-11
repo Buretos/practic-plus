@@ -19,7 +19,7 @@ const ProductContainer = ({ className }) => {
 	const requestServer = useServerRequest();
 	const product = useSelector(selectProduct);
 
-	// Данные поста сбрасываем при каждом монтировании компонента Product (чтобы синхронизировать с данными сервера). Для этого используем синхронный аналог useEffect, т.е. useLayoutEffect, который срабатывает  при его (поста) монтировании, а потом данные будут подгружаться уже через useEffect
+	// Данные продукта сбрасываем при каждом монтировании компонента Product (чтобы синхронизировать с данными сервера). Для этого используем синхронный аналог useEffect, т.е. useLayoutEffect, который срабатывает  при его (поста) монтировании, а потом данные будут подгружаться уже через useEffect
 	useLayoutEffect(() => {
 		dispatch(RESET_PRODUCT_DATA);
 	}, [dispatch, isCreating]);
@@ -36,7 +36,7 @@ const ProductContainer = ({ className }) => {
 			setIsLoading(false);
 		});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [dispatch, requestServer, params.id, isCreating]);
+	}, [dispatch, requestServer, params.id, isCreating, product]);
 
 	if (isLoading) {
 		// кажется, это нужно для того чтобы не рендерить на экране ничего, чтобы было пусто во время загрузки. Сюда надо ставить лоадер, по идее...

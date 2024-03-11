@@ -1,4 +1,4 @@
-export const updateProduct = ({ id, imageUrl, title, content }) =>
+export const updateProduct = ({ id, imageUrl, title, content, categoryId }) =>
 	fetch(`http://localhost:3005/products/${id}`, {
 		method: 'PATCH',
 		headers: {
@@ -8,5 +8,6 @@ export const updateProduct = ({ id, imageUrl, title, content }) =>
 			image_url: imageUrl,
 			title,
 			content,
+			category_id: categoryId,
 		}),
 	}).then((loadedProduct) => loadedProduct.json());

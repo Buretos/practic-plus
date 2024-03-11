@@ -5,7 +5,7 @@ const initialProductState = {
 	title: '',
 	imageUrl: '',
 	content: '',
-	categoryId: '',
+	categoryId: 0,
 	comments: [],
 };
 

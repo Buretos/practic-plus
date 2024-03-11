@@ -9,12 +9,19 @@ import { ROLE } from '../../../../constants';
 import { selectCategories, selectUserRole } from '../../../../selectors';
 import styled from 'styled-components';
 
-const SpecialPannelContainer = ({ className, id, categoryId, editButton }) => {
+const SpecialPannelContainer = ({
+	className,
+	categoriesList,
+	id,
+	categoryId,
+	editButton,
+}) => {
 	const dispatch = useDispatch();
 	const requestServer = useServerRequest();
 	const navigate = useNavigate();
 	const userRole = useSelector(selectUserRole);
 	const categories = useSelector(selectCategories);
+
 	const categoryName = categories[categoryId].name;
 
 	const onProductRemove = (id) => {
@@ -33,11 +40,24 @@ const SpecialPannelContainer = ({ className, id, categoryId, editButton }) => {
 	};
 
 	const isAdmin = checkAccess([ROLE.ADMIN], userRole);
+	const SpecificSpecialPanel = editButton.props.id; // переключатель спецификации специальной панели (удаление или редактирование)
 
-	return (
+	return SpecificSpecialPanel === 'fa-floppy-o' ? (
 		<div className={className}>
-			<div className="published-at">
-				{/* !!! нужно поменять,чтобыт у роли админа было выпадающее меню с категориями товара. */}
+			<div className="category">
+				<Icon
+					inactive={true}
+					id="fa-calendar-o"
+					margin="0 10px 0 0"
+					size="18px"
+				/>
+				{categoriesList}
+			</div>
+			{isAdmin && <div className="buttons">{editButton}</div>}
+		</div>
+	) : (
+		<div className={className}>
+			<div className="category">
 				{categoryName && (
 					<Icon
 						inactive={true}
@@ -74,7 +94,7 @@ export const SpecialPannel = styled(SpecialPannelContainer)`
 		display: flex;
 	}
 
-	& .published-at {
+	& .category {
 		display: flex;
 	}
 
