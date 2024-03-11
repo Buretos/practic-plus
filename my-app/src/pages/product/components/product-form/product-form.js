@@ -38,7 +38,6 @@ const ProductFormContainer = ({
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const isCreating = useMatch('/product');
-	const categories = useSelector(selectCategories);
 
 	if (isCreating) {
 		dispatch(RESET_PRODUCT_DATA);
@@ -74,6 +73,8 @@ const ProductFormContainer = ({
 	const onImageChange = ({ target }) => setImageUrlValue(target.value);
 	const onTitleChange = ({ target }) => setTitleValue(target.value);
 	const onCategoryChange = ({ target }) => setSelectedCategoryId(Number(target.value));
+	const categories = useSelector(selectCategories);
+	console.log('categories', categories);
 
 	return (
 		<div className={className}>

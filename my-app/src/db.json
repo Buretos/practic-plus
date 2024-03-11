@@ -186,6 +186,13 @@
       "category_id": 2,
       "content": "Просто так",
       "id": "8JUKzAE"
+    },
+    {
+      "image_url": "",
+      "title": "",
+      "category_id": 0,
+      "content": "",
+      "id": "8ZV_fMS"
     }
   ],
   "comments": [
@@ -392,6 +399,17 @@
         "roleId": 0
       },
       "id": 12
+    },
+    {
+      "hash": "0.89254675927682569636090192943811416625976562500000",
+      "user": {
+        "id": "001",
+        "login": "anton",
+        "password": "123456",
+        "registeredAt": "2050-09-22",
+        "roleId": 0
+      },
+      "id": 13
     }
   ]
 }
