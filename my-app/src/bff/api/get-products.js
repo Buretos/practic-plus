@@ -4,17 +4,13 @@ import { transformProduct } from '../transformers';
 // для поиска 'title_like=${searchPhrase}'
 // и пагинации '_page=${page}&_limit=${limit}'
 
-export const getProducts = async (searchPhrase, page, limit) =>
-	fetch(
-		`http://localhost:3005/products?title_like=${searchPhrase}&_page=${page}&_limit=${limit}`,
-	)
-		.then((loadedProducts) =>
-			Promise.all([loadedProducts.json(), loadedProducts.headers.get('Link')]),
-		)
-		.then(([loadedProducts, links]) => ({
+export const getProducts = async (searchPhrase) =>
+	fetch(`http://localhost:3005/products?title_like=${searchPhrase}`)
+		.then((loadedProducts) => loadedProducts.json())
+		.then((loadedProducts) => ({
 			products: loadedProducts && loadedProducts.map(transformProduct),
-			links,
 		}));
 
 // В объекте возвращаем страницы и ссылки для пагинации согласно документации json-server (нужен номер последней страницы last)
 // title_like=${searchPhrase}&
+// 		`http://localhost:3005/products?title_like=${searchPhrase}&_category_id=${categoryId}&_page=${page}&_limit=${limit}`,

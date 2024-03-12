@@ -74,7 +74,6 @@ const ProductFormContainer = ({
 	const onTitleChange = ({ target }) => setTitleValue(target.value);
 	const onCategoryChange = ({ target }) => setSelectedCategoryId(Number(target.value));
 	const categories = useSelector(selectCategories);
-	console.log('categories', categories);
 
 	return (
 		<div className={className}>
@@ -88,33 +87,37 @@ const ProductFormContainer = ({
 				placeholder="Заголовок..."
 				onChange={onTitleChange}
 			/>
-			<SpecialPannel
-				// categoriesList={
-				// 	<Categories
-				// 		selectedCategoryId={selectedCategoryId}
-				// 		onCategoryChange={onCategoryChange}
-				// 		categories={categories}
-				// 	/>
-				// }
-				id={id}
-				categoryId={categoryId}
-				categories={categories}
-				margin="20px 0"
-				editButton={<Icon id="fa-floppy-o" size="22px" onClick={onSave} />}
-			/>
-			<div>
-				<select value={selectedCategoryId} onChange={onCategoryChange}>
-					{Object.values(categories).map(
-						(
-							{ id: categoryId, name: categoryName }, // вывод выпадающего списка категорий (массивом map) по названию roleName контекст тега option, который соответствует полю name, и значению, соответствующему полю id массива roles, т.е. roleId
-						) => (
-							<option key={categoryId} value={categoryId}>
-								{categoryName}
-							</option>
-						),
-					)}
-				</select>
+			<div className="containerSpecialPanel">
+				<div className="selectCategories">
+					<select
+						padding="0 20px"
+						value={selectedCategoryId}
+						onChange={onCategoryChange}
+					>
+						{Object.values(categories).map(
+							(
+								{ id: categoryId, name: categoryName }, // вывод выпадающего списка категорий (массивом map) по названию roleName контекст тега option, который соответствует полю name, и значению, соответствующему полю id массива roles, т.е. roleId
+							) => (
+								<option key={categoryId} value={categoryId}>
+									{categoryName}
+								</option>
+							),
+						)}
+					</select>
+				</div>
+				<div className="specialPanel">
+					<SpecialPannel
+						id={id}
+						categoryId={categoryId}
+						categories={categories}
+						margin="20px 0"
+						editButton={
+							<Icon id="fa-floppy-o" size="22px" onClick={onSave} />
+						}
+					/>
+				</div>
 			</div>
+
 			<div
 				ref={contentRef}
 				contentEditable={true}
@@ -131,6 +134,22 @@ export const ProductForm = styled(ProductFormContainer)`
 	& img {
 		float: left;
 		margin: 0 20px 10px 0;
+	}
+
+	& .containerSpecialPanel {
+		display: flex;
+		justify-content: space-between;
+		margin: 1% 0;
+		height: 50px;
+	}
+
+	& .selectCategories {
+		display: flex;
+		width: 200px;
+	}
+
+	& .specialPanel {
+		display: flex;
 	}
 
 	& .product-text {

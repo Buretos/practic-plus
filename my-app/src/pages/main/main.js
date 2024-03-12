@@ -1,29 +1,36 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Pagination, ProductCard, Search } from './components';
-import { useServerRequest } from '../../hooks';
+import Paginate from 'react-paginate'; // import Paginate from 'react-paginate';
 import { PAGINATION_LIMIT } from '../../constants';
-import { debounce, getLastPageFromLinks } from './utils';
+import { useServerRequest } from '../../hooks';
+import { ProductCard, Search } from './components';
+import { debounce } from './utils';
 import styled from 'styled-components';
 
 const MainContainer = ({ className }) => {
 	const [products, setProducts] = useState([]);
-	const [page, setPage] = useState(1);
-	const [lastPage, setLastPage] = useState(1);
+	const [currentPage, setCurrentPage] = useState(0);
 	const [searchPhrase, setSearchPhrase] = useState('');
 	const [shouldSearch, setShouldSearch] = useState(false); // флаг, срабатывающий после истечения 2 секунд задержки в debounce
+	const [categoryId, setCategoryId] = useState('');
 	const requestServer = useServerRequest();
+
+	const handleCategoryChange = (category) => {
+		setCategoryId(category);
+	};
+
+	const handlePageChange = (selectedPage) => {
+		setCurrentPage(selectedPage.selected);
+	};
+
 	// Запрос на просмотр статей есть для всех. Ошибку доступа не проверяем.
 	useEffect(() => {
 		// Запрос поисковой фразы тоже будем отправлять сюда. // категории товаров тоже
-		requestServer('fetchProducts', searchPhrase, page, PAGINATION_LIMIT).then(
-			({ res: { products, links } }) => {
-				setProducts(products);
-				setLastPage(getLastPageFromLinks(links));
-			},
-		);
+		requestServer('fetchProducts', searchPhrase).then(({ res: products }) => {
+			setProducts(products.products);
+		});
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [requestServer, page, shouldSearch]);
+	}, [requestServer, shouldSearch]);
 
 	const startDelayedSearch = useMemo(() => debounce(setShouldSearch, 2000), []);
 	// startDelayedSearch спустя 2 секудны поменяет флаг поиска и поиск сработает в useEffect
@@ -34,13 +41,32 @@ const MainContainer = ({ className }) => {
 		startDelayedSearch(!shouldSearch); // через 2 секунды инвертируем (меняем) флаг поиска. При этом searchPhrase отправляется в операцию на серевер (см. useEffect)
 	};
 
+	const filteredProducts = categoryId // фильтруем список полученный с сервера и отобранный по поисковой фразе (запрос на json-server с поисковой фразой)
+		? products.filter((product) => product.categoryId.toString() === categoryId)
+		: products;
+
+	const startIndex = currentPage * PAGINATION_LIMIT; // Здесь PAGINATION_LIMIT = 9 - количество элементов на странице
+	const endIndex = startIndex + PAGINATION_LIMIT; // Здесь PAGINATION_LIMIT = 9 - количество элементов на странице
+	const currentProducts = filteredProducts.slice(startIndex, endIndex);
+
 	return (
 		<div className={className}>
+			<select
+				className="selectCategory"
+				onChange={(e) => handleCategoryChange(e.target.value)}
+			>
+				<option value="">Все категории</option>
+				<option value="0">Гитары</option>
+				<option value="1">Струны</option>
+				<option value="2">Аксессуары</option>
+				<option value="3">Литература</option>
+				{/* Другие варианты категорий */}
+			</select>
 			<div className="product-and-search">
 				<Search searchPhrase={searchPhrase} onChange={onSearch} />
-				{products.length > 0 ? (
+				{filteredProducts.length > 0 ? (
 					<div className="product-list">
-						{products.map(
+						{currentProducts.map(
 							({ id, title, imageUrl, categoryId, commentsCount }) => (
 								<ProductCard
 									key={id}
@@ -57,8 +83,19 @@ const MainContainer = ({ className }) => {
 					<div className="no-product-found">Статьи не найдены</div>
 				)}
 			</div>
-			{lastPage > 1 && products.length > 0 && (
-				<Pagination page={page} lastPage={lastPage} setPage={setPage} />
+			{filteredProducts.length > PAGINATION_LIMIT && (
+				<Paginate
+					previousLabel="Предыдущая"
+					nextLabel="Следующая"
+					breakLabel="..."
+					breakClassName="break-me"
+					pageCount={Math.ceil(filteredProducts.length / PAGINATION_LIMIT)} // Здесь 9 - количество элементов на странице
+					marginPagesDisplayed={2}
+					pageRangeDisplayed={5}
+					onPageChange={handlePageChange}
+					containerClassName="pagination"
+					activeClassName="active"
+				/>
 			)}
 		</div>
 	);
@@ -69,15 +106,56 @@ export const Main = styled(MainContainer)`
 	flex-direction: column;
 	justify-content: space-between;
 
+	& .selectCategory {
+		margin: 20px;
+		height: 40px;
+		padding: 10px;
+	}
+
 	& .product-list {
 		display: flex;
 		flex-wrap: wrap;
-		padding: 0 0 80px;
+		padding: 0 0 20px;
 	}
 
 	& .no-product-found {
 		font-size: 18px;
 		margin-top: 40px;
 		text-align: center;
+	}
+
+	.pagination {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		list-style: none;
+		padding: 0;
+		margin: 20px 20px 40px;
+	}
+
+	.pagination li {
+		display: inline-block;
+		margin-right: 10px;
+		border: 1px solid #000;
+	}
+
+	.pagination li a {
+		display: block;
+		padding: 8px 12px;
+		background-color: #f2f2f2;
+		color: #333;
+		text-decoration: none;
+		border-radius: 4px;
+		transition: background-color 0.3s ease;
+	}
+
+	.pagination li.active a,
+	.pagination li a:hover {
+		background-color: #ccc;
+	}
+
+	.pagination li.disabled a {
+		pointer-events: none;
+		opacity: 0.5;
 	}
 `;
