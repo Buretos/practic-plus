@@ -1,19 +1,38 @@
 import { useEffect, useMemo, useState } from 'react';
 import Paginate from 'react-paginate'; // import Paginate from 'react-paginate';
+import _ from 'lodash';
 import { PAGINATION_LIMIT } from '../../constants';
 import { useServerRequest } from '../../hooks';
-import { ProductCard, Search } from './components';
+import { ProductCard, Search, SortSelect } from './components';
 import { debounce } from './utils';
 import styled from 'styled-components';
+
+const sortOption = [
+	{
+		value: 'NO',
+		label: ' ',
+		sort: (data) => _.orderBy(data, ['title'], ['no']),
+	},
+	{
+		value: 'titleASC',
+		label: 'по названию',
+		sort: (data) => _.orderBy(data, ['title'], ['asc']),
+	},
+	{
+		value: 'titleDESC',
+		label: 'по названию (обратный пордяок)',
+		sort: (data) => _.orderBy(data, ['title'], ['desc']),
+	},
+];
 
 const MainContainer = ({ className }) => {
 	const [products, setProducts] = useState([]);
 	const [currentPage, setCurrentPage] = useState(0);
 	const [searchPhrase, setSearchPhrase] = useState('');
 	const [shouldSearch, setShouldSearch] = useState(false); // флаг, срабатывающий после истечения 2 секунд задержки в debounce
-	const [categoryId, setCategoryId] = useState('');
+	const [categoryId, setCategoryId] = useState(null);
+	const [sorting, setSorting] = useState('NO'); //priceDESC
 	const requestServer = useServerRequest();
-
 	const handleCategoryChange = (category) => {
 		setCategoryId(category);
 	};
@@ -28,9 +47,10 @@ const MainContainer = ({ className }) => {
 		requestServer('fetchProducts', searchPhrase).then(({ res: products }) => {
 			setProducts(products.products);
 		});
+		setSorting('NO');
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [requestServer, shouldSearch]);
+	}, [requestServer, shouldSearch, categoryId]);
 
 	const startDelayedSearch = useMemo(() => debounce(setShouldSearch, 2000), []);
 	// startDelayedSearch спустя 2 секудны поменяет флаг поиска и поиск сработает в useEffect
@@ -49,22 +69,39 @@ const MainContainer = ({ className }) => {
 	const endIndex = startIndex + PAGINATION_LIMIT; // Здесь PAGINATION_LIMIT = 9 - количество элементов на странице
 	const currentProducts = filteredProducts.slice(startIndex, endIndex);
 
+	const handleSort = (e) => {
+		setSorting(e.target.value);
+	};
+
+	useEffect(() => {
+		const sortObJ = sortOption.find((option) => option.value === sorting);
+		if (sortObJ) {
+			setProducts(sortObJ.sort(filteredProducts));
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [sorting, requestServer, categoryId]);
+
 	return (
 		<div className={className}>
-			<select
-				className="selectCategory"
-				onChange={(e) => handleCategoryChange(e.target.value)}
-			>
-				<option value="">Все категории</option>
-				<option value="0">Гитары</option>
-				<option value="1">Струны</option>
-				<option value="2">Аксессуары</option>
-				<option value="3">Литература</option>
-				{/* Другие варианты категорий */}
-			</select>
+			<SortSelect options={sortOption} onSort={handleSort} value={sorting} />
+
+			<div>
+				<span>Категории </span>
+				<select
+					className="selectCategory"
+					onChange={(e) => handleCategoryChange(e.target.value)}
+				>
+					<option value="">Все категории</option>
+					<option value="0">Гитары</option>
+					<option value="1">Струны</option>
+					<option value="2">Аксессуары</option>
+					<option value="3">Литература</option>
+					{/* Другие варианты категорий */}
+				</select>
+			</div>
 			<div className="product-and-search">
 				<Search searchPhrase={searchPhrase} onChange={onSearch} />
-				{filteredProducts.length > 0 ? (
+				{products.length > 0 ? (
 					<div className="product-list">
 						{currentProducts.map(
 							({ id, title, imageUrl, categoryId, commentsCount }) => (
@@ -83,7 +120,7 @@ const MainContainer = ({ className }) => {
 					<div className="no-product-found">Статьи не найдены</div>
 				)}
 			</div>
-			{filteredProducts.length > PAGINATION_LIMIT && (
+			{products.length > PAGINATION_LIMIT && (
 				<Paginate
 					previousLabel="Предыдущая"
 					nextLabel="Следующая"
