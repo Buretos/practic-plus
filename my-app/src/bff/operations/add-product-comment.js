@@ -3,7 +3,7 @@ import { sessions } from '../sessions';
 import { ROLE } from '../constants';
 import { getProductCommentsWithAuthor } from '../utils';
 
-export const addProductComment = async (hash, userId, productId, content) => {
+export const addProductComment = async (hash, userId, productId, content, evaluation) => {
 	const accessRoles = [ROLE.ADMIN, ROLE.SALESMAN, ROLE.CLIENT];
 
 	const access = await sessions.access(hash, accessRoles);
@@ -14,7 +14,7 @@ export const addProductComment = async (hash, userId, productId, content) => {
 		};
 	}
 
-	await addComment(userId, productId, content);
+	await addComment(userId, productId, content, evaluation);
 
 	const product = await getProduct(productId);
 

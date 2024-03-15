@@ -4,8 +4,12 @@ const initialProductState = {
 	id: '',
 	title: '',
 	imageUrl: '',
-	content: '',
 	categoryId: 0,
+	manufacturer: '',
+	model: '',
+	quanthy: 0,
+	price: 0,
+	content: '',
 	comments: [],
 };
 

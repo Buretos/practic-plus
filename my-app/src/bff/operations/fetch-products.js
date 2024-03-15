@@ -1,5 +1,5 @@
 import { getComments, getProducts } from '../api';
-import { getCommentsCount } from '../utils';
+import { getCommentsCountAndRating } from '../utils';
 
 export const fetchProducts = async (searchPhrase) => {
 	// Просматривать посты может кто угодно. Поэтому проверку доступа (по ролям) не делаем
@@ -17,7 +17,8 @@ export const fetchProducts = async (searchPhrase) => {
 		res: {
 			products: products.map((product) => ({
 				...product,
-				commentsCount: getCommentsCount(comments, product.id),
+				commentsCount: getCommentsCountAndRating(comments, product.id)[0],
+				commentsRating: getCommentsCountAndRating(comments, product.id)[1],
 			})),
 		},
 	};

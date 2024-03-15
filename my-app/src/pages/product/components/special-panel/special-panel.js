@@ -14,6 +14,8 @@ const SpecialPannelContainer = ({
 	categoriesList,
 	id,
 	categoryId,
+	quanthy,
+	price,
 	editButton,
 }) => {
 	const dispatch = useDispatch();
@@ -21,7 +23,6 @@ const SpecialPannelContainer = ({
 	const navigate = useNavigate();
 	const userRole = useSelector(selectUserRole);
 	const categories = useSelector(selectCategories);
-
 	const categoryName = categories[categoryId].name;
 
 	const onProductRemove = (id) => {
@@ -44,29 +45,26 @@ const SpecialPannelContainer = ({
 
 	return SpecificSpecialPanel === 'fa-floppy-o' ? (
 		<div className={className}>
-			<div className="category">
-				<Icon
-					inactive={true}
-					id="fa-calendar-o"
-					margin="0 10px 0 0"
-					size="18px"
-				/>
-				{categoriesList}
-			</div>
+			<div className="category">{categoriesList}</div>
 			{isAdmin && <div className="buttons">{editButton}</div>}
 		</div>
 	) : (
 		<div className={className}>
 			<div className="category">
-				{categoryName && (
-					<Icon
-						inactive={true}
-						id="fa-calendar-o"
-						margin="0 10px 0 0"
-						size="18px"
-					/>
-				)}
+				<Icon inactive={true} id="fa-music" margin="2px 7px 0 0" size="18px" />
 				{categoryName}
+			</div>
+			<div className="category">
+				<Icon inactive={true} id="fa-music" margin="2px 7px 0 0" size="18px" />
+				{categoryName}
+			</div>
+			<div className="product-info">
+				<Icon inactive={true} id="fa-database" margin="0 7px 0 0" size="18px" />
+				{quanthy} шт.
+			</div>
+			<div className="product-info">
+				<Icon inactive={true} id="fa-money" margin="0 7px 0 0" size="18px" />
+				{price} руб.
 			</div>
 			{isAdmin && (
 				<div className="buttons">
@@ -90,11 +88,15 @@ export const SpecialPannel = styled(SpecialPannelContainer)`
 	justify-content: space-between;
 	margin: ${({ margin }) => margin};
 
+	& .category {
+		display: flex;
+	}
+
 	& .buttons {
 		display: flex;
 	}
 
-	& .category {
+	& .product-info {
 		display: flex;
 	}
 

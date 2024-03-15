@@ -11,14 +11,16 @@ import styled from 'styled-components';
 
 const CommentsContainer = ({ className, comments, productId }) => {
 	const [newComment, setNewComment] = useState('');
+	const [newEvaluation, setNewEvaluation] = useState(5);
 	const userId = useSelector(selectUserId);
 	const userRole = useSelector(selectUserRole);
 	const dispatch = useDispatch();
 	const requestServer = useServerRequest();
 
-	const onNewCommentAdd = (userId, productId, content) => {
-		dispatch(addCommentAsync(requestServer, userId, productId, content));
+	const onNewCommentAdd = (userId, productId, content, evaluation) => {
+		dispatch(addCommentAsync(requestServer, userId, productId, content, evaluation));
 		setNewComment('');
+		setNewEvaluation(5);
 	};
 
 	const isGuest = userRole === ROLE.GUEST;
@@ -27,28 +29,74 @@ const CommentsContainer = ({ className, comments, productId }) => {
 		<div className={className}>
 			{!isGuest && (
 				<div className="new-comment">
-					<textarea
-						name="comment"
-						value={newComment}
-						placeholder="Комментарий..."
-						onChange={({ target }) => setNewComment(target.value)}
-					></textarea>
-					<Icon
-						id="fa-paper-plane-o"
-						size="22px"
-						margin="0 0 0 10px"
-						onClick={() => onNewCommentAdd(userId, productId, newComment)}
-					/>
+					<div className="new-comment-header">
+						<div className="new-comment-title">Новый комментарий</div>
+						<div className="new-comment-evaluation-group">
+							<div className="new-comment-icon-evaluation">
+								<Icon
+									id="fa fa-star"
+									size="22px"
+									margin="0 5px 0 30px"
+									onClick={() =>
+										onNewCommentAdd(
+											userId,
+											productId,
+											newComment,
+											newEvaluation,
+										)
+									}
+								/>
+							</div>
+							<div className="evaluation">
+								<select
+									className="evaluation"
+									onChange={({ target }) => {
+										setNewEvaluation(Number(target.value));
+									}}
+								>
+									<option value="5">5</option>
+									<option value="4">4</option>
+									<option value="3">3</option>
+									<option value="2">2</option>
+									<option value="1">1</option>
+									<option value="0">0</option>
+									{/* Другие варианты категорий */}
+								</select>
+							</div>
+						</div>
+						<Icon
+							id="fa-paper-plane-o"
+							size="22px"
+							margin="10px 0 0 8px"
+							onClick={() =>
+								onNewCommentAdd(
+									userId,
+									productId,
+									newComment,
+									newEvaluation,
+								)
+							}
+						/>
+					</div>
+					<div>
+						<textarea
+							name="comment"
+							value={newComment}
+							placeholder="Комментарий..."
+							onChange={({ target }) => setNewComment(target.value)}
+						></textarea>
+					</div>
 				</div>
 			)}
 			<div className="comments">
-				{comments.map(({ id, author, content, publishedAt }) => (
+				{comments.map(({ id, author, content, evaluation, publishedAt }) => (
 					<Comment
 						key={id}
 						productId={productId}
 						id={id}
 						author={author}
 						content={content}
+						evaluation={evaluation}
 						publishedAt={publishedAt}
 					/>
 				))}
@@ -58,20 +106,51 @@ const CommentsContainer = ({ className, comments, productId }) => {
 };
 
 export const Comments = styled(CommentsContainer)`
-	width: 580px;
+	width: 800px;
 	margin: 0 auto;
 
-	& .new-comment {
+	& .new-comment-header {
 		display: flex;
 		width: 100%;
 		margin: 20px 0 0;
 	}
 
+	& .new-comment-title {
+		border-top: 1px solid #000;
+		border-left: 1px solid #000;
+		width: 770px;
+		padding: 10px;
+		background: #ddd;
+	}
+
+	& .new-comment-evaluation-group {
+		display: flex;
+		padding: 10px;
+		border-top: 1px solid #000;
+		border-right: 1px solid #000;
+		background: #ddd;
+	}
+
+	& .new-comment-icon-evaluation {
+		width: 50px;
+	}
+
+	& .evaluation {
+		display: flex;
+		width: 45px;
+		height: 32px;
+		border: 0;
+		padding-left: 5px;
+		background: #ddd;
+	}
+
 	& .new-comment textarea {
-		width: 550px;
+		width: 770px;
 		height: 120px;
 		font-size: 18px;
 		resize: none;
+		padding: 10px;
+		border-top: 0;
 	}
 `;
 

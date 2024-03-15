@@ -6,7 +6,18 @@ import styled from 'styled-components';
 
 const ProductContentContainer = ({
 	className,
-	product: { id, title, imageUrl, content, categoryId },
+	product: {
+		id,
+		title,
+		imageUrl,
+		categoryId,
+		manufacturer,
+		model,
+		quanthy,
+		price,
+		content,
+		comments,
+	},
 }) => {
 	const navigate = useNavigate();
 
@@ -17,7 +28,10 @@ const ProductContentContainer = ({
 			<SpecialPannel
 				id={id}
 				categoryId={categoryId}
-				margin="-20px 0 20px"
+				comments={comments}
+				quanthy={quanthy}
+				price={price}
+				margin="-20px 0 12px"
 				editButton={
 					<Icon
 						id="fa-pencil-square-o"
@@ -26,6 +40,10 @@ const ProductContentContainer = ({
 					/>
 				}
 			/>
+			<div className="product-info">
+				<div>Производитель: &nbsp;{manufacturer}</div>
+				<div>Модель:&nbsp;{model}</div>
+			</div>
 			<div className="product-text">{content}</div>
 		</div>
 	);

@@ -12,9 +12,9 @@ const ProductCardContainer = ({
 	imageUrl,
 	categoryId,
 	commentsCount,
+	commentsRating,
 }) => {
 	const categories = useSelector(selectCategories);
-	// console.log('categories', categories);
 	const categoryName = Object.values(categories)[categoryId].name;
 
 	// На всякий случай. Object.values(myobj); - позволяет извлекать в массив значения ключей объекта myobj .
@@ -26,27 +26,66 @@ const ProductCardContainer = ({
 				<div className="product-card-footer">
 					<h4>{title}</h4>
 				</div>
+				<div className="product-card-info1">
+					<div className="category">
+						<Icon
+							inactive={true}
+							id="fa-check-square-o"
+							margin="2px 7px 0 0"
+							size="18px"
+						/>
+						{categoryName}
+					</div>
+					<div className="comments-count">
+						<Icon
+							inactive={true}
+							id="fa-database"
+							margin="0 7px 0 0"
+							size="18px"
+						/>
+						{commentsCount}
+					</div>
+					<div className="category">
+						<Icon
+							inactive={true}
+							id="fa-money"
+							margin="0 7px 0 0"
+							size="18px"
+						/>
+						{commentsCount}
+					</div>
+				</div>
+				<div className="product-card-info2">
+					<div className="category">
+						<Icon
+							inactive={true}
+							id="fa-music"
+							margin="2px 7px 0 0"
+							size="18px"
+						/>
+						{categoryName}
+					</div>
+					<div className="price">
+						<Icon
+							inactive={true}
+							id="fa-star"
+							margin="0 7px 0 0"
+							size="18px"
+						/>
+						{commentsRating}
+					</div>
+					<div className="comments-count">
+						<Icon
+							inactive={true}
+							id="fa-comment-o"
+							margin="0 7px 0 0"
+							size="18px"
+						/>
+						{commentsCount}
+					</div>
+				</div>
 			</Link>
-			<div className="product-card-info">
-				<div className="category">
-					<Icon
-						inactive={true}
-						id="fa-align-justify"
-						margin="2px 7px 0 0"
-						size="18px"
-					/>
-					{categoryName}
-				</div>
-				<div className="comments-count">
-					<Icon
-						inactive={true}
-						id="fa-comment-o"
-						margin="0 7px 0 0"
-						size="18px"
-					/>
-					{commentsCount}
-				</div>
-			</div>
+
 			<Button border="0" fontWeight="900">
 				Купить
 			</Button>
@@ -73,12 +112,21 @@ export const ProductCard = styled(ProductCardContainer)`
 
 	& h4 {
 		margin: 0;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 
-	& .product-card-info {
+	& .product-card-info1 {
 		display: flex;
 		justify-content: space-between;
-		padding: 5px 10px;
+		padding: 5px 10px 0;
+	}
+
+	& .product-card-info2 {
+		display: flex;
+		justify-content: space-between;
+		padding: 0 10px 5px;
 		border-bottom: 1px solid #000;
 	}
 
@@ -87,6 +135,10 @@ export const ProductCard = styled(ProductCardContainer)`
 	}
 
 	& .comments-count {
+		display: flex;
+	}
+
+	& .price {
 		display: flex;
 	}
 `;

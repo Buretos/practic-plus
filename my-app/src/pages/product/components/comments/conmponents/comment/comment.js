@@ -7,7 +7,15 @@ import { ROLE } from '../../../../../../constants';
 import { selectUserRole } from '../../../../../../selectors';
 import styled from 'styled-components';
 
-const CommentContainer = ({ className, productId, id, author, publishedAt, content }) => {
+const CommentContainer = ({
+	className,
+	productId,
+	id,
+	author,
+	content,
+	evaluation,
+	publishedAt,
+}) => {
 	const dispatch = useDispatch();
 	const requestServer = useServerRequest();
 	const userRole = useSelector(selectUserRole);
@@ -31,15 +39,28 @@ const CommentContainer = ({ className, productId, id, author, publishedAt, conte
 		<div className={className}>
 			<div className="comment">
 				<div className="information-panel">
-					<div className="author">
-						<Icon
-							inactive={true}
-							id="fa-user-circle-o"
-							size="18px"
-							margin="0 10px 0 0"
-							onClick={() => {}}
-						/>
-						{author}
+					<div className="information-author-evaluation">
+						<div className="author">
+							<Icon
+								inactive={true}
+								id="fa-user-circle-o"
+								size="18px"
+								margin="0 10px 0 0"
+								onClick={() => {}}
+							/>
+							{author}
+						</div>
+						<div className="evaluation-comment">
+							<Icon
+								background="#fff"
+								inactive={true}
+								id="fa fa-star"
+								size="18px"
+								margin="0 10px 0 0"
+								onClick={() => {}}
+							/>
+							{evaluation}
+						</div>
 					</div>
 					<div className="published-at">
 						<Icon
@@ -67,13 +88,13 @@ const CommentContainer = ({ className, productId, id, author, publishedAt, conte
 };
 
 export const Comment = styled(CommentContainer)`
-	width: 580px;
+	width: 800px;
 	display: flex;
 	margin-top: 10px;
 
 
 	& .comment {
-		width: 548px;
+		width: 770px;
 		border: 1px solid #000;
 		padding: 5px 10px;z
 
@@ -84,8 +105,17 @@ export const Comment = styled(CommentContainer)`
 		justify-content: space-between;
 	}
 
+	& .information-author-evaluation {
+		display: flex;
+	}
+
 	& .author {
 		display: flex;
+	}
+
+	& .evaluation-comment {
+		display: flex;
+		margin-left:25px;
 	}
 
 	& .published-at {
