@@ -8,12 +8,13 @@ import { checkAccess } from '../../../../utils';
 import { ROLE } from '../../../../constants';
 import { selectCategories, selectUserRole } from '../../../../selectors';
 import styled from 'styled-components';
+import { ratingProduct } from './utils/rating-product';
 
 const SpecialPannelContainer = ({
 	className,
-	categoriesList,
 	id,
 	categoryId,
+	comments,
 	quanthy,
 	price,
 	editButton,
@@ -45,26 +46,29 @@ const SpecialPannelContainer = ({
 
 	return SpecificSpecialPanel === 'fa-floppy-o' ? (
 		<div className={className}>
-			<div className="category">{categoriesList}</div>
 			{isAdmin && <div className="buttons">{editButton}</div>}
 		</div>
 	) : (
 		<div className={className}>
-			<div className="category">
-				<Icon inactive={true} id="fa-music" margin="2px 7px 0 0" size="18px" />
-				{categoryName}
-			</div>
-			<div className="category">
-				<Icon inactive={true} id="fa-music" margin="2px 7px 0 0" size="18px" />
+			<div className="product-info">
+				<Icon inactive={true} id="fa-music" margin="0 7px" size="18px" />
 				{categoryName}
 			</div>
 			<div className="product-info">
-				<Icon inactive={true} id="fa-database" margin="0 7px 0 0" size="18px" />
+				<Icon inactive={true} id="fa-star" margin="0 7px" size="18px" />
+				{ratingProduct(comments)}
+			</div>
+			<div className="product-info">
+				<Icon inactive={true} id="fa-comment-o" margin="0 7px" size="18px" />
+				{comments.length}
+			</div>
+			<div className="product-info">
+				<Icon inactive={true} id="fa-database" margin="0 7px" size="18px" />
 				{quanthy} шт.
 			</div>
 			<div className="product-info">
-				<Icon inactive={true} id="fa-money" margin="0 7px 0 0" size="18px" />
-				{price} руб.
+				<Icon inactive={true} id="fa-rub" margin="0 7px 0 0" size="18px" />
+				{price}
 			</div>
 			{isAdmin && (
 				<div className="buttons">
@@ -102,7 +106,7 @@ export const SpecialPannel = styled(SpecialPannelContainer)`
 
 	& i {
 		position: relative;
-		top: 1px;
+		top: -1px;
 	}
 `;
 

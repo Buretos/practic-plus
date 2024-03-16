@@ -4,4 +4,8 @@ export const transformProduct = (dbProduct) => ({
 	content: dbProduct.content,
 	imageUrl: dbProduct.image_url,
 	categoryId: dbProduct.category_id,
+	manufacturer: dbProduct.manufacturer,
+	model: dbProduct.model,
+	quanthy: dbProduct.quanthy,
+	price: dbProduct.price,
 });

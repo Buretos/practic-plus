@@ -23,6 +23,16 @@ const sortOption = [
 		label: 'по названию (обратный пордяок)',
 		sort: (data) => _.orderBy(data, ['title'], ['desc']),
 	},
+	{
+		value: 'ratingASC',
+		label: 'по рейтингу',
+		sort: (data) => _.orderBy(data, ['commentsRating'], ['desc']),
+	},
+	{
+		value: 'ratingDESC',
+		label: 'по рейтингу (обратный пордяок)',
+		sort: (data) => _.orderBy(data, ['commentsRating'], ['asc']),
+	},
 ];
 
 const MainContainer = ({ className }) => {
@@ -64,7 +74,7 @@ const MainContainer = ({ className }) => {
 	const filteredProducts = categoryId // фильтруем список полученный с сервера и отобранный по поисковой фразе (запрос на json-server с поисковой фразой)
 		? products.filter((product) => product.categoryId.toString() === categoryId)
 		: products;
-
+	console.log('filteredProducts', filteredProducts);
 	const startIndex = currentPage * PAGINATION_LIMIT; // Здесь PAGINATION_LIMIT = 9 - количество элементов на странице
 	const endIndex = startIndex + PAGINATION_LIMIT; // Здесь PAGINATION_LIMIT = 9 - количество элементов на странице
 	const currentProducts = filteredProducts.slice(startIndex, endIndex);
@@ -109,6 +119,9 @@ const MainContainer = ({ className }) => {
 								title,
 								imageUrl,
 								categoryId,
+								model,
+								quanthy,
+								price,
 								commentsCount,
 								commentsRating,
 							}) => (
@@ -118,6 +131,9 @@ const MainContainer = ({ className }) => {
 									title={title}
 									imageUrl={imageUrl}
 									categoryId={categoryId}
+									model={model}
+									quanthy={quanthy}
+									price={price}
 									commentsCount={commentsCount}
 									commentsRating={commentsRating}
 								/>

@@ -11,12 +11,15 @@ const ProductCardContainer = ({
 	title,
 	imageUrl,
 	categoryId,
+	model,
+	quanthy,
+	price,
 	commentsCount,
 	commentsRating,
 }) => {
 	const categories = useSelector(selectCategories);
 	const categoryName = Object.values(categories)[categoryId].name;
-
+	console.log('price', price);
 	// На всякий случай. Object.values(myobj); - позволяет извлекать в массив значения ключей объекта myobj .
 
 	return (
@@ -34,7 +37,7 @@ const ProductCardContainer = ({
 							margin="2px 7px 0 0"
 							size="18px"
 						/>
-						{categoryName}
+						{model}
 					</div>
 					<div className="comments-count">
 						<Icon
@@ -43,16 +46,16 @@ const ProductCardContainer = ({
 							margin="0 7px 0 0"
 							size="18px"
 						/>
-						{commentsCount}
+						{quanthy}
 					</div>
 					<div className="category">
 						<Icon
 							inactive={true}
-							id="fa-money"
+							id="fa-rub"
 							margin="0 7px 0 0"
 							size="18px"
 						/>
-						{commentsCount}
+						{price}
 					</div>
 				</div>
 				<div className="product-card-info2">

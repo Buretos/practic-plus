@@ -35,14 +35,14 @@ const ProductContainer = ({ className }) => {
 			setError(productData.error);
 			setIsLoading(false);
 		});
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [dispatch, requestServer, params.id, isCreating, product]);
+		// console.log('product', product);
+	}, [dispatch, requestServer, params.id, isCreating, product.category_id]);
+	// странная история с обновлением категории продукта. Она не обновляется сразу, только после перезагрузки страницы. Запись нового значения rdux store porduct выдает два ключа вместо одного categoryId со страрым значением ещё и category_id с актуальным значением. Не понимаю... поставил возвращаемое изменяемое актуальное значение в массив зависимостей для обновления чтения данных продукта. Теперь обновляется. Но было бы правильным просто передать пропсом в компонент, отражающий это значение, как это происходит с остальными полями. Причину столь странного поведения так и не понял.;
 
 	if (isLoading) {
 		// кажется, это нужно для того чтобы не рендерить на экране ничего, чтобы было пусто во время загрузки. Сюда надо ставить лоадер, по идее...
 		return null;
 	}
-
 	const SpecificProductPage =
 		isCreating || isEditing ? (
 			<PrivateContent access={[ROLE.ADMIN]} error={error}>
@@ -65,3 +65,5 @@ export const Product = styled(ProductContainer)`
 	margin: 40px 0;
 	padding: 0 80px;
 `;
+
+// Проблема в том, что при изменении в product-form категории продкута, он записывается в базу, но не считывается оттдуа. При этом остальные данные обновляются. Я не могу понять, почему такое происходит... Надо посмотреть на действия по клавише Сохранить (флоппик). Что он делает с другими полями и почему катергория не меняется, пока не будет запрос к правильно записанной базе данных.

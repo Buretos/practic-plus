@@ -10,22 +10,6 @@ import { PROP_TYPE } from '../../../../constants';
 import { selectCategories } from '../../../../selectors';
 import styled from 'styled-components';
 
-// const Categories = (selectedCategoryId, onCategoryChange, categories) => {
-// 	<div>
-// 		<select value={selectedCategoryId} onChange={onCategoryChange}>
-// 			{Object.values(categories).map(
-// 				(
-// 					{ id: categoryId, name: categoryName }, // вывод выпадающего списка категорий (массивом map) по названию roleName контекст тега option, который соответствует полю name, и значению, соответствующему полю id массива roles, т.е. roleId
-// 				) => (
-// 					<option key={categoryId} value={categoryId}>
-// 						{categoryName}
-// 					</option>
-// 				),
-// 			)}
-// 		</select>
-// 	</div>;
-// };
-
 const ProductFormContainer = ({
 	className,
 	product: {
@@ -58,22 +42,17 @@ const ProductFormContainer = ({
 		dispatch(RESET_PRODUCT_DATA);
 		titleProductForm = 'Создание новой карточки информации о товаре';
 	}
-
-	// useEffect(() => {
-	// 	requestServer('fetchCategories').then((categoriesData) => {
-	// 		setCategories(categoriesData.res);
-	// 	});
-	// }, [requestServer]);
-
 	// Неуправляемая форма картики и заголовка не сбрасываем значение с предыдущего значения. Поэтому приходится обнулять данные в компоненте Product и рендерить при изменении в useLayoutEffect. Почему-то по другому не получалось сбросить значение полей при создании новой статьи
+
 	useLayoutEffect(() => {
 		setImageUrlValue(imageUrl);
 		setTitleValue(title);
+		setSelectedCategoryId(categoryId);
 		setManufacturerValue(manufacturer);
 		setModelValue(model);
 		setQuanthyValue(quanthy);
 		setPriceValue(price);
-	}, [imageUrl, title, manufacturer, model, quanthy, price]);
+	}, [imageUrl, title, manufacturer, model, quanthy, price, categoryId]);
 
 	const onSave = () => {
 		const newContent = sanizeContent(contentRef.current.innerHTML);
