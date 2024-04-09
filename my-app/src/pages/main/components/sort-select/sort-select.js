@@ -1,10 +1,11 @@
 import React from 'react';
+import styled from 'styled-components';
 
-export const SortSelect = ({ value, onSort, options }) => {
+const SortSelectContainer = ({ className, value, onSort, options }) => {
 	return (
-		<div>
+		<div className={className}>
 			<span>Сортировка </span>
-			<select value={value} onChange={onSort}>
+			<select className="selectCategory" value={value} onChange={onSort}>
 				{options.map((option) => (
 					<option key={option.value} value={option.value}>
 						{option.label}
@@ -14,3 +15,13 @@ export const SortSelect = ({ value, onSort, options }) => {
 		</div>
 	);
 };
+
+export const SortSelect = styled(SortSelectContainer)`
+	margin-top: 20px;
+
+	& .selectCategory {
+		margin: 20px;
+		height: 40px;
+		padding: 10px;
+	}
+`;

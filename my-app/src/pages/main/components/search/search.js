@@ -3,7 +3,7 @@ import { Icon, Input } from '../../../../components';
 import styled from 'styled-components';
 
 // Управляемый ввод из родительского компонента приходит и искомаяя фраза и onChange
-const SeacchContainer = ({ className, searchPhrase, onChange }) => {
+const SearchContainer = ({ className, searchPhrase, onChange }) => {
 	return (
 		<div className={className}>
 			<Input
@@ -16,7 +16,7 @@ const SeacchContainer = ({ className, searchPhrase, onChange }) => {
 	);
 };
 
-export const Search = styled(SeacchContainer)`
+export const Search = styled(SearchContainer)`
 	display: flex;
 	position: relative;
 	width: 340px;

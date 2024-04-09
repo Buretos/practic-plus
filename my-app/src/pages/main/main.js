@@ -3,7 +3,7 @@ import Paginate from 'react-paginate'; // import Paginate from 'react-paginate';
 import _ from 'lodash';
 import { PAGINATION_LIMIT } from '../../constants';
 import { useServerRequest } from '../../hooks';
-import { ProductCard, Search, SortSelect } from './components';
+import { ProductCard, Search, SortSelect, CategoriesSelect } from './components';
 import { debounce } from './utils';
 import styled from 'styled-components';
 
@@ -93,21 +93,19 @@ const MainContainer = ({ className }) => {
 
 	return (
 		<div className={className}>
-			<SortSelect options={sortOption} onSort={handleSort} value={sorting} />
-
-			<div>
-				<span>Категории </span>
-				<select
-					className="selectCategory"
-					onChange={(e) => handleCategoryChange(e.target.value)}
-				>
-					<option value="">Все категории</option>
-					<option value="0">Гитары</option>
-					<option value="1">Струны</option>
-					<option value="2">Аксессуары</option>
-					<option value="3">Литература</option>
-					{/* Другие варианты категорий */}
-				</select>
+			<div className="mainHeader">
+				<div>
+					<CategoriesSelect
+						onChange={(e) => handleCategoryChange(e.target.value)}
+					/>
+				</div>
+				<div>
+					<SortSelect
+						options={sortOption}
+						onSort={handleSort}
+						value={sorting}
+					/>
+				</div>
 			</div>
 			<div className="product-and-search">
 				<Search searchPhrase={searchPhrase} onChange={onSearch} />
@@ -166,6 +164,11 @@ export const Main = styled(MainContainer)`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+
+	& .mainHeader {
+		display: flex;
+		justify-content: space-between;
+	}
 
 	& .selectCategory {
 		margin: 20px;
