@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import { useServerRequest } from './hooks';
 import { Error, Header, Footer, Modal } from './components';
-import { Authorization, Main, Product, Registration, Users } from './pages';
+import { Authorization, Main, Product, Registration, Users, Cart } from './pages';
 import { loadCategoriesAsync, setUser } from './actions';
 import { ERROR } from './constants';
 import styled from 'styled-components';
@@ -59,7 +59,8 @@ export const Gitarium = () => {
 					<Route path="/register" element={<Registration />} />{' '}
 					{/* Страница  регистрации */}
 					{/* <Route path="/user" element={<User />} /> // Страница покупателя с историей заказов */}
-					{/* <Route path="/basket" element={<User />} /> // Страница корзины покупателя  */}
+					<Route path="/cart" element={<Cart />} />
+					{/* Страница корзины покупателя  */}
 					<Route path="/users" element={<Users />} />{' '}
 					{/* администрирование пользователей*/}
 					<Route path="/product" element={<Product />} />{' '}

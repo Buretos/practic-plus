@@ -16,6 +16,7 @@ const ProductCardContainer = ({
 	price,
 	commentsCount,
 	commentsRating,
+	onClick,
 }) => {
 	const categories = useSelector(selectCategories);
 	const categoryName = Object.values(categories)[categoryId].name;
@@ -89,7 +90,7 @@ const ProductCardContainer = ({
 				</div>
 			</Link>
 
-			<Button border="0" fontWeight="900">
+			<Button onClick={onClick} border="0" fontWeight="900">
 				Купить
 			</Button>
 		</div>

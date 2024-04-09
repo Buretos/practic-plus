@@ -57,6 +57,9 @@ const ControlPanelContainer = ({ className }) => {
 					margin="10px 0 0 0"
 					onClick={() => navigate(-1)}
 				/>
+				<Link to="/cart">
+					<Icon title="Корзина" id="fa-shopping-cart" margin="10px 0 0 10px" />
+				</Link>
 				{isAdmin && (
 					<>
 						<Link to="/product">

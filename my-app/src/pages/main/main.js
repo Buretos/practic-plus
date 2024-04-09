@@ -39,6 +39,7 @@ const MainContainer = ({ className }) => {
 	const [products, setProducts] = useState([]);
 	const [currentPage, setCurrentPage] = useState(0);
 	const [searchPhrase, setSearchPhrase] = useState('');
+	const [order, setOrder] = useState([]);
 	const [shouldSearch, setShouldSearch] = useState(false); // флаг, срабатывающий после истечения 2 секунд задержки в debounce
 	const [categoryId, setCategoryId] = useState(null);
 	const [sorting, setSorting] = useState('NO'); //priceDESC
@@ -50,6 +51,12 @@ const MainContainer = ({ className }) => {
 	const handlePageChange = (selectedPage) => {
 		setCurrentPage(selectedPage.selected);
 	};
+
+	const addToOrder = (product) => {
+		setOrder([...order, product]);
+	};
+	// addToOrder();
+	console.log('Корзина', order);
 
 	// Запрос на просмотр статей есть для всех. Ошибку доступа не проверяем.
 	useEffect(() => {
@@ -134,12 +141,13 @@ const MainContainer = ({ className }) => {
 									price={price}
 									commentsCount={commentsCount}
 									commentsRating={commentsRating}
+									onClick={() => addToOrder(id)}
 								/>
 							),
 						)}
 					</div>
 				) : (
-					<div className="no-product-found">Статьи не найдены</div>
+					<div className="no-product-found">Товары не найдены</div>
 				)}
 			</div>
 			{products.length > PAGINATION_LIMIT && (
