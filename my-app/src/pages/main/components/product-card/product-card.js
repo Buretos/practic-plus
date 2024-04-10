@@ -16,6 +16,7 @@ const ProductCardContainer = ({
 	price,
 	commentsCount,
 	commentsRating,
+	inCart,
 	onClick,
 }) => {
 	const categories = useSelector(selectCategories);
@@ -89,10 +90,13 @@ const ProductCardContainer = ({
 					</div>
 				</div>
 			</Link>
-
-			<Button onClick={onClick} border="0" fontWeight="900">
-				Купить
-			</Button>
+			{inCart ? (
+				<div></div>
+			) : (
+				<Button onClick={onClick} border="0" fontWeight="900">
+					Купить
+				</Button>
+			)}
 		</div>
 	);
 };

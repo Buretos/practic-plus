@@ -60,33 +60,7 @@ const MainContainer = ({ className }) => {
 	const handleAddToOrder = (product) => {
 		dispatch(addToOrder(product));
 	};
-	// const addToOrder = (product) => {
-	// 	setOrder((prevOrder) => {
-	// 		// Проверяем, существует ли уже продукт с таким ID в массиве
-	// 		const existingProductIndex = prevOrder.findIndex((p) => p.id === product.id);
 
-	// 		// Если продукт с таким ID уже есть
-	// 		if (existingProductIndex >= 0) {
-	// 			// Сделать копию массива чтобы не мутировать состояние напрямую
-	// 			const updatedOrder = [...prevOrder];
-
-	// 			// Если у продукта уже есть поле count, увеличиваем его, иначе устанавливаем равным 1
-	// 			const existingCount = updatedOrder[existingProductIndex].count || 0;
-	// 			updatedOrder[existingProductIndex].count = existingCount + 1;
-
-	// 			// Возвращаем обновлённый массив
-	// 			return updatedOrder;
-	// 		} else {
-	// 			// Если продукта нет, добавляем его в массив с count равным 1
-	// 			return [...prevOrder, { ...product, count: 1 }];
-	// 		}
-	// 	});
-	// };
-
-	// const addToOrder = (product) => {
-	// 	setOrder([...order, product]);
-	// };
-	// addToOrder();
 	console.log('Корзина', order);
 
 	// Запрос на просмотр статей есть для всех. Ошибку доступа не проверяем.
@@ -172,6 +146,7 @@ const MainContainer = ({ className }) => {
 									price={price}
 									commentsCount={commentsCount}
 									commentsRating={commentsRating}
+									inCart={false}
 									onClick={() =>
 										handleAddToOrder({
 											id,
