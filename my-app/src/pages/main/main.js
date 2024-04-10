@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Paginate from 'react-paginate'; // import Paginate from 'react-paginate';
 import _ from 'lodash';
 import { PAGINATION_LIMIT } from '../../constants';
@@ -6,6 +7,8 @@ import { useServerRequest } from '../../hooks';
 import { ProductCard, Search, SortSelect, CategoriesSelect } from './components';
 import { debounce } from './utils';
 import styled from 'styled-components';
+import { addToOrder } from '../../actions';
+import { selectOrder } from '../../selectors';
 
 const sortOption = [
 	{
@@ -36,10 +39,12 @@ const sortOption = [
 ];
 
 const MainContainer = ({ className }) => {
+	const dispatch = useDispatch();
+	const order = useSelector(selectOrder);
 	const [products, setProducts] = useState([]);
 	const [currentPage, setCurrentPage] = useState(0);
 	const [searchPhrase, setSearchPhrase] = useState('');
-	const [order, setOrder] = useState([]);
+	// const [order, setOrder] = useState([]);
 	const [shouldSearch, setShouldSearch] = useState(false); // флаг, срабатывающий после истечения 2 секунд задержки в debounce
 	const [categoryId, setCategoryId] = useState(null);
 	const [sorting, setSorting] = useState('NO'); //priceDESC
@@ -52,9 +57,35 @@ const MainContainer = ({ className }) => {
 		setCurrentPage(selectedPage.selected);
 	};
 
-	const addToOrder = (product) => {
-		setOrder([...order, product]);
+	const handleAddToOrder = (product) => {
+		dispatch(addToOrder(product));
 	};
+	// const addToOrder = (product) => {
+	// 	setOrder((prevOrder) => {
+	// 		// Проверяем, существует ли уже продукт с таким ID в массиве
+	// 		const existingProductIndex = prevOrder.findIndex((p) => p.id === product.id);
+
+	// 		// Если продукт с таким ID уже есть
+	// 		if (existingProductIndex >= 0) {
+	// 			// Сделать копию массива чтобы не мутировать состояние напрямую
+	// 			const updatedOrder = [...prevOrder];
+
+	// 			// Если у продукта уже есть поле count, увеличиваем его, иначе устанавливаем равным 1
+	// 			const existingCount = updatedOrder[existingProductIndex].count || 0;
+	// 			updatedOrder[existingProductIndex].count = existingCount + 1;
+
+	// 			// Возвращаем обновлённый массив
+	// 			return updatedOrder;
+	// 		} else {
+	// 			// Если продукта нет, добавляем его в массив с count равным 1
+	// 			return [...prevOrder, { ...product, count: 1 }];
+	// 		}
+	// 	});
+	// };
+
+	// const addToOrder = (product) => {
+	// 	setOrder([...order, product]);
+	// };
 	// addToOrder();
 	console.log('Корзина', order);
 
@@ -141,7 +172,19 @@ const MainContainer = ({ className }) => {
 									price={price}
 									commentsCount={commentsCount}
 									commentsRating={commentsRating}
-									onClick={() => addToOrder(id)}
+									onClick={() =>
+										handleAddToOrder({
+											id,
+											title,
+											imageUrl,
+											categoryId,
+											model,
+											quanthy,
+											price,
+											commentsCount,
+											commentsRating,
+										})
+									}
 								/>
 							),
 						)}
