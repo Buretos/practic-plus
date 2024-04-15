@@ -12,3 +12,5 @@ export * from './reset-product-data';
 export * from './save-product-async';
 export * from './set-product-data';
 export * from './set-user';
+export * from './clear-order';
+export * from './remove-from-order';

@@ -1,19 +1,36 @@
 import { useDispatch, useSelector } from 'react-redux';
-// import { addToOrder } from '../../actions';
 import { selectOrder } from '../../selectors';
-
 import styled from 'styled-components';
-import { H2 } from '../../components';
+import { Button, H2 } from '../../components';
 import { ProductCard } from '../main/components';
+import { addToOrder, clearOrder, removeFromOrder } from '../../actions';
 
 const CartContainer = ({ className }) => {
-	// const dispatch = useDispatch();
+	const dispatch = useDispatch();
 	const order = useSelector(selectOrder);
-	console.log('Корзина', order.order);
+	const countAll = order.order.reduce((sum, item) => sum + item.count, 0);
+
+	const handleClearOrder = () => {
+		dispatch(clearOrder()); // Очистка корзины
+	};
+
+	const handleAddToOrder = (product) => {
+		dispatch(addToOrder(product));
+	};
+
+	const handleRemoveFromOrder = (productId) => {
+		dispatch(removeFromOrder(productId)); // Удаление одной единицы товара из корзины
+	};
+
+	// Функция для подсчёта общего количества товаров в корзине
+
 	return (
 		<div className={className}>
 			<div className="order">
 				<H2>Корзина покупателя</H2>
+				{/* Выводим общее количество товаров */}
+				<div>Всего товаров в корзине: {countAll} шт.</div>
+				<Button onClick={handleClearOrder}>Очистить корзину</Button>
 			</div>
 			{order.order.map(
 				({
@@ -45,7 +62,40 @@ const CartContainer = ({ className }) => {
 							/>
 						</div>
 						<div className="product-info">
+							{console.log('count ', count)}
 							<div>Количество: {count} шт.</div>
+							<div className="block-button-cart">
+								<div className="button-cart">
+									<Button
+										onClick={() => handleRemoveFromOrder({ id })}
+										border="0"
+										fontWeight="900"
+									>
+										-1
+									</Button>
+								</div>
+								<div className="button-cart">
+									<Button
+										onClick={() =>
+											handleAddToOrder({
+												id,
+												title,
+												imageUrl,
+												categoryId,
+												model,
+												quanthy,
+												price,
+												commentsCount,
+												commentsRating,
+											})
+										}
+										border="0"
+										fontWeight="900"
+									>
+										+1
+									</Button>
+								</div>
+							</div>
 							<div>Цена за шт.: {price} руб.</div>
 							<div>
 								Всего за этот товар:
@@ -91,5 +141,15 @@ export const Cart = styled(CartContainer)`
 		margin: 20px;
 		width: 570px;
 		justify-content: space-between;
+	}
+
+	& .block-button-cart {
+		display: flex;
+	}
+
+	& .button-cart {
+		display: flex;
+		justify-content: space-between;
+		width: 80%;
 	}
 `;

@@ -7,7 +7,7 @@ import {
 	selectUserRole,
 	selectUserSession,
 } from '../../../../selectors';
-import { logout } from '../../../../actions';
+import { clearOrder, logout } from '../../../../actions';
 import styled from 'styled-components';
 import { checkAccess } from '../../../../utils';
 
@@ -32,6 +32,7 @@ const ControlPanelContainer = ({ className }) => {
 	const onLogout = () => {
 		dispatch(logout(session));
 		sessionStorage.removeItem('userData');
+		dispatch(clearOrder()); // Очистка корзины
 	};
 
 	const isAdmin = checkAccess([ROLE.ADMIN], roleId);

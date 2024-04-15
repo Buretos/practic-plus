@@ -1,1 +1,3 @@
-export const selectOrder = ({ order }) => order;
+export const selectOrder = ({ order }) => {
+	return order;
+};

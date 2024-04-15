@@ -106,6 +106,7 @@ const MainContainer = ({ className }) => {
 	return (
 		<div className={className}>
 			<div className="mainHeader">
+				{' '}
 				<div>
 					<CategoriesSelect
 						onChange={(e) => handleCategoryChange(e.target.value)}
