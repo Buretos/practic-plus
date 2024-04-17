@@ -8,22 +8,26 @@ const initialCartState = {
 export const cartReducer = (state = initialCartState, action) => {
 	switch (action.type) {
 		case ACTION_TYPE.ADD_TO_CART:
-			const { cart } = state;
+			const { productsInCart } = state;
 			const { payload: product } = action;
-			const existingProductIndex = cart.findIndex((p) => p.id === product.id);
+			const existingProductIndex = productsInCart.findIndex(
+				(p) => p.id === product.id,
+			);
 
-			if (existingProductIndex) {
-				const updatedCart = [...cart];
+			if (existingProductIndex >= 0) {
+				console.log('existingProductIndex', existingProductIndex);
+				const updatedCart = [...productsInCart];
 				const existingCount = updatedCart[existingProductIndex].count || 0;
 				updatedCart[existingProductIndex] = {
 					...updatedCart[existingProductIndex],
 					count: existingCount + 1,
 				};
-				return { ...state, cart: updatedCart };
+				return { ...state, productsInCart: updatedCart };
 			} else {
+				console.log('existingProductIndexElse', existingProductIndex);
 				return {
 					...state,
-					cart: [...cart.productsInCart, { ...cart.productsInCart, count: 1 }],
+					productsInCart: [...productsInCart, { ...product, count: 1 }],
 				};
 			}
 		case ACTION_TYPE.CLEAR_CART:
@@ -48,26 +52,8 @@ export const cartReducer = (state = initialCartState, action) => {
 
 			return {
 				...state,
-				cart: updatedCart,
+				productsInCart: updatedCart,
 			};
-		// return {
-		// 	...state,
-		// 	order: state.order.map((item) => {;
-		// 		if (item.id === action.payload.id) {
-		// 			if (item.count > 1) {
-		// 				// Уменьшаем количество товара
-		// 				return { ...item, count: item.count - 1 };
-		// 			} else {
-		// 				// Удаляем товар полностью, если он один
-		// 				return state.order.filter(
-		// 					(item) => item.id !== action.payload.id,
-		// 				);
-		// 			}
-		// 		} else {
-		// 			return item;
-		// 		}
-		// 	}),
-		// };
 
 		default:
 			return state;

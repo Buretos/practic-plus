@@ -1,6 +1,6 @@
 import { ACTION_TYPE } from './action-type';
 
-export const removeFromOrder = (productId) => ({
+export const removeFromCart = (productId) => ({
 	type: ACTION_TYPE.REMOVE_FROM_CART,
 	payload: productId,
 });

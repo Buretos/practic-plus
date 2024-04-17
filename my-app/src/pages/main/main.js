@@ -59,6 +59,7 @@ const MainContainer = ({ className }) => {
 
 	const handleAddToCart = (product) => {
 		dispatch(addToCart(product));
+		console.log('сработал dispatch(addToCart(product))');
 	};
 
 	console.log('Корзина', cart.productsInCart);
