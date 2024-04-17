@@ -1,29 +1,30 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { selectCart } from '../../selectors';
+import { selectCart, selectUserId, selectUserRole } from '../../selectors';
 import styled from 'styled-components';
 import { Button, H2 } from '../../components';
 import { ProductCard } from '../main/components';
-import { addToCart, clearCart, removeFromCart } from '../../actions';
+import { addOrderAsync, addToCart, clearCart, removeFromCart } from '../../actions';
 import React, { useState } from 'react';
-// import { checkAccess } from '../../utils';
-// import { ROLE } from '../../constants';
-// import { useNavigate } from 'react-router-dom';
-// import { useServerRequest } from '../../hooks';
+import { checkAccess } from '../../utils';
+import { ROLE } from '../../constants';
+import { useNavigate } from 'react-router-dom';
+import { useServerRequest } from '../../hooks';
 
 const CartContainer = ({ className }) => {
 	const dispatch = useDispatch();
 	const cart = useSelector(selectCart);
+	const userId = useSelector(selectUserId);
+	const roleId = useSelector(selectUserRole);
 	const countAll = cart.productsInCart.reduce((sum, item) => sum + item.count, 0);
-	// const roleId = useSelector(selectUserRole);
-	// const navigate = useNavigate();
-	// const login = useSelector(selectUserLogin);
-	// const requestServer = useServerRequest();
+	const navigate = useNavigate();
+	const requestServer = useServerRequest();
 
 	// Добавленные состояния для способов доставки и оплаты
 	const [deliveryMethod, setDeliveryMethod] = useState('');
 	const [paymentMethod, setPaymentMethod] = useState('');
+	// const shoper = login.toString();
 
-	const handleClearOrder = () => {
+	const handleClearCart = () => {
 		dispatch(clearCart()); // Очистка корзины
 	};
 
@@ -35,11 +36,28 @@ const CartContainer = ({ className }) => {
 		dispatch(removeFromCart(productId)); // Удаление одной единицы товара из корзины
 	};
 
+	const handleCreateOrder = (
+		userId,
+		{ productsInCart },
+		paymentMethod,
+		deliveryMethod,
+	) => {
+		dispatch(
+			addOrderAsync(
+				requestServer,
+				userId,
+				productsInCart,
+				paymentMethod,
+				deliveryMethod,
+			),
+		);
+	};
+
 	// Проверяем, все ли условия для активации кнопки "Оформить заказ" выполнены
 	const canCheckout = countAll > 0 && deliveryMethod && paymentMethod;
 
-	// const isShopper = checkAccess([ROLE.CLIENT], roleId);
-	console.log('hash');
+	const isClient = checkAccess([ROLE.CLIENT], roleId);
+	console.log('isClient', isClient);
 
 	return (
 		<div className={className}>
@@ -47,7 +65,7 @@ const CartContainer = ({ className }) => {
 				<H2>Корзина покупателя</H2>
 				{/* Выводим общее количество товаров */}
 				<div>Всего товаров в корзине: {countAll} шт.</div>
-				<Button onClick={handleClearOrder}>Очистить корзину</Button>
+				<Button onClick={handleClearCart}>Очистить корзину</Button>
 			</div>
 			{cart.productsInCart.map(
 				({
@@ -129,9 +147,9 @@ const CartContainer = ({ className }) => {
 					value={deliveryMethod}
 				>
 					<option value="">Выберите способ доставки</option>
-					<option value="pickup">Самовывоз</option>
-					<option value="courier">Доставка курьером</option>
-					<option value="post">Почтовая отправка</option>
+					<option value="Самовывоз">Самовывоз</option>
+					<option value="Доставка курьером">Доставка курьером</option>
+					<option value="Почтовая отправка">Почтовая отправка</option>
 				</select>
 
 				<select
@@ -139,12 +157,26 @@ const CartContainer = ({ className }) => {
 					value={paymentMethod}
 				>
 					<option value="">Выберите способ оплаты</option>
-					<option value="card">Банковской картой</option>
-					<option value="cash">Наличными при получении</option>
-					<option value="online">Онлайн-оплата</option>
+					<option value="Банковской картой">Банковской картой</option>
+					<option value="Наличными при получении">
+						Наличными при получении
+					</option>
+					<option value="Онлайн-оплата">Онлайн-оплата</option>
 				</select>
 
-				<Button disabled={!canCheckout} onClick={() => {}}>
+				<Button
+					disabled={!canCheckout}
+					onClick={() => {
+						isClient
+							? handleCreateOrder(
+									userId,
+									cart,
+									paymentMethod,
+									deliveryMethod,
+							  )
+							: navigate('/login');
+					}}
+				>
 					Оформление заказа
 				</Button>
 			</div>

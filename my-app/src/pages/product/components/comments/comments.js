@@ -33,19 +33,7 @@ const CommentsContainer = ({ className, comments, productId }) => {
 						<div className="new-comment-title">Новый комментарий</div>
 						<div className="new-comment-evaluation-group">
 							<div className="new-comment-icon-evaluation">
-								<Icon
-									id="fa fa-star"
-									size="22px"
-									margin="0 5px 0 30px"
-									onClick={() =>
-										onNewCommentAdd(
-											userId,
-											productId,
-											newComment,
-											newEvaluation,
-										)
-									}
-								/>
+								<Icon id="fa fa-star" size="22px" margin="0 5px 0 30px" />
 							</div>
 							<div className="evaluation">
 								<select

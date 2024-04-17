@@ -1,8 +1,15 @@
-import { setOrderData } from './set-order-data';
+import { setUser } from './set-user';
 
-export const addOrderAsync = (requestServer, newOrderData) => (dispatch) =>
-	requestServer('createOrder', newOrderData).then((updatedOrder) => {
-		dispatch(setOrderData(updatedOrder.res));
-
-		return updatedOrder.res;
-	});
+export const addOrderAsync =
+	(requestServer, userId, productsInCart, paymentMethod, deliveryMethod) =>
+	(dispatch) => {
+		requestServer(
+			'addUserOrder',
+			userId,
+			productsInCart,
+			paymentMethod,
+			deliveryMethod,
+		).then((userData) => {
+			dispatch(setUser(userData.res));
+		});
+	};
