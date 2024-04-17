@@ -7,8 +7,8 @@ import { useServerRequest } from '../../hooks';
 import { ProductCard, Search, SortSelect, CategoriesSelect } from './components';
 import { debounce } from './utils';
 import styled from 'styled-components';
-import { addToOrder } from '../../actions';
-import { selectOrder } from '../../selectors';
+import { addToCart } from '../../actions';
+import { selectCart } from '../../selectors';
 
 const sortOption = [
 	{
@@ -40,7 +40,7 @@ const sortOption = [
 
 const MainContainer = ({ className }) => {
 	const dispatch = useDispatch();
-	const order = useSelector(selectOrder);
+	const cart = useSelector(selectCart);
 	const [products, setProducts] = useState([]);
 	const [currentPage, setCurrentPage] = useState(0);
 	const [searchPhrase, setSearchPhrase] = useState('');
@@ -57,11 +57,11 @@ const MainContainer = ({ className }) => {
 		setCurrentPage(selectedPage.selected);
 	};
 
-	const handleAddToOrder = (product) => {
-		dispatch(addToOrder(product));
+	const handleAddToCart = (product) => {
+		dispatch(addToCart(product));
 	};
 
-	console.log('Корзина', order);
+	console.log('Корзина', cart.productsInCart);
 
 	// Запрос на просмотр статей есть для всех. Ошибку доступа не проверяем.
 	useEffect(() => {
@@ -149,7 +149,7 @@ const MainContainer = ({ className }) => {
 									commentsRating={commentsRating}
 									inCart={false}
 									onClick={() =>
-										handleAddToOrder({
+										handleAddToCart({
 											id,
 											title,
 											imageUrl,

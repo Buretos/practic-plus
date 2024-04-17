@@ -1,4 +1,5 @@
 export * from './add-comment';
+export * from './add-order';
 export * from './add-session';
 export * from './add-user';
 export * from './add-product';
@@ -15,4 +16,5 @@ export * from './get-session';
 export * from './get-user';
 export * from './get-users';
 export * from './set-user-role';
+export * from './update-order';
 export * from './update-product';

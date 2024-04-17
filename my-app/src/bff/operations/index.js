@@ -12,3 +12,4 @@ export * from './remove-product-comment';
 export * from './remove-user';
 export * from './save-product';
 export * from './update-user-role';
+export * from './create-order';

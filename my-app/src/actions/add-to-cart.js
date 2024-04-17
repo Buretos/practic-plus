@@ -1,8 +1,8 @@
 import { ACTION_TYPE } from './action-type';
 
-export const addToOrder = (product) => {
+export const addToCart = (product) => {
 	return {
-		type: ACTION_TYPE.ADD_TO_ORDER,
+		type: ACTION_TYPE.ADD_TO_CART,
 		payload: product,
 	};
 };

@@ -1,51 +1,54 @@
 import { ACTION_TYPE } from '../actions';
 // Initial state
-const initialState = {
-	order: [],
+const initialCartState = {
+	productsInCart: [],
 };
 
 // Reducer
-export const orderReducer = (state = initialState, action) => {
+export const cartReducer = (state = initialCartState, action) => {
 	switch (action.type) {
-		case ACTION_TYPE.ADD_TO_ORDER:
-			const { order } = state;
+		case ACTION_TYPE.ADD_TO_CART:
+			const { cart } = state;
 			const { payload: product } = action;
-			const existingProductIndex = order.findIndex((p) => p.id === product.id);
+			const existingProductIndex = cart.findIndex((p) => p.id === product.id);
 
-			if (existingProductIndex >= 0) {
-				const updatedOrder = [...order];
-				const existingCount = updatedOrder[existingProductIndex].count || 0;
-				updatedOrder[existingProductIndex] = {
-					...updatedOrder[existingProductIndex],
+			if (existingProductIndex) {
+				const updatedCart = [...cart];
+				const existingCount = updatedCart[existingProductIndex].count || 0;
+				updatedCart[existingProductIndex] = {
+					...updatedCart[existingProductIndex],
 					count: existingCount + 1,
 				};
-				return { ...state, order: updatedOrder };
+				return { ...state, cart: updatedCart };
 			} else {
-				return { ...state, order: [...order, { ...product, count: 1 }] };
+				return {
+					...state,
+					cart: [...cart.productsInCart, { ...cart.productsInCart, count: 1 }],
+				};
 			}
-		case ACTION_TYPE.CLEAR_ORDER:
+		case ACTION_TYPE.CLEAR_CART:
 			return {
 				...state,
-				order: [], // Обнуление корзины
+				productsInCart: [], // Обнуление корзины
 			};
-		case ACTION_TYPE.REMOVE_FROM_ORDER:
-			const updatedOrder = state.order.reduce((newOrder, item) => {
+		case ACTION_TYPE.REMOVE_FROM_CART:
+			const updatedCart = state.productsInCart.reduce((newCatr, item) => {
 				if (item.id === action.payload.id) {
 					// Если count больше 1, уменьшаем на 1
 					if (item.count > 1) {
-						newOrder.push({ ...item, count: item.count - 1 });
+						newCatr.push({ ...item, count: item.count - 1 });
 					}
 					// Если count равен 1, товар удаляется, поэтому здесь ничего не делаем
 				} else {
 					// Все остальные товары просто переходят в новый список
-					newOrder.push(item);
+					newCatr.push(item);
 				}
-				return newOrder;
+				return newCatr;
 			}, []);
 
 			return {
 				...state,
-				order: updatedOrder,
+				cart: updatedCart,
 			};
 		// return {
 		// 	...state,

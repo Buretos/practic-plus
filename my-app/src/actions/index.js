@@ -1,6 +1,6 @@
 export * from './action-type';
 export * from './add-comment-async';
-export * from './add-to-order';
+export * from './add-to-cart';
 export * from './close-modal';
 export * from './load-categories-async';
 export * from './load-product-async';
@@ -12,5 +12,7 @@ export * from './reset-product-data';
 export * from './save-product-async';
 export * from './set-product-data';
 export * from './set-user';
-export * from './clear-order';
-export * from './remove-from-order';
+export * from './clear-cart';
+export * from './remove-from-cart';
+export * from './add-order-async';
+export * from './set-order-data';
