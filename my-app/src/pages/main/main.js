@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Paginate from 'react-paginate'; // import Paginate from 'react-paginate';
 import _ from 'lodash';
 import { PAGINATION_LIMIT } from '../../constants';
@@ -8,7 +8,6 @@ import { ProductCard, Search, SortSelect, CategoriesSelect } from './components'
 import { debounce } from './utils';
 import styled from 'styled-components';
 import { addToCart } from '../../actions';
-import { selectCart } from '../../selectors';
 
 const sortOption = [
 	{
@@ -40,11 +39,9 @@ const sortOption = [
 
 const MainContainer = ({ className }) => {
 	const dispatch = useDispatch();
-	const cart = useSelector(selectCart);
 	const [products, setProducts] = useState([]);
 	const [currentPage, setCurrentPage] = useState(0);
 	const [searchPhrase, setSearchPhrase] = useState('');
-	// const [order, setOrder] = useState([]);
 	const [shouldSearch, setShouldSearch] = useState(false); // флаг, срабатывающий после истечения 2 секунд задержки в debounce
 	const [categoryId, setCategoryId] = useState(null);
 	const [sorting, setSorting] = useState('NO'); //priceDESC
@@ -61,8 +58,6 @@ const MainContainer = ({ className }) => {
 		dispatch(addToCart(product));
 		console.log('сработал dispatch(addToCart(product))');
 	};
-
-	console.log('Корзина', cart.productsInCart);
 
 	// Запрос на просмотр статей есть для всех. Ошибку доступа не проверяем.
 	useEffect(() => {

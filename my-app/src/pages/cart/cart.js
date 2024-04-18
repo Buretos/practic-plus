@@ -51,6 +51,7 @@ const CartContainer = ({ className }) => {
 				deliveryMethod,
 			),
 		);
+		navigate(`/history/${userId}`);
 	};
 
 	// Проверяем, все ли условия для активации кнопки "Оформить заказ" выполнены
