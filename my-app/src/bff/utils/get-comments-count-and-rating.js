@@ -7,11 +7,12 @@ export const getCommentsCountAndRating = (comments = [], productId) => {
 		return [0, 0];
 	}
 
-	const productRating =
-		productComments.reduce(
-			(total, productComment) => total + productComment.evaluation,
-			0,
-		) / productComments.length;
+	const productRating = parseFloat(
+		(
+			productComments.reduce((total, comment) => total + comment.evaluation, 0) /
+			productComments.length
+		).toFixed(1),
+	);
 
 	return [productComments.length, productRating];
 };

@@ -11,9 +11,14 @@ import { addToCart } from '../../actions';
 
 const sortOption = [
 	{
-		value: 'NO',
-		label: ' ',
-		sort: (data) => _.orderBy(data, ['title'], ['no']),
+		value: 'priceASC',
+		label: 'по цене',
+		sort: (data) => _.orderBy(data, ['price'], ['desc']),
+	},
+	{
+		value: 'priceDESC',
+		label: 'по цене (обратный пордяок)',
+		sort: (data) => _.orderBy(data, ['price'], ['asc']),
 	},
 	{
 		value: 'titleASC',

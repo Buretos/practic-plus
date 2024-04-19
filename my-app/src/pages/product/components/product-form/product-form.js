@@ -82,7 +82,7 @@ const ProductFormContainer = ({
 		setQuanthyValue(Number(target.value));
 	};
 	const onPriceChange = ({ target }) => {
-		setPriceValue(Number(target.value).toFixed(2));
+		setPriceValue(Number(target.value).toFixed(0));
 	};
 
 	const categories = useSelector(selectCategories);
@@ -159,7 +159,7 @@ const ProductFormContainer = ({
 				<div className="titleField">Цена товара...</div>
 				<Input
 					type="number"
-					step="0.01"
+					step="1"
 					min="0"
 					value={priceValue}
 					placeholder="Цена товара..."
