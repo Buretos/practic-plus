@@ -4,7 +4,6 @@ import styled from 'styled-components';
 const CategoriesSelectContainer = ({ className, onChange }) => {
 	return (
 		<div className={className}>
-			<span>Категории </span>
 			<select className="selectCategory" onChange={onChange}>
 				<option value="">Все категории</option>
 				<option value="0">Гитары</option>
@@ -24,6 +23,7 @@ export const CategoriesSelect = styled(CategoriesSelectContainer)`
 		margin: 20px;
 		height: 40px;
 		padding: 10px;
-		width: 313px;
+		font-size: 17px;
+		width: 280px;
 	}
 `;

@@ -54,7 +54,7 @@ const CommentContainer = ({
 							<Icon
 								background="#fff"
 								inactive={true}
-								id="fa fa-star"
+								id="fa-thumbs-o-up"
 								size="18px"
 								margin="0 10px 0 0"
 								onClick={() => {}}

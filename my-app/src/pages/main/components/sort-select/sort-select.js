@@ -4,7 +4,6 @@ import styled from 'styled-components';
 const SortSelectContainer = ({ className, value, onSort, options }) => {
 	return (
 		<div className={className}>
-			<span>Сортировка </span>
 			<select className="selectCategory" value={value} onChange={onSort}>
 				{options.map((option) => (
 					<option key={option.value} value={option.value}>
@@ -23,5 +22,7 @@ export const SortSelect = styled(SortSelectContainer)`
 		margin: 20px;
 		height: 40px;
 		padding: 10px;
+		font-size: 17px;
+		width: 280px;
 	}
 `;

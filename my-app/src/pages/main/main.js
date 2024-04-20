@@ -11,25 +11,31 @@ import { addToCart } from '../../actions';
 
 const sortOption = [
 	{
-		value: 'priceASC',
-		label: 'по цене',
-		sort: (data) => _.orderBy(data, ['price'], ['desc']),
+		value: ' ',
+		label: 'Сортировка',
+		sort: (data) => _.orderBy(data, [' '], ['desc']),
+	},
+	{
+		value: 'priceASK',
+		label: 'по возрастанию цены',
+		sort: (data) =>
+			_.orderBy(
+				data,
+				[(currentProducts) => parseFloat(currentProducts.price)],
+				['asc'],
+			),
 	},
 	{
 		value: 'priceDESC',
-		label: 'по цене (обратный пордяок)',
-		sort: (data) => _.orderBy(data, ['price'], ['asc']),
+		label: 'по убыванию цены',
+		sort: (data) =>
+			_.orderBy(
+				data,
+				[(currentProducts) => parseFloat(currentProducts.price)],
+				['desc'],
+			),
 	},
-	{
-		value: 'titleASC',
-		label: 'по названию',
-		sort: (data) => _.orderBy(data, ['title'], ['asc']),
-	},
-	{
-		value: 'titleDESC',
-		label: 'по названию (обратный пордяок)',
-		sort: (data) => _.orderBy(data, ['title'], ['desc']),
-	},
+
 	{
 		value: 'ratingASC',
 		label: 'по рейтингу',
@@ -68,6 +74,7 @@ const MainContainer = ({ className }) => {
 	useEffect(() => {
 		// Запрос поисковой фразы тоже будем отправлять сюда. // категории товаров тоже
 		requestServer('fetchProducts', searchPhrase).then(({ res: products }) => {
+			console.log('products.products', products.products);
 			setProducts(products.products);
 		});
 		setSorting('NO');
@@ -114,6 +121,9 @@ const MainContainer = ({ className }) => {
 					/>
 				</div>
 				<div>
+					<Search searchPhrase={searchPhrase} onChange={onSearch} />
+				</div>
+				<div>
 					<SortSelect
 						options={sortOption}
 						onSort={handleSort}
@@ -121,8 +131,23 @@ const MainContainer = ({ className }) => {
 					/>
 				</div>
 			</div>
+			<div className="pag-top">
+				{filteredProducts.length > PAGINATION_LIMIT && (
+					<Paginate
+						previousLabel="Предыдущая"
+						nextLabel="Следующая"
+						breakLabel="..."
+						breakClassName="break-me"
+						pageCount={Math.ceil(filteredProducts.length / PAGINATION_LIMIT)} // Здесь 9 - количество элементов на странице
+						marginPagesDisplayed={2}
+						pageRangeDisplayed={5}
+						onPageChange={handlePageChange}
+						containerClassName="pagination"
+						activeClassName="active"
+					/>
+				)}
+			</div>
 			<div className="product-and-search">
-				<Search searchPhrase={searchPhrase} onChange={onSearch} />
 				{products.length > 0 ? (
 					<div className="product-list">
 						{currentProducts.map(
@@ -170,20 +195,22 @@ const MainContainer = ({ className }) => {
 					<div className="no-product-found">Товары не найдены</div>
 				)}
 			</div>
-			{products.length > PAGINATION_LIMIT && (
-				<Paginate
-					previousLabel="Предыдущая"
-					nextLabel="Следующая"
-					breakLabel="..."
-					breakClassName="break-me"
-					pageCount={Math.ceil(filteredProducts.length / PAGINATION_LIMIT)} // Здесь 9 - количество элементов на странице
-					marginPagesDisplayed={2}
-					pageRangeDisplayed={5}
-					onPageChange={handlePageChange}
-					containerClassName="pagination"
-					activeClassName="active"
-				/>
-			)}
+			<div className="pag-bottom">
+				{filteredProducts.length > PAGINATION_LIMIT && (
+					<Paginate
+						previousLabel="Предыдущая"
+						nextLabel="Следующая"
+						breakLabel="..."
+						breakClassName="break-me"
+						pageCount={Math.ceil(filteredProducts.length / PAGINATION_LIMIT)} // Здесь 9 - количество элементов на странице
+						marginPagesDisplayed={2}
+						pageRangeDisplayed={5}
+						onPageChange={handlePageChange}
+						containerClassName="pagination"
+						activeClassName="active"
+					/>
+				)}
+			</div>
 		</div>
 	);
 };
@@ -196,6 +223,7 @@ export const Main = styled(MainContainer)`
 	& .mainHeader {
 		display: flex;
 		justify-content: space-between;
+		margin-top: 10px;
 	}
 
 	& .selectCategory {
@@ -216,18 +244,27 @@ export const Main = styled(MainContainer)`
 		text-align: center;
 	}
 
+	& .pag-top {
+		margin: 40px 0 10px;
+	}
+
+	& .pag-bottom {
+		margin-bottom: 40px;
+	}
+
 	.pagination {
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		list-style: none;
 		padding: 0;
-		margin: 20px 20px 40px;
+		margin: 10px;
 	}
 
 	.pagination li {
 		display: inline-block;
 		margin-right: 10px;
+		font-size: 17px;
 		border: 1px solid #000;
 	}
 

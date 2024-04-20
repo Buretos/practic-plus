@@ -16,6 +16,7 @@ export * from './get-session';
 export * from './get-user';
 export * from './get-users';
 export * from './get-orders';
+export * from './get-orders-my';
 export * from './set-user-role';
 export * from './update-order';
 export * from './update-product';

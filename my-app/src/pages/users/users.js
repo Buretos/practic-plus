@@ -30,11 +30,14 @@ const UsersContainer = ({ className }) => {
 				if (usersRes.error || rolesRes.error) {
 					// Проверка ответа запросов на ошибки, если они есть, то текст соответствующей ошибки передаётся в errorMessage
 					setErrorMessage(usersRes.error || rolesRes.error);
+
 					return;
 				}
 				// После безошибочного ответа получаем и записываем массивы users и roles
 				setUsers(usersRes.res);
 				setRoles(rolesRes.res);
+				console.log('users', users);
+				console.log('roles', roles);
 			},
 		);
 	}, [requestServer, shouIdUpdateUserList, userRole]);

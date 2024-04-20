@@ -24,6 +24,10 @@ const CartContainer = ({ className }) => {
 	const [paymentMethod, setPaymentMethod] = useState('');
 	// const shoper = login.toString();
 
+	const totalAmount = cart.productsInCart.reduce((sum, item) => {
+		return sum + parseFloat(item.price) * item.count;
+	}, 0);
+
 	const handleClearCart = () => {
 		dispatch(clearCart()); // Очистка корзины
 	};
@@ -51,6 +55,7 @@ const CartContainer = ({ className }) => {
 				deliveryMethod,
 			),
 		);
+		dispatch(clearCart());
 		navigate(`/history/${userId}`);
 	};
 
@@ -65,8 +70,10 @@ const CartContainer = ({ className }) => {
 			<div className="order">
 				<H2>Корзина покупателя</H2>
 				{/* Выводим общее количество товаров */}
-				<div>Всего товаров в корзине: {countAll} шт.</div>
-				<Button onClick={handleClearCart}>Очистить корзину</Button>
+				<div className="order-heder">Всего товаров в корзине: {countAll} шт.</div>
+				<Button className="button-order" onClick={handleClearCart}>
+					Очистить корзину
+				</Button>
 			</div>
 			{cart.productsInCart.map(
 				({
@@ -132,7 +139,7 @@ const CartContainer = ({ className }) => {
 									</Button>
 								</div>
 							</div>
-							<div>Цена за шт.: {price} руб.</div>
+							<div>Цена: {price} руб./шт.</div>
 							<div>
 								Всего за этот товар:
 								<br /> {count} x {price} = {count * price} руб.
@@ -143,29 +150,37 @@ const CartContainer = ({ className }) => {
 			)}
 
 			<div className="checkout-options">
-				<select
-					onChange={(e) => setDeliveryMethod(e.target.value)}
-					value={deliveryMethod}
-				>
-					<option value="">Выберите способ доставки</option>
-					<option value="Самовывоз">Самовывоз</option>
-					<option value="Доставка курьером">Доставка курьером</option>
-					<option value="Почтовая отправка">Почтовая отправка</option>
-				</select>
+				<div className="total-amount">
+					Всего товаров в корзине: {countAll} шт.
+					<br />
+					Итоговая сумма: {totalAmount} руб.
+				</div>
+				<div className="bloc-select">
+					<select
+						onChange={(e) => setDeliveryMethod(e.target.value)}
+						value={deliveryMethod}
+					>
+						<option value="">Выберите способ доставки</option>
+						<option value="Самовывоз">Самовывоз</option>
+						<option value="Доставка курьером">Доставка курьером</option>
+						<option value="Почтовая отправка">Почтовая отправка</option>
+					</select>
 
-				<select
-					onChange={(e) => setPaymentMethod(e.target.value)}
-					value={paymentMethod}
-				>
-					<option value="">Выберите способ оплаты</option>
-					<option value="Банковской картой">Банковской картой</option>
-					<option value="Наличными при получении">
-						Наличными при получении
-					</option>
-					<option value="Онлайн-оплата">Онлайн-оплата</option>
-				</select>
+					<select
+						onChange={(e) => setPaymentMethod(e.target.value)}
+						value={paymentMethod}
+					>
+						<option value="">Выберите способ оплаты</option>
+						<option value="Банковской картой">Банковской картой</option>
+						<option value="Наличными при получении">
+							Наличными при получении
+						</option>
+						<option value="Онлайн-оплата">Онлайн-оплата</option>
+					</select>
+				</div>
 
 				<Button
+					className="button-order"
 					disabled={!canCheckout}
 					onClick={() => {
 						isClient
@@ -189,6 +204,10 @@ export const Cart = styled(CartContainer)`
 	width: 70%;
 	margin: 0 auto;
 	align-items: center;
+
+	& .order-heder {
+		margin: 0 0 30px;
+	}
 
 	& .order {
 		margin: 0 auto;
@@ -229,16 +248,37 @@ export const Cart = styled(CartContainer)`
 		width: 80%;
 	}
 
+	& .button-order {
+		height: 40px;
+		margin: 10px 0 50px;
+	}
+
 	& .checkout-options {
 		margin-top: 20px;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		gap: 10px;
+
+		& .total-amount {
+			margin: 40px 0 20px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			font-size: 21px;
+			text-align: center;
+		}
+
+		& .bloc-select {
+			display: flex;
+			justify-content: space-between;
+		}
 
 		select {
 			padding: 10px;
 			min-width: 200px;
+			margin: 20px;
+			width: 317px;
+			font-size: 17px;
 		}
 	}
 `;

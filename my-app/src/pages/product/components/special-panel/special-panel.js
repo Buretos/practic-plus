@@ -55,7 +55,7 @@ const SpecialPannelContainer = ({
 				{categoryName}
 			</div>
 			<div className="product-info">
-				<Icon inactive={true} id="fa-star" margin="0 7px" size="18px" />
+				<Icon inactive={true} id="fa-thumbs-o-up" margin="0 7px" size="18px" />
 				{ratingProduct(comments)}
 			</div>
 			<div className="product-info">

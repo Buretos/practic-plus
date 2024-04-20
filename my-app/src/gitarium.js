@@ -72,8 +72,6 @@ export const Gitarium = () => {
 					<Route path="/users" element={<Users />} />{' '}
 					{/* Страница истории заказов */}
 					<Route path="/history" element={<History />} />{' '}
-					{/* Страница истории заказов покупателя*/}
-					<Route path="/history/:id" element={<History />} />{' '}
 					{/* Страница создания нового товара */}
 					<Route path="/product/:id" element={<Product />} />{' '}
 					{/* администрирование пользователей*/}

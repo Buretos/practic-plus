@@ -1,6 +1,7 @@
 export * from './add-product-comment';
 export * from './authorize';
 export * from './fetch-categories';
+export * from './fetch-orders';
 export * from './fetch-product';
 export * from './fetch-products';
 export * from './fetch-roles';
