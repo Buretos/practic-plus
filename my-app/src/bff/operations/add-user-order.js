@@ -9,6 +9,8 @@ export const addUserOrder = async (
 	productsInCart,
 	paymentMethod,
 	deliveryMethod,
+	countAll,
+	totalAmount,
 ) => {
 	const accessRoles = [ROLE.CLIENT];
 
@@ -20,7 +22,14 @@ export const addUserOrder = async (
 		};
 	}
 
-	await addOrder(userId, productsInCart, paymentMethod, deliveryMethod);
+	await addOrder(
+		userId,
+		productsInCart,
+		paymentMethod,
+		deliveryMethod,
+		countAll,
+		totalAmount,
+	);
 
 	const user = await getUser(userId);
 

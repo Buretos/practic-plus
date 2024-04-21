@@ -72,6 +72,24 @@
       "name": "Литература"
     }
   ],
+  "status": [
+    {
+      "id": 0,
+      "name": "создан"
+    },
+    {
+      "id": 1,
+      "name": "доставляется"
+    },
+    {
+      "id": 2,
+      "name": "вручён"
+    },
+    {
+      "id": 3,
+      "name": "отменён"
+    }
+  ],
   "products": [
     {
       "id": "001",
@@ -340,56 +358,34 @@
           "price": "34567",
           "commentsCount": 7,
           "commentsRating": 4.6,
-          "count": 2
+          "count": 1
         },
         {
-          "id": "004",
-          "title": "Гитара шестиструнная Doff",
-          "imageUrl": "https://fastly.picsum.photos/id/9/280/150.jpg?hmac=zE9obd5kbPoxnMveFw5lsk4QV_Zz9q_4xQQsmc8njLc",
+          "id": "002",
+          "title": "Гитара семмиструнная Dofff",
+          "imageUrl": "https://fastly.picsum.photos/id/33/280/150.jpg?hmac=SwQ2gQweBOwyaetpYP2H272VzjFEWjLCEahFBuOe904",
           "categoryId": 0,
-          "model": "rgс-01",
-          "price": "15256",
-          "commentsCount": 1,
-          "commentsRating": 5,
-          "count": 2
-        }
-      ],
-      "payment_method": "Банковской картой",
-      "delivery_method": "Самовывоз",
-      "status_order": "создан",
-      "created_order_at": "2024-04-20T21:16:21.814Z",
-      "last_changed_status_order_at": {},
-      "note_order": "",
-      "id": 1
-    },
-    {
-      "user_id": "IIPVAtt",
-      "products_in_cart": [
-        {
-          "id": "001",
-          "title": "Гитара классическая Algambra",
-          "imageUrl": "https://fastly.picsum.photos/id/1/280/150.jpg?hmac=fk100E3BpEF5_za37tFN2lAElAuCVMTFbduWlpO7ioo",
-          "categoryId": 0,
-          "model": "sdf",
-          "quanthy": 4534,
-          "price": "34567",
-          "commentsCount": 7,
-          "commentsRating": 4.6,
+          "model": "gct-04",
+          "quanthy": 9,
+          "price": "17045",
+          "commentsCount": 5,
+          "commentsRating": 3.6,
           "count": 1
         }
       ],
       "payment_method": "Банковской картой",
-      "delivery_method": "Доставка курьером",
-      "status_order": "создан",
-      "created_order_at": "2024-04-20T21:19:56.330Z",
-      "last_changed_status_order_at": {},
-      "note_order": "",
-      "id": 2
+      "delivery_method": "Самовывоз",
+      "status_id": 0,
+      "created_order_at": "2024-04-21T20:29:09.289Z",
+      "last_changed_status_order_at": "2024-04-21T20:29:09.289Z",
+      "count_all": 2,
+      "total_amount": 51612,
+      "id": 1
     }
   ],
   "sessions": [
     {
-      "hash": "0.27385048408926593310752650722861289978027343750000",
+      "hash": "0.42115685910801259339564239780884236097335815429688",
       "user": {
         "id": "001",
         "login": "anton",

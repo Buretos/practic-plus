@@ -1,6 +1,11 @@
-import { ORDER_STATUS } from '../constants';
-
-export const addOrder = async (userId, productsInCart, paymentMethod, deliveryMethod) =>
+export const addOrder = async (
+	userId,
+	productsInCart,
+	paymentMethod,
+	deliveryMethod,
+	countAll,
+	totalAmount,
+) =>
 	fetch('http://localhost:3005/orders', {
 		method: 'POST',
 		headers: {
@@ -11,9 +16,10 @@ export const addOrder = async (userId, productsInCart, paymentMethod, deliveryMe
 			products_in_cart: productsInCart,
 			payment_method: paymentMethod,
 			delivery_method: deliveryMethod,
-			status_order: ORDER_STATUS.CREATED,
+			status_id: 0,
 			created_order_at: new Date(),
-			last_changed_status_order_at: {},
-			note_order: '',
+			last_changed_status_order_at: new Date(),
+			count_all: countAll,
+			total_amount: totalAmount,
 		}),
 	});

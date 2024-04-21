@@ -45,6 +45,8 @@ const CartContainer = ({ className }) => {
 		{ productsInCart },
 		paymentMethod,
 		deliveryMethod,
+		countAll,
+		totalAmount,
 	) => {
 		dispatch(
 			addOrderAsync(
@@ -53,6 +55,8 @@ const CartContainer = ({ className }) => {
 				productsInCart,
 				paymentMethod,
 				deliveryMethod,
+				countAll,
+				totalAmount,
 			),
 		);
 		dispatch(clearCart());
@@ -189,6 +193,8 @@ const CartContainer = ({ className }) => {
 									cart,
 									paymentMethod,
 									deliveryMethod,
+									countAll,
+									totalAmount,
 							  )
 							: navigate('/login');
 					}}
