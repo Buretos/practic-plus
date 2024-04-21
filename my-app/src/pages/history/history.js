@@ -31,6 +31,7 @@ const HistoryContainer = ({ className }) => {
 			console.log('roles', roles);
 			console.log('orders', orders);
 		});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [requestServer]);
 
 	return (
@@ -39,27 +40,34 @@ const HistoryContainer = ({ className }) => {
 				<H2>История покупок</H2>
 			</div>
 
-			{/* {users.map(
+			{users.map(
 				// распечатка массива пользователей построчно
-				({ id, login, registeredAt, roleId }) => (
-					<div // Компонент строки пользователя
-						key={id}
-						id={id}
-						login={login}
-					>
-						{id} - {login}
-					</div>
-				),
-			)} */}
+				({ id, login, registeredAt, roleId }) =>
+					console.log(
+						'id, login, registeredAt, roleId ',
+						id,
+						login,
+						registeredAt,
+						roleId,
+					),
+			)}
+
+			{orders.map(
+				// распечатка массива пользователей построчно
+				({ id, userId, createdOrderAt }) =>
+					console.log(
+						'orders: id,userId,createdAt ',
+						id,
+						userId,
+						createdOrderAt,
+					),
+			)}
 
 			{orders.map(
 				// распечатка массива пользователей построчно
 				({ id, userId, createdOrderAt }) => (
 					<div // Компонент строки пользователя
 						key={id}
-						id={id}
-						userId={userId}
-						createdOrderAt={createdOrderAt}
 					>
 						{userId} - {createdOrderAt}
 					</div>

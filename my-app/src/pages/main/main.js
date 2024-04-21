@@ -67,14 +67,12 @@ const MainContainer = ({ className }) => {
 
 	const handleAddToCart = (product) => {
 		dispatch(addToCart(product));
-		console.log('сработал dispatch(addToCart(product))');
 	};
 
 	// Запрос на просмотр статей есть для всех. Ошибку доступа не проверяем.
 	useEffect(() => {
 		// Запрос поисковой фразы тоже будем отправлять сюда. // категории товаров тоже
 		requestServer('fetchProducts', searchPhrase).then(({ res: products }) => {
-			console.log('products.products', products.products);
 			setProducts(products.products);
 		});
 		setSorting('NO');
@@ -94,7 +92,6 @@ const MainContainer = ({ className }) => {
 	const filteredProducts = categoryId // фильтруем список полученный с сервера и отобранный по поисковой фразе (запрос на json-server с поисковой фразой)
 		? products.filter((product) => product.categoryId.toString() === categoryId)
 		: products;
-	console.log('filteredProducts', filteredProducts);
 	const startIndex = currentPage * PAGINATION_LIMIT; // Здесь PAGINATION_LIMIT = 9 - количество элементов на странице
 	const endIndex = startIndex + PAGINATION_LIMIT; // Здесь PAGINATION_LIMIT = 9 - количество элементов на странице
 	const currentProducts = filteredProducts.slice(startIndex, endIndex);

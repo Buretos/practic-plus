@@ -40,6 +40,7 @@ const UsersContainer = ({ className }) => {
 				console.log('roles', roles);
 			},
 		);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [requestServer, shouIdUpdateUserList, userRole]);
 
 	const onUserRemove = (userId) => {

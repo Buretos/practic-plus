@@ -1,5 +1,6 @@
 export const transformOrder = (dbOrder) => ({
 	id: dbOrder.id,
+	userId: dbOrder.user_id,
 	productsInCart: dbOrder.products_in_cart,
 	paymentMethod: dbOrder.payment_method,
 	deliveryMethodtent: dbOrder.delivery_method,
