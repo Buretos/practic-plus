@@ -52,9 +52,7 @@ const ControlPanelContainer = ({ className }) => {
 					</Button>
 				) : roleId === ROLE.CLIENT ? (
 					<>
-						<Link to={`/history/${userId}`}>
-							<UserName>{login}</UserName>
-						</Link>
+						<UserName>{login}</UserName>
 						<Icon id="fa-sign-out" margin="0 0 0 10px" onClick={onLogout} />
 					</>
 				) : (
@@ -88,6 +86,14 @@ const ControlPanelContainer = ({ className }) => {
 					<></>
 				)}
 
+				{(roleId === ROLE.CLIENT || roleId === ROLE.SALESMAN) && (
+					<>
+						<Link to="/orders">
+							<Icon id="fa fa-archive" margin="10px 0 0 16px" />
+						</Link>
+					</>
+				)}
+
 				{isAdmin && (
 					<>
 						<Link to="/product">
@@ -95,6 +101,9 @@ const ControlPanelContainer = ({ className }) => {
 						</Link>
 						<Link to="/users">
 							<Icon id="fa-user-plus" margin="10px 0 0 16px" />
+						</Link>
+						<Link to="/orders">
+							<Icon id="fa fa-archive" margin="10px 0 0 16px" />
 						</Link>
 					</>
 				)}

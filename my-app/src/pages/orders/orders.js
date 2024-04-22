@@ -64,6 +64,7 @@ const OrdersContainer = ({ className }) => {
 						({
 							id,
 							userId,
+							productsInCart,
 							createdOrderAt,
 							deliveryMethod,
 							paymentMethod,
@@ -77,12 +78,12 @@ const OrdersContainer = ({ className }) => {
 							const userLogin = user
 								? user.login
 								: 'Неизвестный пользователь';
-
 							return (
 								<OrderRow // Компонент строки пользователя
 									key={id}
 									id={id}
 									userLogin={userLogin}
+									productsInCart={productsInCart}
 									createdOrderAt={createdOrderAt}
 									deliveryMethod={deliveryMethod}
 									paymentMethod={paymentMethod}

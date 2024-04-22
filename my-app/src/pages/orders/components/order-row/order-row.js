@@ -10,6 +10,7 @@ const OrderRowContainer = ({
 	className,
 	id,
 	userLogin,
+	productsInCart,
 	createdOrderAt,
 	deliveryMethod,
 	paymentMethod,
@@ -29,6 +30,8 @@ const OrderRowContainer = ({
 		setSelectedStatusId(Number(target.value)); // изменение id  статуса на выбранное значение поля, value={roleId}
 	};
 
+	console.log('productsInCart1', productsInCart);
+
 	const onStatusSave = (orderId, newOrderStatusId) => {
 		// обработчик сохранения выбранного статуса
 		requestServer('updateOrderStatus', orderId, newOrderStatusId).then(() => {
@@ -46,6 +49,7 @@ const OrderRowContainer = ({
 			state: {
 				id,
 				userLogin,
+				productsInCart,
 				createdOrderAt,
 				deliveryMethod,
 				paymentMethod,
@@ -87,7 +91,7 @@ const OrderRowContainer = ({
 					</div>
 				</div>
 			</TableRow>
-			<Icon id="fa-info-circle" margin="0 0 0 20px" onClick={onOrderInfo} />
+			<Icon id="fa-info-circle" margin="0 0 0 20px" onClick={() => onOrderInfo()} />
 		</div>
 	);
 };

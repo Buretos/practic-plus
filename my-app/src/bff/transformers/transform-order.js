@@ -3,7 +3,7 @@ export const transformOrder = (dbOrder) => ({
 	userId: dbOrder.user_id,
 	productsInCart: dbOrder.products_in_cart,
 	paymentMethod: dbOrder.payment_method,
-	deliveryMethodtent: dbOrder.delivery_method,
+	deliveryMethod: dbOrder.delivery_method,
 	statusId: dbOrder.status_id,
 	createdOrderAt: dbOrder.created_order_at,
 	lastChangedStatusOrderAt: dbOrder.last_changed_status_order_at,

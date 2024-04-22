@@ -16,7 +16,7 @@ const ProductCardContainer = ({
 	price,
 	commentsCount,
 	commentsRating,
-	inCart,
+	cardOnly,
 	onClick,
 }) => {
 	const categories = useSelector(selectCategories);
@@ -90,7 +90,7 @@ const ProductCardContainer = ({
 					</div>
 				</div>
 			</Link>
-			{inCart ? (
+			{cardOnly ? (
 				<div></div>
 			) : (
 				<div className="button-sale" onClick={onClick}>

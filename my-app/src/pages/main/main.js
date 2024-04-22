@@ -1,13 +1,15 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Paginate from 'react-paginate'; // import Paginate from 'react-paginate';
 import _ from 'lodash';
-import { PAGINATION_LIMIT } from '../../constants';
+import { PAGINATION_LIMIT, ROLE } from '../../constants';
 import { useServerRequest } from '../../hooks';
 import { ProductCard, Search, SortSelect, CategoriesSelect } from './components';
 import { debounce } from './utils';
 import styled from 'styled-components';
 import { addToCart } from '../../actions';
+import { checkAccess } from '../../utils';
+import { selectUserRole } from '../../selectors';
 
 const sortOption = [
 	{
@@ -57,6 +59,10 @@ const MainContainer = ({ className }) => {
 	const [categoryId, setCategoryId] = useState(null);
 	const [sorting, setSorting] = useState('NO'); //priceDESC
 	const requestServer = useServerRequest();
+	const roleId = useSelector(selectUserRole);
+	const isSalesman = checkAccess([ROLE.SALESMAN], roleId);
+	const isAdmin = checkAccess([ROLE.ADMIN], roleId);
+
 	const handleCategoryChange = (category) => {
 		setCategoryId(category);
 	};
@@ -170,7 +176,7 @@ const MainContainer = ({ className }) => {
 									price={price}
 									commentsCount={commentsCount}
 									commentsRating={commentsRating}
-									inCart={false}
+									cardOnly={isSalesman || isAdmin ? true : false}
 									onClick={() =>
 										handleAddToCart({
 											id,

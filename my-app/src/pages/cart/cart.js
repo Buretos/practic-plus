@@ -105,7 +105,7 @@ const CartContainer = ({ className }) => {
 								price={price}
 								commentsCount={commentsCount}
 								commentsRating={commentsRating}
-								inCart={true}
+								cardOnly={true}
 							/>
 						</div>
 						<div className="product-info">
