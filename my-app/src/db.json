@@ -373,7 +373,7 @@
       ],
       "payment_method": "Онлайн-оплата",
       "delivery_method": "Самовывоз",
-      "status_id": 1,
+      "status_id": 0,
       "created_order_at": "2024-04-22",
       "last_changed_status_order_at": "2024-04-22",
       "count_all": 2,
@@ -416,17 +416,65 @@
       "count_all": 3,
       "total_amount": 86179,
       "id": 3
+    },
+    {
+      "user_id": "IIPVAtt",
+      "products_in_cart": [
+        {
+          "id": "001",
+          "title": "Гитара классическая Algambra",
+          "imageUrl": "https://fastly.picsum.photos/id/1/280/150.jpg?hmac=fk100E3BpEF5_za37tFN2lAElAuCVMTFbduWlpO7ioo",
+          "categoryId": 0,
+          "model": "sdf",
+          "quanthy": 4534,
+          "price": "34567",
+          "commentsCount": 7,
+          "commentsRating": 4.6,
+          "count": 1
+        },
+        {
+          "id": "002",
+          "title": "Гитара семмиструнная Dofff",
+          "imageUrl": "https://fastly.picsum.photos/id/33/280/150.jpg?hmac=SwQ2gQweBOwyaetpYP2H272VzjFEWjLCEahFBuOe904",
+          "categoryId": 0,
+          "model": "gct-04",
+          "quanthy": 9,
+          "price": "17045",
+          "commentsCount": 5,
+          "commentsRating": 3.6,
+          "count": 1
+        },
+        {
+          "id": "004",
+          "title": "Гитара шестиструнная Doff",
+          "imageUrl": "https://fastly.picsum.photos/id/9/280/150.jpg?hmac=zE9obd5kbPoxnMveFw5lsk4QV_Zz9q_4xQQsmc8njLc",
+          "categoryId": 0,
+          "model": "rgс-01",
+          "price": "15256",
+          "commentsCount": 1,
+          "commentsRating": 5,
+          "count": 1
+        }
+      ],
+      "payment_method": "Онлайн-оплата",
+      "delivery_method": "Почтовая отправка",
+      "status_id": 0,
+      "created_order_at": "2024-04-22",
+      "last_changed_status_order_at": "2024-04-22",
+      "count_all": 3,
+      "total_amount": 66868,
+      "id": 4
     }
   ],
   "sessions": [
     {
-      "hash": "0.98900109762465460150338003586512058973312377929688",
+      "hash": "0.59111465997555501239446584804682061076164245605469",
       "user": {
-        "id": "0emZyQN",
-        "login": "ivan",
-        "password": "121354",
-        "registeredAt": "2046-03-10 07:24",
-        "roleId": 1
+        "id": "001",
+        "login": "anton",
+        "password": "123456",
+        "registeredAt": "2050-09-22",
+        "roleId": 0
       },
       "id": 1
     }

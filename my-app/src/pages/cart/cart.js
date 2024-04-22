@@ -67,7 +67,6 @@ const CartContainer = ({ className }) => {
 	const canCheckout = countAll > 0 && deliveryMethod && paymentMethod;
 
 	const isClient = checkAccess([ROLE.CLIENT], roleId);
-	console.log('isClient', isClient);
 
 	return (
 		<div className={className}>
