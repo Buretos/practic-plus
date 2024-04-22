@@ -349,43 +349,41 @@
       "user_id": "IIPVAtt",
       "products_in_cart": [
         {
-          "id": "001",
-          "title": "Гитара классическая Algambra",
-          "imageUrl": "https://fastly.picsum.photos/id/1/280/150.jpg?hmac=fk100E3BpEF5_za37tFN2lAElAuCVMTFbduWlpO7ioo",
+          "id": "005",
+          "title": "Бас гитара",
+          "imageUrl": "https://fastly.picsum.photos/id/56/280/150.jpg?hmac=0U92dafCesyX2DvGzfJTRbVlnTL3Rblcd7MyRcXdVc4",
           "categoryId": 0,
-          "model": "sdf",
-          "quanthy": 4534,
-          "price": "34567",
-          "commentsCount": 7,
-          "commentsRating": 4.6,
+          "model": "rgс-02",
+          "price": "11780",
+          "commentsCount": 0,
+          "commentsRating": 0,
           "count": 1
         },
         {
-          "id": "002",
-          "title": "Гитара семмиструнная Dofff",
-          "imageUrl": "https://fastly.picsum.photos/id/33/280/150.jpg?hmac=SwQ2gQweBOwyaetpYP2H272VzjFEWjLCEahFBuOe904",
+          "id": "006",
+          "title": "Струны LaBella",
+          "imageUrl": "https://fastly.picsum.photos/id/177/280/150.jpg?hmac=kr58w0Y6C2PMYKCfgot61_jkI1ios3luVhkul83Bj6s",
           "categoryId": 0,
-          "model": "gct-04",
-          "quanthy": 9,
-          "price": "17045",
-          "commentsCount": 5,
-          "commentsRating": 3.6,
+          "quanthy": 3,
+          "price": "25600",
+          "commentsCount": 1,
+          "commentsRating": 5,
           "count": 1
         }
       ],
-      "payment_method": "Банковской картой",
+      "payment_method": "Онлайн-оплата",
       "delivery_method": "Самовывоз",
-      "status_id": 0,
-      "created_order_at": "2024-04-21T20:29:09.289Z",
-      "last_changed_status_order_at": "2024-04-21T20:29:09.289Z",
+      "status_id": 1,
+      "created_order_at": "2024-04-22",
+      "last_changed_status_order_at": "2024-04-22",
       "count_all": 2,
-      "total_amount": 51612,
-      "id": 1
+      "total_amount": 37380,
+      "id": 2
     }
   ],
   "sessions": [
     {
-      "hash": "0.42115685910801259339564239780884236097335815429688",
+      "hash": "0.70827459578756002400723446044139564037322998046875",
       "user": {
         "id": "001",
         "login": "anton",

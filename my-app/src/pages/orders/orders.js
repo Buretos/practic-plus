@@ -48,35 +48,17 @@ const OrdersContainer = ({ className }) => {
 		// PrivateContent -обёртка содержимого приватной страницы (проверяет права пользователя и принимает текст ошибки )
 		<PrivateContent access={[ROLE.SALESMAN, ROLE.ADMIN]} serverError={errorMessage}>
 			<div className={className}>
-				<div>
-					<H2>Заказы</H2>
-				</div>
-
-				{/* {status.map(
-					// распечатка массива пользователей построчно
-					({ id, name }) => (
-						<div // Компонент строки пользователя
-							key={id}
-						>
-							{id} - {name}
-						</div>
-					),
-				)} */}
-
-				<div>
-					<TableRow>
-						<div className="id-column">id</div>
-						<div className="login-column">Покупатель</div>
-						<div className="registered-at-column">Дата заказа</div>
-						<div className="registered-at-column">Доставка</div>
-						<div className="registered-at-column">Оплата</div>
-						<div className="number-column">Количество товаров</div>
-						<div className="number-column">Обшая сумма заказа</div>
-						<div className="status-column">Статус заказа</div>
-						<div className="registered-at-column">
-							Дата последнего изменения статуса
-						</div>
-					</TableRow>
+				<H2>Заказы</H2>
+				<div className="table-bloc">
+					<div>
+						<TableRow>
+							<div className="id-column">id</div>
+							<div className="login-column">Покупатель</div>
+							<div className="data-column">Дата</div>
+							<div className="price-column">Сумма</div>
+							<div className="status-column">Статус заказа</div>
+						</TableRow>
+					</div>
 					{orders.map(
 						// распечатка массива товаров построчно
 						({
@@ -89,21 +71,29 @@ const OrdersContainer = ({ className }) => {
 							totalAmount,
 							statusId,
 							lastChangedStatusOrderAt,
-						}) => (
-							<OrderRow // Компонент строки пользователя
-								key={id}
-								id={id}
-								userId={userId}
-								createdOrderAt={createdOrderAt}
-								deliveryMethod={deliveryMethod}
-								paymentMethod={paymentMethod}
-								countAll={countAll}
-								totalAmount={totalAmount}
-								statusId={statusId}
-								status={status}
-								lastChangedStatusOrderAt={lastChangedStatusOrderAt}
-							/>
-						),
+						}) => {
+							const user = users.find((user) => user.id === userId);
+							// Получить login (или name) пользователя
+							const userLogin = user
+								? user.login
+								: 'Неизвестный пользователь';
+
+							return (
+								<OrderRow // Компонент строки пользователя
+									key={id}
+									id={id}
+									userLogin={userLogin}
+									createdOrderAt={createdOrderAt}
+									deliveryMethod={deliveryMethod}
+									paymentMethod={paymentMethod}
+									countAll={countAll}
+									totalAmount={totalAmount}
+									statusId={statusId}
+									status={status}
+									lastChangedStatusOrderAt={lastChangedStatusOrderAt}
+								/>
+							);
+						},
 					)}
 				</div>
 			</div>
@@ -115,7 +105,11 @@ export const Orders = styled(OrdersContainer)`
 display: flex;
 	align-items: center;
 	flex-direction: column;
-	margin: 0 auto;
-	width: 570px;
+	margin: auto ;
+	width: 100%;
 	}
+
+& .table-bloc {
+	width: 80%;
+}
 `;

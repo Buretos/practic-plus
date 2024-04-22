@@ -20,3 +20,4 @@ export * from './set-user-role';
 export * from './update-order';
 export * from './update-product';
 export * from './get-status';
+export * from './set-order-status';

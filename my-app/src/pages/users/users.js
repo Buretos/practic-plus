@@ -62,11 +62,13 @@ const UsersContainer = ({ className }) => {
 			<div className={className}>
 				<H2>Пользователи</H2>
 				<div>
-					<TableRow>
-						<div className="login-column">Логин</div>
-						<div className="registered-at-column">Дата регистрации</div>
-						<div className="role-column">Роль</div>
-					</TableRow>
+					<div>
+						<TableRow>
+							<div className="login-column">Логин</div>
+							<div className="registered-at-column">Дата регистрации</div>
+							<div className="role-column">Роль</div>
+						</TableRow>
+					</div>
 					{users.map(
 						// распечатка массива пользователей построчно
 						({ id, login, registeredAt, roleId }) => (

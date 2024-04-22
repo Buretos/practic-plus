@@ -16,23 +16,23 @@ export const TableRow = styled(TableRowContainer)`
 	}
 
 	& .id-column {
-		width: 40px;
+		width: 70px;
 	}
 
 	& .login-column {
-		width: 172px;
+		width: 150px;
+	}
+
+	& .data-column {
+		width: 150px;
+	}
+
+	& .price-column {
+		width: 150px;
 	}
 
 	& .status-column {
 		width: auto;
-	}
-
-	& .'registered-at-column' {
-		width: 213px;
-	}
-
-	& .'number-column' {
-		width: 100px;
 	}
 `;
 
