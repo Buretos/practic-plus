@@ -329,6 +329,14 @@
       "content": "",
       "evaluation": 2,
       "id": 45
+    },
+    {
+      "author_id": "IIPVAtt",
+      "product_id": "001",
+      "published_at": "2024-04-23",
+      "content": "Неплохое звучание за такие деньги. ",
+      "evaluation": 4,
+      "id": 46
     }
   ],
   "orders": [
@@ -351,17 +359,64 @@
       ],
       "payment_method": "Наличными при получении",
       "delivery_method": "Доставка курьером",
-      "status_id": 0,
+      "status_id": 2,
       "created_order_at": "2024-04-23",
       "last_changed_status_order_at": "2024-04-23",
       "count_all": 1,
       "total_amount": 34567,
       "id": 1
+    },
+    {
+      "user_id": "IIPVAtt",
+      "products_in_cart": [
+        {
+          "id": "007",
+          "title": "Жёлтое море..",
+          "imageUrl": "https://fastly.picsum.photos/id/131/280/150.jpg?hmac=T8mqTMKYJTXODtC48QcdkDgIESSb_9G_lVb7dN8WoVE",
+          "categoryId": 1,
+          "quanthy": 30,
+          "price": "3500",
+          "commentsCount": 0,
+          "commentsRating": 0,
+          "count": 1
+        },
+        {
+          "id": "mGefEMJ",
+          "title": "Самоучитель игры на шестиструнной гитаре",
+          "imageUrl": "https://fastly.picsum.photos/id/256/280/150.jpg?hmac=3LXeerkI-E19M5FVPTHLqLe8MseCVc1pPqA99oLZCqc",
+          "categoryId": 0,
+          "price": "77770",
+          "commentsCount": 0,
+          "commentsRating": 0,
+          "count": 1
+        },
+        {
+          "id": "001",
+          "title": "Гитара классическая Algambra",
+          "imageUrl": "https://fastly.picsum.photos/id/1/280/150.jpg?hmac=fk100E3BpEF5_za37tFN2lAElAuCVMTFbduWlpO7ioo",
+          "categoryId": 0,
+          "model": "sdf",
+          "manufacturer": "Sony",
+          "quanthy": 4534,
+          "price": "34567",
+          "commentsCount": 7,
+          "commentsRating": 4.4,
+          "count": 1
+        }
+      ],
+      "payment_method": "Онлайн-оплата",
+      "delivery_method": "Почтовая отправка",
+      "status_id": 0,
+      "created_order_at": "2024-04-23",
+      "last_changed_status_order_at": "2024-04-23",
+      "count_all": 3,
+      "total_amount": 115837,
+      "id": 2
     }
   ],
   "sessions": [
     {
-      "hash": "0.17993191384288964584925452072639018297195434570313",
+      "hash": "0.33158803183359530919460667064413428306579589843750",
       "user": {
         "id": "001",
         "login": "anton",
