@@ -3,7 +3,7 @@ import { sessions } from '../sessions';
 import { ROLE } from '../constants';
 
 export const saveProduct = async (hash, newProductData) => {
-	const accessRoles = [ROLE.ADMIN];
+	const accessRoles = [ROLE.SALESMAN, ROLE.ADMIN];
 
 	const access = await sessions.access(hash, accessRoles);
 	if (!access) {

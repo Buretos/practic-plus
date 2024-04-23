@@ -3,7 +3,7 @@ import { Icon } from '../../../../components';
 import { TableRow } from '../table-row/table-row';
 import { useState } from 'react';
 import { useServerRequest } from '../../../../hooks';
-import { Order } from '../../../order/order';
+
 import { useNavigate } from 'react-router-dom';
 
 const OrderRowContainer = ({
@@ -30,8 +30,6 @@ const OrderRowContainer = ({
 		setSelectedStatusId(Number(target.value)); // изменение id  статуса на выбранное значение поля, value={roleId}
 	};
 
-	console.log('productsInCart1', productsInCart);
-
 	const onStatusSave = (orderId, newOrderStatusId) => {
 		// обработчик сохранения выбранного статуса
 		requestServer('updateOrderStatus', orderId, newOrderStatusId).then(() => {
@@ -41,8 +39,6 @@ const OrderRowContainer = ({
 	};
 
 	const isSaveButtonDisabled = selectedStatusId === initialStatusId; // флаг выключения активности кнопки сохранить при совпадении выбранного  статуса с изначальным, т.е.  когда статус не изменился.
-
-	console.log('userLogin', userLogin);
 
 	const onOrderInfo = () => {
 		navigate('/order', {

@@ -9,6 +9,7 @@ import { ROLE } from '../../../../constants';
 import { selectCategories, selectUserRole } from '../../../../selectors';
 import styled from 'styled-components';
 import { ratingProduct } from './utils/rating-product';
+import { setUserRole } from '../../../../bff/api';
 
 const SpecialPannelContainer = ({
 	className,
@@ -40,13 +41,13 @@ const SpecialPannelContainer = ({
 			}),
 		);
 	};
-
 	const isAdmin = checkAccess([ROLE.ADMIN], userRole);
+	const isSalesman = checkAccess([ROLE.SALESMAN], userRole);
 	const SpecificSpecialPanel = editButton.props.id; // переключатель спецификации специальной панели (удаление или редактирование)
 
 	return SpecificSpecialPanel === 'fa-floppy-o' ? (
 		<div className={className}>
-			{isAdmin && <div className="buttons">{editButton}</div>}
+			{(isAdmin || isSalesman) && <div className="buttons">{editButton}</div>}
 		</div>
 	) : (
 		<div className={className}>
@@ -70,7 +71,7 @@ const SpecialPannelContainer = ({
 				<Icon inactive={true} id="fa-rub" margin="0 7px 0 0" size="18px" />
 				{price}
 			</div>
-			{isAdmin && (
+			{(isAdmin || isSalesman) && (
 				<div className="buttons">
 					{editButton}
 					{categoryName && (

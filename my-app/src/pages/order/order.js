@@ -60,6 +60,7 @@ const OrderContainer = ({ className }) => {
 					imageUrl,
 					categoryId,
 					model,
+					manufacturer,
 					quanthy,
 					price,
 					commentsCount,
@@ -87,6 +88,9 @@ const OrderContainer = ({ className }) => {
 							<div className="product-info">
 								<div>
 									Название: <b>{title}</b>{' '}
+								</div>
+								<div>
+									Производитель: <b>{manufacturer}</b>{' '}
 								</div>
 								<div>
 									Категория товара: <b>{categoryName}</b>

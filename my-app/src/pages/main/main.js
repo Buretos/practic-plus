@@ -160,6 +160,7 @@ const MainContainer = ({ className }) => {
 								imageUrl,
 								categoryId,
 								model,
+								manufacturer,
 								quanthy,
 								price,
 								commentsCount,
@@ -172,6 +173,7 @@ const MainContainer = ({ className }) => {
 									imageUrl={imageUrl}
 									categoryId={categoryId}
 									model={model}
+									manufacturer={manufacturer}
 									quanthy={quanthy}
 									price={price}
 									commentsCount={commentsCount}
@@ -184,6 +186,7 @@ const MainContainer = ({ className }) => {
 											imageUrl,
 											categoryId,
 											model,
+											manufacturer,
 											quanthy,
 											price,
 											commentsCount,

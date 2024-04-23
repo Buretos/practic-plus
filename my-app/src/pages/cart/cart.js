@@ -60,7 +60,7 @@ const CartContainer = ({ className }) => {
 			),
 		);
 		dispatch(clearCart());
-		navigate(`/history/${userId}`);
+		navigate(`/orders`);
 	};
 
 	// Проверяем, все ли условия для активации кнопки "Оформить заказ" выполнены
@@ -85,6 +85,7 @@ const CartContainer = ({ className }) => {
 					imageUrl,
 					categoryId,
 					model,
+					manufacturer,
 					quanthy,
 					price,
 					commentsCount,
@@ -108,7 +109,7 @@ const CartContainer = ({ className }) => {
 							/>
 						</div>
 						<div className="product-info">
-							{console.log('count ', count)}
+							<div>Производитель: {manufacturer}</div>
 							<div>Количество: {count} шт.</div>
 							<div className="block-button-cart">
 								<div className="button-cart">

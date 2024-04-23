@@ -29,7 +29,6 @@ const ControlPanelContainer = ({ className }) => {
 	const dispatch = useDispatch();
 	const roleId = useSelector(selectUserRole);
 	const login = useSelector(selectUserLogin);
-	const userId = useSelector(selectUserId);
 	const session = useSelector(selectUserSession);
 	const cart = useSelector(selectCart);
 	const countAll = cart.productsInCart.reduce((sum, item) => sum + item.count, 0);
@@ -39,9 +38,8 @@ const ControlPanelContainer = ({ className }) => {
 		sessionStorage.removeItem('userData');
 		dispatch(clearCart()); // Очистка корзины
 	};
-
-	console.log('roleId', roleId);
 	const isAdmin = checkAccess([ROLE.ADMIN], roleId);
+	const isSalesman = checkAccess([ROLE.SALESMAN], roleId);
 
 	return (
 		<div className={className}>
@@ -84,6 +82,14 @@ const ControlPanelContainer = ({ className }) => {
 					</Link>
 				) : (
 					<></>
+				)}
+
+				{isSalesman && (
+					<>
+						<Link to="/product">
+							<Icon id="fa fa-plus" margin="10px 0 0 16px" />
+						</Link>
+					</>
 				)}
 
 				{(roleId === ROLE.CLIENT || roleId === ROLE.SALESMAN) && (

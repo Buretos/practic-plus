@@ -45,7 +45,7 @@ const ProductContainer = ({ className }) => {
 	}
 	const SpecificProductPage =
 		isCreating || isEditing ? (
-			<PrivateContent access={[ROLE.ADMIN]} error={error}>
+			<PrivateContent access={[ROLE.SALESMAN, ROLE.ADMIN]} error={error}>
 				<div className={className}>
 					<ProductForm product={product} />
 				</div>

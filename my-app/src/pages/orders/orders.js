@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { ROLE } from '../../constants';
 import { checkAccess } from '../../utils';
 import { useSelector } from 'react-redux';
-import { selectUserRole } from '../../selectors';
+import { selectUserId, selectUserLogin, selectUserRole } from '../../selectors';
 import { TableRow } from './components/table-row/table-row';
 import { OrderRow } from './components/order-row/order-row';
 
@@ -16,8 +16,25 @@ const OrdersContainer = ({ className }) => {
 	const requestServer = useServerRequest();
 	const [errorMessage, setErrorMessage] = useState(null);
 	const userRole = useSelector(selectUserRole); // роль текущего пользователя, вошедшего в сессию (берётся из селектора store redux)
+	const isClient = checkAccess([ROLE.CLIENT], userRole);
+	const userId = useSelector(selectUserId);
+	const login = useSelector(selectUserLogin);
 
 	useEffect(() => {
+		if (isClient) {
+			Promise.all([
+				requestServer('fetchStatus'),
+				requestServer('fetchOrdersUserId', userId),
+			]).then(([statusRes, ordersUserIdRes]) => {
+				if (statusRes.error || ordersUserIdRes.error) {
+					setErrorMessage(statusRes.error || ordersUserIdRes.error);
+				}
+				setStatus(statusRes.res);
+				setOrders(ordersUserIdRes.res);
+				return;
+			});
+		}
+
 		// Обращение к серверу через useEffect
 		// Сначала проверяем права доступа текущего пользователя на страницу, чтобы лишний раз не запрашивать сервер. По хорошему эту проверку надо положить в каждый обработчик, и мы положим хотя в этом компоненте есть ещё только один обработчик -)))
 		if (!checkAccess([ROLE.SALESMAN, ROLE.ADMIN], userRole)) {
@@ -33,8 +50,6 @@ const OrdersContainer = ({ className }) => {
 			if (usersRes.error || statusRes.error || ordersRes.error) {
 				// Проверка ответа запросов на ошибки, если они есть, то текст соответствующей ошибки передаётся в errorMessage
 				setErrorMessage(usersRes.error || statusRes.error || ordersRes.error);
-				console.log('errorMessage', errorMessage);
-				return;
 			}
 			// После безошибочного ответа получаем и записываем массивы users и roles
 			setUsers(usersRes.res);
@@ -46,7 +61,10 @@ const OrdersContainer = ({ className }) => {
 
 	return (
 		// PrivateContent -обёртка содержимого приватной страницы (проверяет права пользователя и принимает текст ошибки )
-		<PrivateContent access={[ROLE.SALESMAN, ROLE.ADMIN]} serverError={errorMessage}>
+		<PrivateContent
+			access={[ROLE.CLIENT, ROLE.SALESMAN, ROLE.ADMIN]}
+			serverError={errorMessage}
+		>
 			<div className={className}>
 				<H2>Заказы</H2>
 				<div className="table-bloc">
@@ -82,7 +100,7 @@ const OrdersContainer = ({ className }) => {
 								<OrderRow // Компонент строки пользователя
 									key={id}
 									id={id}
-									userLogin={userLogin}
+									userLogin={isClient ? login : userLogin}
 									productsInCart={productsInCart}
 									createdOrderAt={createdOrderAt}
 									deliveryMethod={deliveryMethod}

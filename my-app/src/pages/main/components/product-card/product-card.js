@@ -35,20 +35,49 @@ const ProductCardContainer = ({
 					<div className="category">
 						<Icon
 							inactive={true}
-							id="fa-check-square-o"
+							id="fa-music"
+							margin="2px 7px 0 0"
+							size="18px"
+						/>
+						{categoryName}
+					</div>
+					<div className="category">
+						<Icon
+							inactive={true}
+							id="fa fa-certificate"
 							margin="2px 7px 0 0"
 							size="18px"
 						/>
 						{model}
 					</div>
-					<div className="comments-count">
+				</div>
+				<div className="product-card-info2">
+					<div className="category">
 						<Icon
 							inactive={true}
-							id="fa-database"
+							id="fa fa-stack-overflow"
 							margin="0 7px 0 0"
 							size="18px"
 						/>
 						{quanthy}
+					</div>
+					<div className="category">
+						<Icon
+							inactive={true}
+							id="fa-thumbs-o-up"
+							margin="0 7px 0 0"
+							size="18px"
+						/>
+						{commentsRating}
+					</div>
+					<div className="category">
+						<Icon
+							inactive={true}
+							id="fa-comment-o"
+							margin="0 7px 0 0"
+							size="18px"
+						/>
+						{commentsCount}
 					</div>
 					<div className="category">
 						<Icon
@@ -58,35 +87,6 @@ const ProductCardContainer = ({
 							size="18px"
 						/>
 						{price}
-					</div>
-				</div>
-				<div className="product-card-info2">
-					<div className="category">
-						<Icon
-							inactive={true}
-							id="fa-music"
-							margin="2px 7px 0 0"
-							size="18px"
-						/>
-						{categoryName}
-					</div>
-					<div className="price">
-						<Icon
-							inactive={true}
-							id="fa-thumbs-o-up"
-							margin="0 7px 0 0"
-							size="18px"
-						/>
-						{commentsRating}
-					</div>
-					<div className="comments-count">
-						<Icon
-							inactive={true}
-							id="fa-comment-o"
-							margin="0 7px 0 0"
-							size="18px"
-						/>
-						{commentsCount}
 					</div>
 				</div>
 			</Link>
@@ -142,13 +142,12 @@ export const ProductCard = styled(ProductCardContainer)`
 
 	& .category {
 		display: flex;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 
 	& .comments-count {
-		display: flex;
-	}
-
-	& .price {
 		display: flex;
 	}
 
