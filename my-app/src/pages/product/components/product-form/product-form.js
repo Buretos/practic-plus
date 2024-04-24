@@ -127,7 +127,12 @@ const ProductFormContainer = ({
 						categories={categories}
 						margin="0"
 						editButton={
-							<Icon id="fa-floppy-o" size="22px" onClick={onSave} />
+							<Icon
+								title="сохранить информацию о новом товаре"
+								id="fa-floppy-o"
+								size="22px"
+								onClick={onSave}
+							/>
 						}
 					/>
 				</div>

@@ -34,6 +34,7 @@ const ProductContentContainer = ({
 				margin="-20px 0 12px"
 				editButton={
 					<Icon
+						title="редактирование товара"
 						id="fa-pencil-square-o"
 						size="22px"
 						onClick={() => navigate(`/product/${id}/edit`)}
@@ -41,8 +42,12 @@ const ProductContentContainer = ({
 				}
 			/>
 			<div className="product-info">
-				<div>Производитель: &nbsp;{manufacturer}</div>
-				<div>Модель:&nbsp;{model}</div>
+				<div>
+					Производитель: &nbsp;<strong>{manufacturer}</strong>
+				</div>
+				<div>
+					Модель:&nbsp;<strong>{model}</strong>
+				</div>
 			</div>
 			<div className="product-text">{content}</div>
 		</div>

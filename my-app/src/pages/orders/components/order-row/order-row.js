@@ -86,6 +86,7 @@ const OrderRowContainer = ({
 						</select>
 						<div className="save-role-button">
 							<Icon
+								title="сохранить изменение статуса заказа"
 								id="fa-floppy-o"
 								margin="0 0 0 10px"
 								disabled={isSaveButtonDisabled}
@@ -95,7 +96,12 @@ const OrderRowContainer = ({
 					</div>
 				)}
 			</TableRow>
-			<Icon id="fa-info-circle" margin="0 0 0 20px" onClick={() => onOrderInfo()} />
+			<Icon
+				title="подробная информация о заказе"
+				id="fa-info-circle"
+				margin="0 0 0 20px"
+				onClick={() => onOrderInfo()}
+			/>
 		</div>
 	);
 };

@@ -34,6 +34,7 @@ const CommentsContainer = ({ className, comments, productId }) => {
 						<div className="new-comment-evaluation-group">
 							<div className="new-comment-icon-evaluation">
 								<Icon
+									title="оценка"
 									id="fa-thumbs-o-up"
 									size="22px"
 									margin="0 5px 0 30px"
@@ -57,6 +58,7 @@ const CommentsContainer = ({ className, comments, productId }) => {
 							</div>
 						</div>
 						<Icon
+							title="отправить отзыв"
 							id="fa-paper-plane-o"
 							size="22px"
 							margin="10px 0 0 8px"

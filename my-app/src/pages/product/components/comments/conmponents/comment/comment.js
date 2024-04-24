@@ -42,6 +42,7 @@ const CommentContainer = ({
 					<div className="information-author-evaluation">
 						<div className="author">
 							<Icon
+								title="автор отзыва"
 								inactive={true}
 								id="fa-user-circle-o"
 								size="18px"
@@ -52,6 +53,7 @@ const CommentContainer = ({
 						</div>
 						<div className="evaluation-comment">
 							<Icon
+								title="оценка"
 								background="#fff"
 								inactive={true}
 								id="fa-thumbs-o-up"
@@ -64,6 +66,7 @@ const CommentContainer = ({
 					</div>
 					<div className="published-at">
 						<Icon
+							title="дата публикации"
 							inactive={true}
 							id="fa-calendar-o"
 							size="18px"
@@ -77,6 +80,7 @@ const CommentContainer = ({
 			</div>
 			{isAdminOrSalesman && (
 				<Icon
+					title="удалить"
 					id="fa-trash-o"
 					size="22px"
 					margin="0 0 0 10px"

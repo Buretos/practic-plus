@@ -34,6 +34,7 @@ const ProductCardContainer = ({
 					<div className="category">
 						<Icon
 							inactive={true}
+							title="категория товара"
 							id="fa-music"
 							margin="2px 7px 0 0"
 							size="18px"
@@ -43,6 +44,7 @@ const ProductCardContainer = ({
 					<div className="category">
 						<Icon
 							inactive={true}
+							title="модель"
 							id="fa fa-certificate"
 							margin="2px 7px 0 0"
 							size="18px"
@@ -54,6 +56,7 @@ const ProductCardContainer = ({
 					<div className="category">
 						<Icon
 							inactive={true}
+							title="количество товара в магазине"
 							id="fa fa-stack-overflow"
 							margin="0 7px 0 0"
 							size="18px"
@@ -63,6 +66,7 @@ const ProductCardContainer = ({
 					<div className="category">
 						<Icon
 							inactive={true}
+							title="рейтинг"
 							id="fa-thumbs-o-up"
 							margin="0 7px 0 0"
 							size="18px"
@@ -72,6 +76,7 @@ const ProductCardContainer = ({
 					<div className="category">
 						<Icon
 							inactive={true}
+							title="количество отзывов"
 							id="fa-comment-o"
 							margin="0 7px 0 0"
 							size="18px"
@@ -81,6 +86,7 @@ const ProductCardContainer = ({
 					<div className="category">
 						<Icon
 							inactive={true}
+							title="цена"
 							id="fa-rub"
 							margin="0 7px 0 0"
 							size="18px"

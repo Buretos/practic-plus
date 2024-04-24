@@ -51,23 +51,53 @@ const SpecialPannelContainer = ({
 	) : (
 		<div className={className}>
 			<div className="product-info">
-				<Icon inactive={true} id="fa-music" margin="0 7px" size="18px" />
+				<Icon
+					title="категория товара"
+					inactive={true}
+					id="fa-music"
+					margin="0 7px"
+					size="18px"
+				/>
 				{categoryName}
 			</div>
 			<div className="product-info">
-				<Icon inactive={true} id="fa-thumbs-o-up" margin="0 7px" size="18px" />
+				<Icon
+					title="рейтинг товара"
+					inactive={true}
+					id="fa-thumbs-o-up"
+					margin="0 7px"
+					size="18px"
+				/>
 				{ratingProduct(comments)}
 			</div>
 			<div className="product-info">
-				<Icon inactive={true} id="fa-comment-o" margin="0 7px" size="18px" />
+				<Icon
+					title="количество отзывов"
+					inactive={true}
+					id="fa-comment-o"
+					margin="0 7px"
+					size="18px"
+				/>
 				{comments.length}
 			</div>
 			<div className="product-info">
-				<Icon inactive={true} id="fa-database" margin="0 7px" size="18px" />
+				<Icon
+					title="количество товара в магазине"
+					inactive={true}
+					id="fa-database"
+					margin="0 7px"
+					size="18px"
+				/>
 				{quanthy} шт.
 			</div>
 			<div className="product-info">
-				<Icon inactive={true} id="fa-rub" margin="0 7px 0 0" size="18px" />
+				<Icon
+					title="цена товара"
+					inactive={true}
+					id="fa-rub"
+					margin="0 7px 0 0"
+					size="18px"
+				/>
 				{price}
 			</div>
 			{(isAdmin || isSalesman) && (
@@ -75,6 +105,7 @@ const SpecialPannelContainer = ({
 					{editButton}
 					{categoryName && (
 						<Icon
+							title="удаление товара"
 							id="fa-trash-o"
 							size="22px"
 							margin="0 0 0 15px"

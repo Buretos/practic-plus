@@ -49,13 +49,33 @@ const ControlPanelContainer = ({ className }) => {
 					</Button>
 				) : roleId === ROLE.CLIENT ? (
 					<>
-						<UserName>{login}</UserName>
-						<Icon id="fa-sign-out" margin="0 0 0 10px" onClick={onLogout} />
+						<UserName title="покупатель">{login}</UserName>
+						<Icon
+							title="выход"
+							id="fa-sign-out"
+							margin="0 0 0 10px"
+							onClick={onLogout}
+						/>
+					</>
+				) : roleId === ROLE.SALESMAN ? (
+					<>
+						<UserName title="продавец">{login}</UserName>
+						<Icon
+							id="fa-sign-out"
+							title="выход"
+							margin="0 0 0 10px"
+							onClick={onLogout}
+						/>
 					</>
 				) : (
 					<>
-						<UserName>{login}</UserName>
-						<Icon id="fa-sign-out" margin="0 0 0 10px" onClick={onLogout} />
+						<UserName title="администратор">{login}</UserName>
+						<Icon
+							id="fa-sign-out"
+							title="выход"
+							margin="0 0 0 10px"
+							onClick={onLogout}
+						/>
 					</>
 				)}
 			</RightAligned>
@@ -86,7 +106,11 @@ const ControlPanelContainer = ({ className }) => {
 				{isSalesman && (
 					<>
 						<Link to="/product">
-							<Icon id="fa fa-plus" margin="10px 0 0 16px" />
+							<Icon
+								title="добавление нового товара"
+								id="fa fa-plus"
+								margin="10px 0 0 16px"
+							/>
 						</Link>
 					</>
 				)}
@@ -94,7 +118,11 @@ const ControlPanelContainer = ({ className }) => {
 				{(roleId === ROLE.CLIENT || roleId === ROLE.SALESMAN) && (
 					<>
 						<Link to="/orders">
-							<Icon id="fa fa-archive" margin="10px 0 0 16px" />
+							<Icon
+								title="история покупок"
+								id="fa fa-archive"
+								margin="10px 0 0 16px"
+							/>
 						</Link>
 					</>
 				)}
@@ -102,13 +130,25 @@ const ControlPanelContainer = ({ className }) => {
 				{isAdmin && (
 					<>
 						<Link to="/product">
-							<Icon id="fa fa-plus" margin="10px 0 0 16px" />
+							<Icon
+								title="добавление нового товара"
+								id="fa fa-plus"
+								margin="10px 0 0 16px"
+							/>
 						</Link>
 						<Link to="/users">
-							<Icon id="fa-user-plus" margin="10px 0 0 16px" />
+							<Icon
+								title="управление пользователями"
+								id="fa-user-plus"
+								margin="10px 0 0 16px"
+							/>
 						</Link>
 						<Link to="/orders">
-							<Icon id="fa fa-archive" margin="10px 0 0 16px" />
+							<Icon
+								title="история покупок"
+								id="fa fa-archive"
+								margin="10px 0 0 16px"
+							/>
 						</Link>
 					</>
 				)}
