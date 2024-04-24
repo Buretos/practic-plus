@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -26,3 +27,14 @@ export const SortSelect = styled(SortSelectContainer)`
 		width: 280px;
 	}
 `;
+
+SortSelectContainer.propTypes = {
+	value: PropTypes.string.isRequired,
+	onSort: PropTypes.func.isRequired,
+	options: PropTypes.arrayOf(
+		PropTypes.shape({
+			value: PropTypes.string.isRequired,
+			label: PropTypes.string.isRequired,
+		}),
+	).isRequired,
+};

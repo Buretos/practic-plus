@@ -15,7 +15,6 @@ export const cartReducer = (state = initialCartState, action) => {
 			);
 
 			if (existingProductIndex >= 0) {
-				console.log('existingProductIndex', existingProductIndex);
 				const updatedCart = [...productsInCart];
 				const existingCount = updatedCart[existingProductIndex].count || 0;
 				updatedCart[existingProductIndex] = {

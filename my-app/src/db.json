@@ -85,7 +85,7 @@
       "category_id": 0,
       "manufacturer": "Sony",
       "model": "sdfаa",
-      "quanthy": 4534,
+      "quanthy": 4533,
       "price": "34567"
     },
     {
@@ -382,17 +382,56 @@
       "count_all": 3,
       "total_amount": 115837,
       "id": 2
+    },
+    {
+      "user_id": "IIPVAtt",
+      "products_in_cart": [
+        {
+          "id": "001",
+          "title": "Гитара классическая Algambra",
+          "imageUrl": "https://fastly.picsum.photos/id/1/280/150.jpg?hmac=fk100E3BpEF5_za37tFN2lAElAuCVMTFbduWlpO7ioo",
+          "categoryId": 0,
+          "model": "sdfаa",
+          "manufacturer": "Sony",
+          "quanthy": 4534,
+          "price": "34567",
+          "commentsCount": 3,
+          "commentsRating": 4.7,
+          "count": 1
+        },
+        {
+          "id": "002",
+          "title": "Гитара семмиструнная Dofff",
+          "imageUrl": "https://fastly.picsum.photos/id/33/280/150.jpg?hmac=SwQ2gQweBOwyaetpYP2H272VzjFEWjLCEahFBuOe904",
+          "categoryId": 0,
+          "model": "gct-04",
+          "manufacturer": "Doff",
+          "quanthy": 47,
+          "price": "17045",
+          "commentsCount": 5,
+          "commentsRating": 3.6,
+          "count": 1
+        }
+      ],
+      "payment_method": "Наличными при получении",
+      "delivery_method": "Самовывоз",
+      "status_id": 0,
+      "created_order_at": "2024-04-24",
+      "last_changed_status_order_at": "2024-04-24",
+      "count_all": 2,
+      "total_amount": 51612,
+      "id": 3
     }
   ],
   "sessions": [
     {
-      "hash": "0.19991016535029038081461294495966285467147827148438",
+      "hash": "0.38051878835550145829813573072897270321846008300781",
       "user": {
-        "id": "IIPVAtt",
-        "login": "shon",
+        "id": "001",
+        "login": "anton",
         "password": "123456",
-        "registeredAt": "2037-11-17 13:32",
-        "roleId": 2
+        "registeredAt": "2050-09-22",
+        "roleId": 0
       },
       "id": 1
     }

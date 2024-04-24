@@ -4,7 +4,6 @@ import { Button, Icon } from '../../../../components';
 import { ROLE } from '../../../../constants';
 import {
 	selectCart,
-	selectUserId,
 	selectUserLogin,
 	selectUserRole,
 	selectUserSession,

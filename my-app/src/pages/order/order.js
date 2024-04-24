@@ -1,9 +1,10 @@
-import styled from 'styled-components';
-import { Button, H2 } from '../../components';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { ProductCard } from '../main/components';
+import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Button, H2 } from '../../components';
+import { ProductCard } from '../main/components';
 import { selectCategories } from '../../selectors';
+import styled from 'styled-components';
 
 const OrderContainer = ({ className }) => {
 	const navigate = useNavigate();
@@ -28,8 +29,6 @@ const OrderContainer = ({ className }) => {
 		status,
 		lastChangedStatusOrderAt,
 	} = state;
-
-	console.log('productsInCart', productsInCart);
 
 	return (
 		<div className={className}>
@@ -210,3 +209,38 @@ export const Order = styled(OrderContainer)`
 		}
 	}
 `;
+
+OrderContainer.propTypes = {
+	state: PropTypes.shape({
+		id: PropTypes.string.isRequired,
+		userLogin: PropTypes.string.isRequired,
+		productsInCart: PropTypes.arrayOf(
+			PropTypes.shape({
+				id: PropTypes.string.isRequired,
+				title: PropTypes.string.isRequired,
+				imageUrl: PropTypes.string.isRequired,
+				categoryId: PropTypes.number.isRequired,
+				model: PropTypes.string.isRequired,
+				manufacturer: PropTypes.string,
+				quanthy: PropTypes.number,
+				price: PropTypes.number.isRequired,
+				commentsCount: PropTypes.number,
+				commentsRating: PropTypes.number,
+				count: PropTypes.number.isRequired,
+			}),
+		).isRequired,
+		createdOrderAt: PropTypes.string.isRequired,
+		deliveryMethod: PropTypes.string.isRequired,
+		paymentMethod: PropTypes.string.isRequired,
+		countAll: PropTypes.number.isRequired,
+		totalAmount: PropTypes.number.isRequired,
+		statusId: PropTypes.number.isRequired,
+		status: PropTypes.arrayOf(
+			PropTypes.shape({
+				id: PropTypes.number.isRequired,
+				name: PropTypes.string.isRequired,
+			}),
+		).isRequired,
+		lastChangedStatusOrderAt: PropTypes.string.isRequired,
+	}).isRequired,
+};

@@ -5,8 +5,8 @@ export const addUser = (login, password) =>
 			'Content-Type': 'application/json;charset=utf-8',
 		},
 		body: JSON.stringify({
-			login, // <--когда ключ и значение совпадают, то можно использовать сокращённую запись (login: login,)
-			password, // сокращённая запись
+			login,
+			password,
 			registed_at: new Date().toISOString().split('T')[0],
 			role_id: 2,
 		}),

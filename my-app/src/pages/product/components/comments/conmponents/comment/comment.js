@@ -1,5 +1,5 @@
-import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 import { CLOSE_MODAL, openModal, removeCommentAsync } from '../../../../../../actions';
 import { Icon } from '../../../../../../components';
 import { useServerRequest } from '../../../../../../hooks';
@@ -128,5 +128,6 @@ Comment.propTypes = {
 	id: PropTypes.number.isRequired,
 	author: PropTypes.string.isRequired,
 	content: PropTypes.string.isRequired,
+	evaluation: PropTypes.number.isRequired,
 	publishedAt: PropTypes.string.isRequired,
 };

@@ -9,7 +9,6 @@ import { ROLE } from '../../../../constants';
 import { selectCategories, selectUserRole } from '../../../../selectors';
 import styled from 'styled-components';
 import { ratingProduct } from './utils/rating-product';
-import { setUserRole } from '../../../../bff/api';
 
 const SpecialPannelContainer = ({
 	className,
@@ -111,8 +110,11 @@ export const SpecialPannel = styled(SpecialPannelContainer)`
 	}
 `;
 
-SpecialPannel.propTypes = {
+SpecialPannelContainer.propTypes = {
 	id: PropTypes.string.isRequired,
-	categoryId: PropTypes.number.isRequired,
+	categoryId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+	comments: PropTypes.array.isRequired,
+	quanthy: PropTypes.number.isRequired,
+	price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 	editButton: PropTypes.node.isRequired,
 };

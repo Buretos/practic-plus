@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -27,3 +28,7 @@ export const CategoriesSelect = styled(CategoriesSelectContainer)`
 		width: 280px;
 	}
 `;
+
+CategoriesSelectContainer.propTypes = {
+	onChange: PropTypes.func.isRequired,
+};

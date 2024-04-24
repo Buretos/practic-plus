@@ -1,14 +1,14 @@
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { selectCart, selectUserId, selectUserRole } from '../../selectors';
-import styled from 'styled-components';
+import { addOrderAsync, addToCart, clearCart, removeFromCart } from '../../actions';
 import { Button, H2 } from '../../components';
 import { ProductCard } from '../main/components';
-import { addOrderAsync, addToCart, clearCart, removeFromCart } from '../../actions';
-import React, { useState } from 'react';
 import { checkAccess } from '../../utils';
 import { ROLE } from '../../constants';
-import { useNavigate } from 'react-router-dom';
 import { useServerRequest } from '../../hooks';
+import styled from 'styled-components';
 
 const CartContainer = ({ className }) => {
 	const dispatch = useDispatch();
@@ -22,7 +22,6 @@ const CartContainer = ({ className }) => {
 	// Добавленные состояния для способов доставки и оплаты
 	const [deliveryMethod, setDeliveryMethod] = useState('');
 	const [paymentMethod, setPaymentMethod] = useState('');
-	// const shoper = login.toString();
 
 	const totalAmount = cart.productsInCart.reduce((sum, item) => {
 		return sum + parseFloat(item.price) * item.count;
@@ -72,8 +71,9 @@ const CartContainer = ({ className }) => {
 		<div className={className}>
 			<div className="order">
 				<H2>Корзина покупателя</H2>
-				{/* Выводим общее количество товаров */}
-				<div className="order-heder">Всего товаров в корзине: {countAll} шт.</div>
+				<div className="order-heder">
+					Всего товаров в корзине: <b>{countAll}</b> шт.
+				</div>
 				<Button className="button-order" onClick={handleClearCart}>
 					Очистить корзину
 				</Button>
@@ -109,8 +109,12 @@ const CartContainer = ({ className }) => {
 							/>
 						</div>
 						<div className="product-info">
-							<div>Производитель: {manufacturer}</div>
-							<div>Количество: {count} шт.</div>
+							<div>
+								Производитель: <b>{manufacturer}</b>
+							</div>
+							<div>
+								Количество: <b>{count}</b> шт.
+							</div>
 							<div className="block-button-cart">
 								<div className="button-cart">
 									<Button
@@ -143,10 +147,13 @@ const CartContainer = ({ className }) => {
 									</Button>
 								</div>
 							</div>
-							<div>Цена: {price} руб./шт.</div>
+							<div>
+								Цена: <b>{price}</b> руб./шт.
+							</div>
 							<div>
 								Всего за этот товар:
-								<br /> {count} x {price} = {count * price} руб.
+								<br /> <b>{count}</b> x <b>{price}</b> ={' '}
+								<b>{count * price}</b> руб.
 							</div>
 						</div>
 					</div>
@@ -155,9 +162,12 @@ const CartContainer = ({ className }) => {
 
 			<div className="checkout-options">
 				<div className="total-amount">
-					Всего товаров в корзине: {countAll} шт.
-					<br />
-					Итоговая сумма: {totalAmount} руб.
+					<div>
+						Всего товаров в корзине: <strong>{countAll}</strong> шт.
+					</div>
+					<div>
+						Итоговая сумма: <strong>{totalAmount}</strong> руб.{' '}
+					</div>
 				</div>
 				<div className="bloc-select">
 					<select
@@ -213,6 +223,7 @@ export const Cart = styled(CartContainer)`
 
 	& .order-heder {
 		margin: 0 0 30px;
+		font-size: 21px;
 	}
 
 	& .order {

@@ -6,11 +6,11 @@ import { PAGINATION_LIMIT, ROLE } from '../../constants';
 import { useServerRequest } from '../../hooks';
 import { ProductCard, Search, SortSelect, CategoriesSelect } from './components';
 import { debounce } from './utils';
-import styled from 'styled-components';
 import { addToCart } from '../../actions';
 import { checkAccess } from '../../utils';
 import { selectUserRole } from '../../selectors';
 import { Loader } from '../../components';
+import styled from 'styled-components';
 
 const sortOption = [
 	{

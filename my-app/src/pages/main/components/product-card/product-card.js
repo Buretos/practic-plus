@@ -21,8 +21,7 @@ const ProductCardContainer = ({
 }) => {
 	const categories = useSelector(selectCategories);
 	const categoryName = Object.values(categories)[categoryId].name;
-	console.log('price', price);
-	// На всякий случай. Object.values(myobj); - позволяет извлекать в массив значения ключей объекта myobj .
+	// Object.values(myobj); - позволяет извлекать в массив значения ключей объекта myobj .
 
 	return (
 		<div className={className}>
@@ -175,11 +174,11 @@ ProductCard.propTypes = {
 	title: PropTypes.string.isRequired,
 	imageUrl: PropTypes.string.isRequired,
 	categoryId: PropTypes.number.isRequired,
+	model: PropTypes.string.isRequired,
+	quanthy: PropTypes.number.isRequired,
+	price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 	commentsCount: PropTypes.number.isRequired,
-	categories: PropTypes.arrayOf(
-		PropTypes.shape({
-			id: PropTypes.number.isRequired,
-			name: PropTypes.string.isRequired,
-		}),
-	),
+	commentsRating: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+	cardOnly: PropTypes.bool,
+	onClick: PropTypes.func,
 };

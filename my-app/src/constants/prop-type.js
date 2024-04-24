@@ -1,21 +1,29 @@
 import PropTypes from 'prop-types';
 import { ROLE } from './role';
+import { CATEGORIES } from './categories';
 
 export const PROP_TYPE = {
 	ROLE: PropTypes.oneOf(Object.values(ROLE)),
+	CATEGORIES: PropTypes.oneOf(Object.values(CATEGORIES)),
 	ERROR: PropTypes.oneOfType([PropTypes.string, PropTypes.exact(null)]),
+	ORDER_STATUS: PropTypes.oneOfType([PropTypes.string, PropTypes.exact(null)]),
 	COMMENT: PropTypes.shape({
 		id: PropTypes.number.isRequired,
 		author: PropTypes.string.isRequired,
 		content: PropTypes.string.isRequired,
+		evaluation: PropTypes.number.isRequired,
 		publishedAt: PropTypes.string.isRequired,
 	}),
 	PRODUCT: PropTypes.shape({
 		id: PropTypes.string.isRequired,
 		title: PropTypes.string.isRequired,
 		imageUrl: PropTypes.string.isRequired,
-		content: PropTypes.string.isRequired,
 		categoryId: PropTypes.number.isRequired,
+		manufacturer: PropTypes.string.isRequired,
+		model: PropTypes.string.isRequired,
+		quanthy: PropTypes.number.isRequired,
+		price: PropTypes.number.isRequired,
+		content: PropTypes.string.isRequired,
 	}),
 };
 

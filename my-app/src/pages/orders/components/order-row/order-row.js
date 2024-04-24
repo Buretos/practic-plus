@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Icon } from '../../../../components';
 import { TableRow } from '../table-row/table-row';
@@ -108,3 +109,31 @@ export const OrderRow = styled(OrderRowContainer)`
 		padding: 0 5px;
 	}
 `;
+
+OrderRowContainer.propTypes = {
+	className: PropTypes.string, // Обычно не является обязательным, потому что может быть предоставлено styled-компонентом
+	id: PropTypes.string.isRequired,
+	userLogin: PropTypes.string.isRequired,
+	productsInCart: PropTypes.arrayOf(
+		PropTypes.shape({
+			id: PropTypes.string.isRequired,
+			name: PropTypes.string.isRequired,
+			price: PropTypes.number.isRequired,
+			quantity: PropTypes.number.isRequired,
+		}),
+	).isRequired,
+	createdOrderAt: PropTypes.string.isRequired,
+	deliveryMethod: PropTypes.string.isRequired,
+	paymentMethod: PropTypes.string.isRequired,
+	countAll: PropTypes.number.isRequired,
+	totalAmount: PropTypes.number.isRequired,
+	statusId: PropTypes.number.isRequired,
+	status: PropTypes.arrayOf(
+		PropTypes.shape({
+			id: PropTypes.number.isRequired,
+			name: PropTypes.string.isRequired,
+		}),
+	).isRequired,
+	lastChangedStatusOrderAt: PropTypes.string,
+	isClient: PropTypes.bool,
+};
