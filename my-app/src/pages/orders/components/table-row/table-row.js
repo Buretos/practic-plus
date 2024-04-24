@@ -19,15 +19,7 @@ export const TableRow = styled(TableRowContainer)`
 		width: 70px;
 	}
 
-	& .login-column {
-		width: 150px;
-	}
-
-	& .data-column {
-		width: 150px;
-	}
-
-	& .price-column {
+	& .item-column {
 		width: 150px;
 	}
 

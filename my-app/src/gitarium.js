@@ -2,7 +2,7 @@ import { useLayoutEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import { useServerRequest } from './hooks';
-import { Error, Header, Footer, Modal } from './components';
+import { Error, Header, Footer, Modal, Loader } from './components';
 import {
 	Authorization,
 	Main,
@@ -75,6 +75,8 @@ export const Gitarium = () => {
 					<Route path="/orders" element={<Orders />} />{' '}
 					{/* Страница просмотра заказа */}
 					<Route path="/order" element={<Order />} />{' '}
+					{/* Страница просмотра заказа */}
+					<Route path="/loader" element={<Loader />} />{' '}
 					{/* Страница создания нового товара */}
 					<Route path="/product/:id" element={<Product />} />{' '}
 					{/* администрирование пользователей*/}

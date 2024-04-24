@@ -10,6 +10,7 @@ import styled from 'styled-components';
 import { addToCart } from '../../actions';
 import { checkAccess } from '../../utils';
 import { selectUserRole } from '../../selectors';
+import { Loader } from '../../components';
 
 const sortOption = [
 	{
@@ -58,6 +59,7 @@ const MainContainer = ({ className }) => {
 	const [shouldSearch, setShouldSearch] = useState(false); // флаг, срабатывающий после истечения 2 секунд задержки в debounce
 	const [categoryId, setCategoryId] = useState(null);
 	const [sorting, setSorting] = useState('NO'); //priceDESC
+	const [isLoading, setIsLoading] = useState(true);
 	const requestServer = useServerRequest();
 	const roleId = useSelector(selectUserRole);
 	const isSalesman = checkAccess([ROLE.SALESMAN], roleId);
@@ -76,10 +78,13 @@ const MainContainer = ({ className }) => {
 	};
 
 	// Запрос на просмотр статей есть для всех. Ошибку доступа не проверяем.
+
 	useEffect(() => {
+		setIsLoading(true);
 		// Запрос поисковой фразы тоже будем отправлять сюда. // категории товаров тоже
 		requestServer('fetchProducts', searchPhrase).then(({ res: products }) => {
 			setProducts(products.products);
+			setIsLoading(false);
 		});
 		setSorting('NO');
 
@@ -116,107 +121,119 @@ const MainContainer = ({ className }) => {
 
 	return (
 		<div className={className}>
-			<div className="mainHeader">
-				{' '}
+			{isLoading ? (
+				<Loader />
+			) : (
 				<div>
-					<CategoriesSelect
-						onChange={(e) => handleCategoryChange(e.target.value)}
-					/>
-				</div>
-				<div>
-					<Search searchPhrase={searchPhrase} onChange={onSearch} />
-				</div>
-				<div>
-					<SortSelect
-						options={sortOption}
-						onSort={handleSort}
-						value={sorting}
-					/>
-				</div>
-			</div>
-			<div className="pag-top">
-				{filteredProducts.length > PAGINATION_LIMIT && (
-					<Paginate
-						previousLabel="Предыдущая"
-						nextLabel="Следующая"
-						breakLabel="..."
-						breakClassName="break-me"
-						pageCount={Math.ceil(filteredProducts.length / PAGINATION_LIMIT)} // Здесь 9 - количество элементов на странице
-						marginPagesDisplayed={2}
-						pageRangeDisplayed={5}
-						onPageChange={handlePageChange}
-						containerClassName="pagination"
-						activeClassName="active"
-					/>
-				)}
-			</div>
-			<div className="product-and-search">
-				{products.length > 0 ? (
-					<div className="product-list">
-						{currentProducts.map(
-							({
-								id,
-								title,
-								imageUrl,
-								categoryId,
-								model,
-								manufacturer,
-								quanthy,
-								price,
-								commentsCount,
-								commentsRating,
-							}) => (
-								<ProductCard
-									key={id}
-									id={id}
-									title={title}
-									imageUrl={imageUrl}
-									categoryId={categoryId}
-									model={model}
-									manufacturer={manufacturer}
-									quanthy={quanthy}
-									price={price}
-									commentsCount={commentsCount}
-									commentsRating={commentsRating}
-									cardOnly={isSalesman || isAdmin ? true : false}
-									onClick={() =>
-										handleAddToCart({
-											id,
-											title,
-											imageUrl,
-											categoryId,
-											model,
-											manufacturer,
-											quanthy,
-											price,
-											commentsCount,
-											commentsRating,
-										})
-									}
-								/>
-							),
+					<div className="mainHeader">
+						{' '}
+						<div>
+							<CategoriesSelect
+								onChange={(e) => handleCategoryChange(e.target.value)}
+							/>
+						</div>
+						<div>
+							<Search searchPhrase={searchPhrase} onChange={onSearch} />
+						</div>
+						<div>
+							<SortSelect
+								options={sortOption}
+								onSort={handleSort}
+								value={sorting}
+							/>
+						</div>
+					</div>
+					<div className="pag-top">
+						{filteredProducts.length > PAGINATION_LIMIT && (
+							<Paginate
+								previousLabel="Предыдущая"
+								nextLabel="Следующая"
+								breakLabel="..."
+								breakClassName="break-me"
+								pageCount={Math.ceil(
+									filteredProducts.length / PAGINATION_LIMIT,
+								)} // Здесь 9 - количество элементов на странице
+								marginPagesDisplayed={2}
+								pageRangeDisplayed={5}
+								onPageChange={handlePageChange}
+								containerClassName="pagination"
+								activeClassName="active"
+							/>
 						)}
 					</div>
-				) : (
-					<div className="no-product-found">Товары не найдены</div>
-				)}
-			</div>
-			<div className="pag-bottom">
-				{filteredProducts.length > PAGINATION_LIMIT && (
-					<Paginate
-						previousLabel="Предыдущая"
-						nextLabel="Следующая"
-						breakLabel="..."
-						breakClassName="break-me"
-						pageCount={Math.ceil(filteredProducts.length / PAGINATION_LIMIT)} // Здесь 9 - количество элементов на странице
-						marginPagesDisplayed={2}
-						pageRangeDisplayed={5}
-						onPageChange={handlePageChange}
-						containerClassName="pagination"
-						activeClassName="active"
-					/>
-				)}
-			</div>
+					<div className="product-and-search">
+						{products.length > 0 ? (
+							<div className="product-list">
+								{currentProducts.map(
+									({
+										id,
+										title,
+										imageUrl,
+										categoryId,
+										model,
+										manufacturer,
+										quanthy,
+										price,
+										commentsCount,
+										commentsRating,
+									}) => (
+										<ProductCard
+											key={id}
+											id={id}
+											title={title}
+											imageUrl={imageUrl}
+											categoryId={categoryId}
+											model={model}
+											manufacturer={manufacturer}
+											quanthy={quanthy}
+											price={price}
+											commentsCount={commentsCount}
+											commentsRating={commentsRating}
+											cardOnly={
+												isSalesman || isAdmin ? true : false
+											}
+											onClick={() =>
+												handleAddToCart({
+													id,
+													title,
+													imageUrl,
+													categoryId,
+													model,
+													manufacturer,
+													quanthy,
+													price,
+													commentsCount,
+													commentsRating,
+												})
+											}
+										/>
+									),
+								)}
+							</div>
+						) : (
+							<div className="no-product-found">Товары не найдены</div>
+						)}
+					</div>
+					<div className="pag-bottom">
+						{filteredProducts.length > PAGINATION_LIMIT && (
+							<Paginate
+								previousLabel="Предыдущая"
+								nextLabel="Следующая"
+								breakLabel="..."
+								breakClassName="break-me"
+								pageCount={Math.ceil(
+									filteredProducts.length / PAGINATION_LIMIT,
+								)} // Здесь 9 - количество элементов на странице
+								marginPagesDisplayed={2}
+								pageRangeDisplayed={5}
+								onPageChange={handlePageChange}
+								containerClassName="pagination"
+								activeClassName="active"
+							/>
+						)}
+					</div>
+				</div>
+			)}
 		</div>
 	);
 };

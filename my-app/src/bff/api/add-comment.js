@@ -1,5 +1,3 @@
-import { generateDate } from '../utils';
-
 export const addComment = (userId, productId, content, evaluation) =>
 	fetch('http://localhost:3005/comments', {
 		method: 'POST',
@@ -9,7 +7,7 @@ export const addComment = (userId, productId, content, evaluation) =>
 		body: JSON.stringify({
 			author_id: userId,
 			product_id: productId,
-			published_at: generateDate(),
+			published_at: new Date().toISOString().split('T')[0],
 			content,
 			evaluation,
 		}),

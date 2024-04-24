@@ -19,6 +19,7 @@ const OrderRowContainer = ({
 	statusId,
 	status,
 	lastChangedStatusOrderAt,
+	isClient,
 }) => {
 	const navigate = useNavigate();
 	const [initialStatusId, setInitialStatusId] = useState(statusId); // изначальный статус заказа, отображаемый в поле выбора статусов (см. тег select)
@@ -62,30 +63,36 @@ const OrderRowContainer = ({
 		<div className={className}>
 			<TableRow border={true}>
 				<div className="id-column">{id}</div>
-				<div className="login-column">{userLogin}</div>
-				<div className="data-column">{createdOrderAt}</div>
-				<div className="price-column">{totalAmount}</div>
-				<div className="status-column">
-					<select value={selectedStatusId} onChange={onStatusChange}>
-						{status.map(
-							(
-								{ id: statusId, name: statusName }, // вывод выпадающего списка ролей (массивом map) по названию roleName контекст тега option, который соответствует полю name, и значению, соответствующему полю id массива roles, т.е. roleId
-							) => (
-								<option key={statusId} value={statusId}>
-									{statusName}
-								</option>
-							),
-						)}
-					</select>
-					<div className="save-role-button">
-						<Icon
-							id="fa-floppy-o"
-							margin="0 0 0 10px"
-							disabled={isSaveButtonDisabled}
-							onClick={() => onStatusSave(id, selectedStatusId)}
-						/>
+				<div className="item-column">{userLogin}</div>
+				<div className="item-column">{createdOrderAt}</div>
+				<div className="item-column">{totalAmount}</div>
+				{isClient ? (
+					<div className="item-column">
+						{status.find((item) => item.id === statusId).name}
 					</div>
-				</div>
+				) : (
+					<div className="status-column">
+						<select value={selectedStatusId} onChange={onStatusChange}>
+							{status.map(
+								(
+									{ id: statusId, name: statusName }, // вывод выпадающего списка ролей (массивом map) по названию roleName контекст тега option, который соответствует полю name, и значению, соответствующему полю id массива roles, т.е. roleId
+								) => (
+									<option key={statusId} value={statusId}>
+										{statusName}
+									</option>
+								),
+							)}
+						</select>
+						<div className="save-role-button">
+							<Icon
+								id="fa-floppy-o"
+								margin="0 0 0 10px"
+								disabled={isSaveButtonDisabled}
+								onClick={() => onStatusSave(id, selectedStatusId)}
+							/>
+						</div>
+					</div>
+				)}
 			</TableRow>
 			<Icon id="fa-info-circle" margin="0 0 0 20px" onClick={() => onOrderInfo()} />
 		</div>
