@@ -15,11 +15,11 @@ export const createSession = (roleId) => {
 			session.removeComment = removeComment;
 			break;
 		}
-		case ROLE.MODERATOR: {
+		case ROLE.SALESMAN: {
 			session.removeComment = removeComment;
 			break;
 		}
-		case ROLE.READER: {
+		case ROLE.CLIENT: {
 			break;
 		}
 		default:

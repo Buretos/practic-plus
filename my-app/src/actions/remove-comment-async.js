@@ -1,7 +1,7 @@
-import { setPostData } from './set-post-data';
+import { setProductData } from './set-product-data';
 
-export const removeCommentAsync = (requestServer, postId, id) => (dispatch) => {
-	requestServer('removePostComment', postId, id).then((postData) => {
-		dispatch(setPostData(postData.res));
+export const removeCommentAsync = (requestServer, productId, id) => (dispatch) => {
+	requestServer('removeProductComment', productId, id).then((productData) => {
+		dispatch(setProductData(productData.res));
 	});
 };

@@ -2,10 +2,11 @@ import { transformComment } from '../transformers';
 // Если id статьи не передаётся, то запрашиваются все комментарии вообще.
 
 const ALL_COMMENTS_URL = 'http://localhost:3005/comments';
-const POST_COMMENTS_URL = 'http://localhost:3005/comments?post_id=';
+const PRODUCT_COMMENTS_URL = 'http://localhost:3005/comments?product_id=';
 
-export const getComments = (postId) => {
-	const url = postId === undefined ? ALL_COMMENTS_URL : POST_COMMENTS_URL + postId;
+export const getComments = (productId) => {
+	const url =
+		productId === undefined ? ALL_COMMENTS_URL : PRODUCT_COMMENTS_URL + productId;
 	return fetch(url)
 		.then((loadedComments) => loadedComments.json())
 		.then((loadedComments) => loadedComments.map(transformComment));

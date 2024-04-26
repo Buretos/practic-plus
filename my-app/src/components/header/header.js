@@ -2,6 +2,7 @@ import { ControlPanel, Logo } from './components';
 import styled from 'styled-components';
 
 const Discription = styled.div`
+	margin-top: 8px;
 	font-style: italic;
 `;
 
@@ -9,11 +10,9 @@ const HeaderContainer = ({ className }) => (
 	<header className={className}>
 		<Logo />
 		<Discription>
-			Веб-технологии
+			Гитары, струны и аксессуары,
 			<br />
-			Написание кода
-			<br />
-			Разбор ошибок
+			история, учебники, ноты...
 		</Discription>
 		<ControlPanel />
 	</header>

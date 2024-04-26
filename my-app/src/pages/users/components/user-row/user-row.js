@@ -1,3 +1,5 @@
+// Компонент строки пользователя на странице администрирования пользователей. Получает массив пользователей, доступные варианты выбора ролей для них. Содержит кнопки сохранить изменённые данные и удалить пользователя.
+
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { Icon } from '../../../../components';
@@ -15,21 +17,24 @@ const UserRowContainer = ({
 	roles,
 	onUserRemove,
 }) => {
-	const [initialRoleId, setInitialRoleId] = useState(userRoleId);
-	const [selectedRoleId, setSelectedRoleId] = useState(userRoleId);
-	const requestServer = useServerRequest();
+	const [initialRoleId, setInitialRoleId] = useState(userRoleId); // изначальная (текущая) роль пользователя, отображаемая в поле выбора ролей (см. тег select)
+	const [selectedRoleId, setSelectedRoleId] = useState(userRoleId); // Новая роль выбранная из списка (перед выбором она соответствует текущей роли)
+	const requestServer = useServerRequest(); // функция запроса на сервер
 
 	const onRoleChange = ({ target }) => {
-		setSelectedRoleId(Number(target.value));
+		// обработчик изменения роли выбранной из  выпадающего списка ролей
+		setSelectedRoleId(Number(target.value)); // изменение id  роли на выбранное значение поля, value={roleId}
 	};
 
 	const onRoleSave = (userId, newUserRoleId) => {
+		// обработчие сохранения выбранной роли
 		requestServer('updateUserRole', userId, newUserRoleId).then(() => {
+			// рапрос на сервер и обновление id роли в методе users
 			setInitialRoleId(newUserRoleId);
 		});
 	};
 
-	const isSaveButtonDisabled = selectedRoleId === initialRoleId;
+	const isSaveButtonDisabled = selectedRoleId === initialRoleId; // флаг выключения активности кнопки сохранить при совпадении выбранной роли с изначальной раолью, т.е.  когда роль не изменилась
 
 	return (
 		<div className={className}>
@@ -38,11 +43,15 @@ const UserRowContainer = ({
 				<div className="registered-at-column">{registeredAt}</div>
 				<div className="role-column">
 					<select value={selectedRoleId} onChange={onRoleChange}>
-						{roles.map(({ id: roleId, name: roleName }) => (
-							<option key={roleId} value={roleId}>
-								{roleName}
-							</option>
-						))}
+						{roles.map(
+							(
+								{ id: roleId, name: roleName }, // вывод выпадающего списка ролей (массивом map) по названию roleName контекст тега option, который соответствует полю name, и значению, соответствующему полю id массива roles, т.е. roleId
+							) => (
+								<option key={roleId} value={roleId}>
+									{roleName}
+								</option>
+							),
+						)}
 					</select>
 					<div className="save-role-button">
 						<Icon
@@ -73,7 +82,7 @@ UserRow.propTypes = {
 	id: PropTypes.string.isRequired,
 	login: PropTypes.string.isRequired,
 	registeredAt: PropTypes.string.isRequired,
-	roleId: PROP_TYPE.ROLE.isRequired,
+	roleId: PROP_TYPE.isRequired,
 	roles: PropTypes.arrayOf(PROP_TYPE.ROLE).isRequired,
 	onUserRemove: PropTypes.func.isRequired,
 };

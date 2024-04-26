@@ -16,10 +16,10 @@ const SmallText = styled.div`
 
 const LogoContainer = ({ className }) => (
 	<Link className={className} to="/">
-		<Icon id="fa-code" size="70px" margin="0 10px 0 0" />
+		<Icon id="fa-music" size="70px" margin="0 20px 0 0" />
 		<div>
-			<LargeText>Блог</LargeText>
-			<SmallText>веб-разработчика</SmallText>
+			<LargeText>Гитариум</LargeText>
+			<SmallText>музыкальный магазин</SmallText>
 		</div>
 	</Link>
 );
@@ -27,4 +27,5 @@ const LogoContainer = ({ className }) => (
 export const Logo = styled(LogoContainer)`
 	display: flex;
 	margin-top: -21px;
+	width: 330px;
 `;
